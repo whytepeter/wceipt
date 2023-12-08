@@ -1,4 +1,4 @@
-export type UserType = {
+export interface UserType {
   firstName: String;
   lastName: String;
   email: String;
@@ -15,16 +15,16 @@ export type UserType = {
 
   organization: OrganizationType[];
   roles: Roles[];
-};
+}
 
-export type Roles = {
+export interface Roles {
   id: String;
   name: String;
   permissions: Permissions[];
   createdAt: String;
-};
+}
 
-export type OrganizationType = {
+export interface OrganizationType {
   id: String;
   userId: String;
   name: String;
@@ -33,9 +33,9 @@ export type OrganizationType = {
   type: String;
   address: String;
   createdAt: Date;
-};
+}
 
-export type CustomerType = {
+export interface CustomerType {
   id: String;
   userId: String;
   organizationId: String;
@@ -44,9 +44,9 @@ export type CustomerType = {
   phone: String;
   address: String;
   createdAt: Date;
-};
+}
 
-export type ProductType = {
+export interface ProductType {
   id: String;
   userId: String;
   organizationId: String;
@@ -56,17 +56,17 @@ export type ProductType = {
   quantity: Number;
   description: String;
   createdAt: Date;
-};
+}
 
 //Receip Types
 
-export type ReceiptProductType = {
+export interface ReceiptProductType {
   product: ProductType;
   quantity: Number;
   priceSold: Number;
-};
+}
 
-export type ReceiptType = {
+export interface ReceiptType {
   id: String;
   userId: String;
   organizationId: String;
@@ -75,4 +75,4 @@ export type ReceiptType = {
   products: ReceiptProductType[];
   description: String;
   createdAt: Date;
-};
+}
