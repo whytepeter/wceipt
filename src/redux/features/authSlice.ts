@@ -3,7 +3,7 @@ import { UserType } from "@/types/types";
 
 type InitialState = {
   isLogin: Boolean;
-  user: UserType;
+  user: UserType | null;
 };
 
 const initialState = {
