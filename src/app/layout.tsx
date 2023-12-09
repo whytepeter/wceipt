@@ -1,6 +1,9 @@
 import { ReduxProvider } from "@/redux/provider";
 import type { Metadata } from "next";
+import { ThemeProvider } from "@mui/material";
+import theme from "@/app/theme";
 import "./globals.css";
+import "primeicons/primeicons.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ReduxProvider>{children}</ReduxProvider>
+        <ReduxProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
