@@ -1,7 +1,6 @@
 import { ReduxProvider } from "@/redux/provider";
 import type { Metadata } from "next";
-import { ThemeProvider } from "@mui/material";
-import theme from "@/app/theme";
+
 import "./globals.css";
 import "primeicons/primeicons.css";
 
@@ -18,9 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ReduxProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </ReduxProvider>
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   );

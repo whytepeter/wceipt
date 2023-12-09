@@ -1,3 +1,5 @@
+"use client";
+
 import { CgSpinner } from "react-icons/cg";
 
 const sizes = {
@@ -50,10 +52,11 @@ export default function CustomButton({
           ${variants[variant]}
           ${sizes[size]}
           ${bold && "font-medium"}
-          ${block && "max-w-full min-w-full w-full"}
+          ${block ? "max-w-full min-w-full w-full" : "w-fit"}
           ${loading && "pointer-events-none"}
           ${disabled ? "opacity-60" : "hover:opacity-95"}
           rounded-${rounded}
+          ${className}
            text-center relative
           `;
 
@@ -66,10 +69,7 @@ export default function CustomButton({
         className={buttonStyles}
         onClick={onClick}
       >
-        <div
-          style={{ opacity: loading ? 0 : 1 }}
-          className={`text-center ${className}`}
-        >
+        <div style={{ opacity: loading ? 0 : 1 }} className={`text-center `}>
           {children}
         </div>
 

@@ -1,11 +1,13 @@
 "use client";
-import WButton from "@/components/global/WButton";
-import { Button, styled } from "@mui/material";
+import Button from "@/components/global/Button";
+import TextInput from "@/components/global/TextInput";
 
 import { useState } from "react";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
+
+  const [amount, setAmount] = useState(0);
 
   const handleClick = (): void => {
     setLoading(true);
@@ -16,11 +18,19 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-[#F4D690] text-2xl w-screen h-screen p-4 ">
+      <div className="bg-[#F4D690] text-2xl w-screen h-screen flex flex-col gap-4 p-4 ">
         Home
-        <WButton onClick={handleClick} loading={loading}>
+        <Button onClick={handleClick} loading={loading}>
           CLICK ME
-        </WButton>
+        </Button>
+        <TextInput
+          value={amount}
+          onChange={(val) => {
+            setAmount(val);
+          }}
+          placeholder="Enter Name"
+        />
+        {amount}
       </div>
     </>
   );
