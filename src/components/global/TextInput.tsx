@@ -60,32 +60,39 @@ export default function TextInput(props: InputType) {
         h-[48px] bg-white px-3 py-2 rounded-lg border border-dark-100
     `;
 
-  //   const [fValue, setFValue] = useState<string | undefined>(undefined);
+  const [fValue, setFValue] = useState<string | undefined>(undefined);
 
-  //   const formatValue = (val: string): string => {
-  //     const enteredValue = val;
-  //     const parsedValue = parseFloat(enteredValue.replace(/[^\d.-]/g, ""));
-  //     let stringValue = parsedValue.toLocaleString();
+  //Convert value to a formated currency
+  const formatValue = (val: string): string => {
+    const enteredValue = val;
+    const parsedValue = parseFloat(enteredValue.replace(/[^\d.-]/g, ""));
+    let stringValue = parsedValue.toLocaleString();
 
-  //     console.log(stringValue);
+    console.log(stringValue);
 
-  //     if (!isNaN(parsedValue)) {
-  //       setFValue(`₦${stringValue}`);
-  //     } else {
-  //       setFValue("");
-  //     }
+    if (!isNaN(parsedValue)) {
+      setFValue(`₦${stringValue}`);
+    } else {
+      setFValue("");
+    }
 
-  //     return stringValue;
-  //   };
+    return stringValue;
+  };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const enteredValue = event.target.value;
+    let enteredValue = event.target.value;
 
-    // const formatted = formatValue(enteredValue);
-    // const parsedValue = parseFloat(formatted);
-    // console.log(parsedValue);
-
-    onChange && onChange(enteredValue);
+    if (format) {
+      formatValue(enteredValue);
+      if (enteredValue.charAt(0) === "₦") {
+        enteredValue = enteredValue.substring(1);
+      }
+      const parsedValue = parseFloat(enteredValue.split(",").join(""));
+      onChange && onChange(parsedValue);
+    } else {
+      onChange && onChange(enteredValue);
+      setFValue(enteredValue);
+    }
   };
 
   return (
@@ -97,7 +104,7 @@ export default function TextInput(props: InputType) {
             type={type}
             name={name}
             inputMode={inputMode}
-            value={value}
+            value={fValue}
             onChange={handleInputChange}
             onFocus={onFocus}
             onBlur={onBlur}
