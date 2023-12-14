@@ -11,6 +11,7 @@ const colors = {
   accent: "#F4D690",
 };
 
+// Check if the type match the colors type
 function isValidColor(color: string): color is keyof typeof colors {
   return Object.keys(colors).includes(color);
 }
@@ -69,7 +70,7 @@ export default function CustomButton({
     },
     text: {
       background: "transparent",
-      text: mainColor,
+      color: mainColor,
     },
     fill: {
       background: mainColor,
