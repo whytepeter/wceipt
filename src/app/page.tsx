@@ -22,7 +22,7 @@ export default function Home() {
         Home
         <Button
           color="secondary"
-          variant="fill"
+          variant="outlined"
           onClick={handleClick}
           loading={loading}
         >

@@ -57,18 +57,29 @@ export default function CustomButton({
       : undefined
     : color;
 
-  console.log("Main Color", mainColor);
-
-  const variants = {
-    fill: `bg-[${mainColor}] text-white`,
-    outlined: `bg-transparent text-[${mainColor}] border-2 border-[${mainColor}]`,
-    text: `bg-transparent text-[${mainColor}]`,
+  const loaderStyle = {
+    color: variant == "fill" ? "white" : mainColor,
   };
 
-  const loaderColor = variant == "fill" ? "text-white" : `text-[${mainColor}]`;
+  const variants = {
+    outlined: {
+      background: "transparent",
+      color: mainColor,
+      border: `2px solid ${mainColor}`,
+    },
+    text: {
+      background: "transparent",
+      text: mainColor,
+    },
+    fill: {
+      background: mainColor,
+      color: "white",
+    },
+  };
 
-  const buttonStyles = `
-          ${variants[variant]}
+  const variantStyles = variants[variant];
+
+  const otherStyles = `
           ${sizes[size]}
           ${bold ? "font-medium" : ""}
           ${block ? "max-w-full min-w-full w-full" : "w-fit"}
@@ -86,7 +97,8 @@ export default function CustomButton({
         type={type}
         disabled={disabled}
         aria-disabled={ariaDisabled}
-        className={buttonStyles}
+        className={otherStyles}
+        style={variantStyles}
         onClick={onClick}
       >
         <div style={{ opacity: loading ? 0 : 1 }} className={`text-center `}>
@@ -95,7 +107,11 @@ export default function CustomButton({
 
         <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           {loading && (
-            <CgSpinner size={25} className={` animate-spin ${loaderColor}`} />
+            <CgSpinner
+              style={loaderStyle}
+              size={25}
+              className={` animate-spin `}
+            />
           )}
         </span>
       </button>
