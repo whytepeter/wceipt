@@ -21,7 +21,7 @@ export default function Home() {
       <div className="bg-[#F4D690] text-2xl w-screen h-screen flex flex-col gap-4 p-4 ">
         Home
         <Button onClick={handleClick} loading={loading}>
-          CLICK ME
+          Click Me
         </Button>
         <TextInput
           onChange={(val) => {

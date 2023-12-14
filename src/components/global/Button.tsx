@@ -18,8 +18,8 @@ function isValidColor(color: string): color is keyof typeof colors {
 
 const sizes = {
   small: "px-3 py-2 text-xs",
-  medium: "px-4 py-2.5 text-sm",
-  large: "px-5 py-3 text-lg",
+  medium: "px-4 py-3 text-sm",
+  large: "px-5 py-3.5 text-lg",
 };
 
 interface ButtonType {
