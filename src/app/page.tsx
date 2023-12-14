@@ -24,7 +24,6 @@ export default function Home() {
           CLICK ME
         </Button>
         <TextInput
-          format
           onChange={(val) => {
             setAmount(val);
           }}

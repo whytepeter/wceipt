@@ -76,11 +76,8 @@ export default function TextInput(props: InputType) {
     let enteredValue = event.target.value;
 
     if (format) {
-      formatValue(enteredValue);
-      if (enteredValue.charAt(0) === "₦") {
-        enteredValue = enteredValue.substring(1);
-      }
-      const parsedValue = parseFloat(enteredValue.split(",").join(""));
+      const stringValue = formatValue(enteredValue);
+      const parsedValue = parseFloat(stringValue.split(",").join(""));
       onChange && onChange(parsedValue);
     } else {
       onChange && onChange(enteredValue);
