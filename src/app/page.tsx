@@ -1,7 +1,8 @@
 "use client";
 import Button from "@/components/global/Button";
 import TextInput from "@/components/global/TextInput";
-import { FaRegEyeSlash } from "react-icons/fa6";
+import SelectInput from "@/components/global/SelectInput";
+import { FaRegEyeSlash, FaUser } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 
 import { useState } from "react";
@@ -10,6 +11,22 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   const [amount, setAmount] = useState("0");
+
+  const [selected, setSelected] = useState("");
+  const options = [
+    {
+      label: "Type 1",
+      value: "Type 1",
+    },
+    {
+      label: "Type 2",
+      value: "Type 2",
+    },
+    {
+      label: "Type 3",
+      value: "Type 3",
+    },
+  ];
 
   const handleClick = (): void => {
     setLoading(true);
@@ -50,6 +67,14 @@ export default function Home() {
             setAmount(val);
           }}
           placeholder="Enter Amount"
+        />
+        <SelectInput
+          value={selected}
+          options={options}
+          onSelect={(val) => {
+            setSelected(val);
+          }}
+          leftIcon={<FaUser />}
         />
       </div>
     </>
