@@ -1,6 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
 import { CgSpinner } from "react-icons/cg";
+
+const colors = {
+  primary: "#1B4946",
+  "primary-light": "#48B3AB",
+  secondary: "#76172F",
+  "secondary-light": "#BC2747",
+  accent: "#F4D690",
+};
+
+function isValidColor(color: string): color is keyof typeof colors {
+  return Object.keys(colors).includes(color);
+}
 
 const sizes = {
   small: "px-3 py-2 text-xs",
@@ -40,13 +53,21 @@ export default function CustomButton({
   // Accessibility improvements
   const ariaDisabled = disabled ? "true" : undefined;
 
+  const mainColor = Object.keys(colors).includes(color)
+    ? isValidColor(color)
+      ? colors[color]
+      : undefined
+    : color;
+
+  console.log("Main Color", mainColor);
+
   const variants = {
-    fill: `bg-${color} text-white`,
-    outlined: `bg-transparent text-${color} border-2 border-${color}`,
-    text: `bg-transparent text-${color}`,
+    fill: `bg-[${mainColor}] text-white`,
+    outlined: `bg-transparent text-[${mainColor}] border-2 border-[${mainColor}]`,
+    text: `bg-transparent text-[${mainColor}]`,
   };
 
-  const loaderColor = variant == "fill" ? "text-white" : `text-${color}`;
+  const loaderColor = variant == "fill" ? "text-white" : `text-[${mainColor}]`;
 
   const buttonStyles = `
           ${variants[variant]}
@@ -56,8 +77,9 @@ export default function CustomButton({
           ${loading && "pointer-events-none"}
           ${disabled ? "opacity-60" : "hover:opacity-95"}
           rounded-${rounded}
+          
           ${className}
-           text-center relative
+           text-center relative 
           `;
 
   return (
