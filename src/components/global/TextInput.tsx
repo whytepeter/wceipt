@@ -23,7 +23,7 @@ interface InputType {
   disabled?: boolean;
   format?: boolean;
   className?: string;
-  onChange?: (value: string | number) => void;
+  onChange?: (value: string) => void;
   //   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;

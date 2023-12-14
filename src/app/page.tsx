@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Home() {
   const [loading, setLoading] = useState(false);
 
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("0");
 
   const handleClick = (): void => {
     setLoading(true);
