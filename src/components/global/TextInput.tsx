@@ -2,13 +2,6 @@
 
 import { useState } from "react";
 
-const options = {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-  prefix: "$",
-  useGrouping: true, // Add commas for thousands separators
-};
-
 interface InputType {
   type?: "text" | "email" | "password" | "tel" | undefined;
   name?: string;
