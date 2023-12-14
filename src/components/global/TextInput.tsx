@@ -23,6 +23,8 @@ interface InputType {
   disabled?: boolean;
   format?: boolean;
   className?: string;
+  righIcon?: React.ReactNode;
+  leftIcon?: React.ReactNode;
   onChange?: (value: string) => void;
   //   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
@@ -42,6 +44,8 @@ export default function TextInput(props: InputType) {
     id,
     name,
     className,
+    leftIcon,
+    righIcon,
     onChange,
     onFocus,
     onBlur,
@@ -51,6 +55,7 @@ export default function TextInput(props: InputType) {
         ${disabled && "pointer-events-none opacity-60"}
         ${className}
         h-[48px] bg-white px-3 py-2 rounded-lg border border-dark-100
+        flex gap-2 items-center
     `;
 
   const [fValue, setFValue] = useState<string | undefined>(undefined);
@@ -89,6 +94,9 @@ export default function TextInput(props: InputType) {
     <>
       <div className="flex flex-col ">
         <div className={inputStyles}>
+          {leftIcon && (
+            <div className="text-base text-dark cursor-pointer">{leftIcon}</div>
+          )}
           <input
             id={id}
             type={type}
@@ -98,12 +106,19 @@ export default function TextInput(props: InputType) {
             onChange={handleInputChange}
             onFocus={onFocus}
             onBlur={onBlur}
-            className={`h-full  text-base  w-full font-light  caret-primary text-dark-300  leading-2 focus:outline-none block appearance-none`}
+            className={`h-full  text-base  w-full font-light  caret-primary text-dark  leading-2 focus:outline-none block appearance-none`}
             placeholder={placeholder}
           />
+          {righIcon && (
+            <div className="text-base text-dark cursor-pointer">{righIcon}</div>
+          )}
         </div>
-        {error && <span className="text-xs text-error  my-1">{error} </span>}
-        {hint && <span className="text-xs my-1">{hint} </span>}
+        {error && (
+          <span className="text-xs text-error  mt-1 ml-1">{error} </span>
+        )}
+        {hint && (
+          <span className="text-xs mt-1 text-dark-200 ml-1">{hint} </span>
+        )}
       </div>
     </>
   );
