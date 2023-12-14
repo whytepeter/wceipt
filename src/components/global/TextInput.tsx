@@ -76,9 +76,9 @@ export default function TextInput(props: InputType) {
     let enteredValue = event.target.value;
 
     if (format) {
-      const stringValue = formatValue(enteredValue);
-      const parsedValue = parseFloat(stringValue.split(",").join(""));
-      onChange && onChange(parsedValue);
+      let stringValue = formatValue(enteredValue);
+      stringValue = stringValue.split(",").join("");
+      onChange && onChange(stringValue);
     } else {
       onChange && onChange(enteredValue);
       setFValue(enteredValue);
