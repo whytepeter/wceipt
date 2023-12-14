@@ -30,7 +30,6 @@ interface ButtonType {
   block?: boolean;
   size?: "small" | "medium" | "large";
   color?: string;
-  rounded?: "sm" | "md" | "lg" | "xl" | "full";
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   bold?: boolean;
   children: React.ReactNode;
@@ -44,7 +43,6 @@ export default function CustomButton({
   block = false,
   size = "medium",
   color = "primary",
-  rounded = "md",
   className = "",
   onClick,
   bold = false,
@@ -72,14 +70,14 @@ export default function CustomButton({
   const buttonStyles = `
           ${variants[variant]}
           ${sizes[size]}
-          ${bold && "font-medium"}
+          ${bold ? "font-medium" : ""}
           ${block ? "max-w-full min-w-full w-full" : "w-fit"}
-          ${loading && "pointer-events-none"}
+          ${loading ? "pointer-events-none" : ""}
           ${disabled ? "opacity-60" : "hover:opacity-95"}
-          rounded-${rounded}
           
+          text-center relative 
+          rounded-lg
           ${className}
-           text-center relative 
           `;
 
   return (
