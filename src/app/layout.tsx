@@ -1,5 +1,6 @@
 import { ReduxProvider } from "@/redux/provider";
 import type { Metadata } from "next";
+import SideBar from "@/components/sidebar/SideBar";
 
 import "./globals.css";
 import "primeicons/primeicons.css";
@@ -17,7 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ReduxProvider>{children}</ReduxProvider>
+        <ReduxProvider>
+          <SideBar />
+          <div className="ml-[60px] md:ml-[230px] overflow-hidden">
+            {children}
+          </div>
+        </ReduxProvider>
       </body>
     </html>
   );

@@ -4,15 +4,11 @@ import { useState } from "react";
 import useClickOutside from "@/hooks/useClickOutside";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
-
-interface OptionType {
-  label: string;
-  value: string;
-}
+import { SelectOptionType } from "@/interfaces/types";
 
 interface SelectType {
   value: string;
-  options: OptionType[];
+  options: SelectOptionType[] | null;
   id?: string;
   autoHeight?: boolean;
   placeholder?: string;
@@ -51,15 +47,15 @@ export default function TextInput(props: SelectType) {
   ${disabled && "pointer-events-none opacity-60"}
   ${className}
   h-[48px] bg-white px-3 py-2 rounded-lg border border-dark-100
-  flex gap-2 items-center
+  flex gap-2 items-center text-dark
 `;
 
   const getLabel = (val: string): string => {
-    const option = options.find((el) => el.value == val);
+    const option = options && options.find((el) => el.value == val);
     return option ? option.label : "";
   };
 
-  const handleSelect = (option: OptionType): void => {
+  const handleSelect = (option: SelectOptionType): void => {
     if (!onSelect) return;
     onSelect(option.value);
     setIsSelect(false);
@@ -83,21 +79,17 @@ export default function TextInput(props: SelectType) {
           aria-readonly
         >
           {leftIcon && (
-            <div className="text-base text-dark cursor-pointer">{leftIcon}</div>
+            <div className="text-base  cursor-pointer">{leftIcon}</div>
           )}
           <span
-            onClick={toggleIsSelect}
             className={`${
-              value ? "text-dark" : "text-dark-100"
+              value ? "" : "text-dark-100"
             } relative text-base w-full font-light leading-2  pointer-events-none`}
           >
             {value == "" ? placeholder : getLabel(value)}
           </span>
 
-          <span
-            onClick={toggleIsSelect}
-            className="text-xl text-dark cursor-pointer"
-          >
+          <span className="text-xl  cursor-pointer">
             {isSelect ? <FiChevronRight /> : <FiChevronDown />}
           </span>
         </div>
@@ -107,26 +99,27 @@ export default function TextInput(props: SelectType) {
             ref={clickOutside}
             className={`
             ${autoHeight ? "h-auto" : "h-44 overflow-y-auto"}
-            w-full mt-1 overflow-x-hidden rounded-b-xl shadow-xl bg-white`}
+            absolute w-full mt-1 overflow-x-hidden rounded-b-xl shadow-xl bg-white`}
           >
-            {options.map((option, index) => (
-              <li
-                key={index}
-                onClick={() => {
-                  handleSelect(option);
-                }}
-                className={`${
-                  value == option.value ? " text-primary" : "text-dark"
-                } px-4 py-3 hover:bg-[#ebfaf6] text-base cursor-pointer   flex justify-between items-center border-b last:border-none border-dark-100`}
-              >
-                <span> {option.label}</span>
-                <span className="text-xl">
-                  {value == option.value && <AiFillCheckCircle />}
-                </span>
-              </li>
-            ))}
+            {options &&
+              options.map((option, index) => (
+                <li
+                  key={index}
+                  onClick={() => {
+                    handleSelect(option);
+                  }}
+                  className={`${
+                    value == option.value ? " text-primary" : "text-dark"
+                  } px-4 py-3 hover:bg-[#ebfaf6] text-base cursor-pointer flex justify-between items-center border-b last:border-none border-dark-100`}
+                >
+                  <span> {option.label}</span>
+                  <span className="text-xl">
+                    {value == option.value && <AiFillCheckCircle />}
+                  </span>
+                </li>
+              ))}
 
-            <div className="p-2">{action}</div>
+            {action && <div className="p-2">{action}</div>}
           </ul>
         )}
       </div>

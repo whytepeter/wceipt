@@ -37,7 +37,7 @@ export default function Home() {
 
   return (
     <>
-      <div className=" m bg-[#F4D690] text-2xl w-screen h-screen flex flex-col gap-4 p-4 ">
+      <div className="text-2xl flex flex-col gap-4 p-4 ">
         Home
         <Button onClick={handleClick} loading={loading}>
           Click Me

@@ -18,7 +18,7 @@ function isValidColor(color: string): color is keyof typeof colors {
 
 const sizes = {
   small: "px-3 py-2 text-xs",
-  medium: "px-4 py-3 text-sm",
+  medium: "px-4 py-3 text-base",
   large: "px-5 py-3.5 text-lg",
 };
 
@@ -86,8 +86,8 @@ export default function CustomButton({
           ${block ? "max-w-full min-w-full w-full" : "w-fit"}
           ${loading ? "pointer-events-none" : ""}
           ${disabled ? "opacity-60" : "hover:opacity-95"}
-          
-          text-center relative 
+          active:opacity-90
+          text-center relative  
           rounded-lg
           
           `;
