@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Button from "@/components/global/Button";
 
 interface InputType {
   type?: "text" | "email" | "password" | "tel" | undefined;
@@ -65,8 +66,6 @@ export default function TextInput(props: InputType) {
     const enteredValue = val;
     const parsedValue = parseFloat(enteredValue.replace(/[^\d.-]/g, ""));
     let stringValue = parsedValue.toLocaleString();
-
-    console.log(stringValue);
 
     if (!isNaN(parsedValue)) {
       setFValue(`₦${stringValue}`);

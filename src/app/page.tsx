@@ -2,7 +2,7 @@
 import Button from "@/components/global/Button";
 import TextInput from "@/components/global/TextInput";
 import SelectInput from "@/components/global/SelectInput";
-import { FaRegEyeSlash, FaUser } from "react-icons/fa6";
+import { FaRegEyeSlash, FaUser, FaPlus } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 
 import { useState } from "react";
@@ -75,6 +75,16 @@ export default function Home() {
             setSelected(val);
           }}
           leftIcon={<FaUser />}
+          action={
+            <Button
+              variant="text"
+              block
+              className="flex items-center justify-center gap-2"
+            >
+              Add More
+              <FaPlus className="text-primary" />
+            </Button>
+          }
         />
       </div>
     </>

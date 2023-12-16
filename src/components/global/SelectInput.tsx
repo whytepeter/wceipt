@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import useClickOutside from "@/hooks/useClickOutside";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
-import useClickOutside from "@/hooks/useClickOutside";
 
 interface OptionType {
   label: string;
@@ -21,6 +21,7 @@ interface SelectType {
   disabled?: boolean;
   className?: string;
   leftIcon?: React.ReactNode;
+  action?: React.ReactNode;
   onSelect?: (value: string) => void;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -38,6 +39,7 @@ export default function TextInput(props: SelectType) {
     error = false,
     placeholder,
     leftIcon,
+    action,
     onSelect,
     onFocus,
     onBlur,
@@ -78,19 +80,25 @@ export default function TextInput(props: SelectType) {
         <div
           onClick={toggleIsSelect}
           style={{ height: "48px" }}
-          className={selectStyles}
+          className={`${selectStyles} flex items-center gap-2`}
           aria-readonly
         >
+          {leftIcon && (
+            <div className="text-base text-dark cursor-pointer">{leftIcon}</div>
+          )}
           <span
             onClick={toggleIsSelect}
             className={`${
-              value ? "text-dark-500" : "text-dark-300"
-            } relative w-11/12  pointer-events-none`}
+              value ? "text-dark" : "text-dark-100"
+            } relative text-base w-full font-light leading-2  pointer-events-none`}
           >
             {value == "" ? placeholder : getLabel(value)}
           </span>
 
-          <span onClick={toggleIsSelect} className=" text-xl text-dark-400">
+          <span
+            onClick={toggleIsSelect}
+            className="text-xl text-dark cursor-pointer"
+          >
             {isSelect ? <FiChevronRight /> : <FiChevronDown />}
           </span>
         </div>
@@ -98,9 +106,9 @@ export default function TextInput(props: SelectType) {
         {isSelect && (
           <ul
             ref={clickOutside}
-            className={`${
-              autoHeight ? "h-auto" : "h-44 overflow-y-auto"
-            } w-full mt-2 overflow-x-hidden rounded-xl shadow-xl bg-white`}
+            className={`
+            ${autoHeight ? "h-auto" : "h-44 overflow-y-auto"}
+            w-full mt-1 overflow-x-hidden rounded-b-xl shadow-xl bg-white`}
           >
             {options.map((option, index) => (
               <li
@@ -109,8 +117,8 @@ export default function TextInput(props: SelectType) {
                   handleSelect(option);
                 }}
                 className={`${
-                  value == option.value ? " text-success" : "text-dark-500"
-                } px-4 py-3 hover:bg-[#ebfaf6] cursor-pointer   flex justify-between items-center border-b last:border-none border-dark-50`}
+                  value == option.value ? " text-primary" : "text-dark"
+                } px-4 py-3 hover:bg-[#ebfaf6] text-base cursor-pointer   flex justify-between items-center border-b last:border-none border-dark-50`}
               >
                 <span> {option.label}</span>
                 <span className="text-xl">
@@ -118,6 +126,8 @@ export default function TextInput(props: SelectType) {
                 </span>
               </li>
             ))}
+
+            <div className="p-2">{action}</div>
           </ul>
         )}
       </div>

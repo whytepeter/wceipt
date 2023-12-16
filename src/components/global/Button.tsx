@@ -89,7 +89,7 @@ export default function CustomButton({
           
           text-center relative 
           rounded-lg
-          ${className}
+          
           `;
 
   return (
@@ -102,7 +102,10 @@ export default function CustomButton({
         style={variantStyles}
         onClick={onClick}
       >
-        <div style={{ opacity: loading ? 0 : 1 }} className={`text-center `}>
+        <div
+          style={{ opacity: loading ? 0 : 1 }}
+          className={`text-center ${className}`}
+        >
           {children}
         </div>
 
