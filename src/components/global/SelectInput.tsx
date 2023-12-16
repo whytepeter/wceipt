@@ -37,6 +37,7 @@ export default function TextInput(props: SelectType) {
     disabled = false,
     autoHeight = true,
     error = false,
+    hint,
     placeholder,
     leftIcon,
     action,
@@ -54,10 +55,8 @@ export default function TextInput(props: SelectType) {
 `;
 
   const getLabel = (val: string): string => {
-    if (val) {
-      const option = options.find((el) => el.value == val);
-      return option ? option.label : "";
-    }
+    const option = options.find((el) => el.value == val);
+    return option ? option.label : "";
   };
 
   const handleSelect = (option: OptionType): void => {
@@ -75,7 +74,7 @@ export default function TextInput(props: SelectType) {
   });
 
   return (
-    <>
+    <div>
       <div className="relative z-10">
         <div
           onClick={toggleIsSelect}
@@ -131,7 +130,11 @@ export default function TextInput(props: SelectType) {
           </ul>
         )}
       </div>
-      <div className="text-xs font-light text-error mt-1 mb-2">{error}</div>
-    </>
+
+      <div className="text-xs font-light mt-1 ml-1">
+        {error && <span className=" text-error  ">{error} </span>}
+        {hint && <span className=" text-dark-200 ">{hint} </span>}
+      </div>
+    </div>
   );
 }

@@ -112,12 +112,10 @@ export default function TextInput(props: InputType) {
             <div className="text-base text-dark cursor-pointer">{righIcon}</div>
           )}
         </div>
-        {error && (
-          <span className="text-xs text-error  mt-1 ml-1">{error} </span>
-        )}
-        {hint && (
-          <span className="text-xs mt-1 text-dark-200 ml-1">{hint} </span>
-        )}
+        <div className="text-xs font-light mt-1 ml-1">
+          {error && <span className=" text-error  ">{error} </span>}
+          {hint && <span className=" text-dark-200">{hint} </span>}
+        </div>
       </div>
     </>
   );

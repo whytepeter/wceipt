@@ -74,6 +74,8 @@ export default function Home() {
           onSelect={(val) => {
             setSelected(val);
           }}
+          error="Type is required"
+          placeholder="Select Type"
           leftIcon={<FaUser />}
           action={
             <Button
