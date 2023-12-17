@@ -46,8 +46,9 @@ export default function TextInput(props: SelectType) {
   const selectStyles = `
   ${disabled && "pointer-events-none opacity-60"}
   ${className}
-  h-[48px] bg-white px-3 py-2 rounded-lg border border-dark-100
-  flex gap-2 items-center text-dark
+  h-[48px]  px-3 py-2 rounded-lg 
+  border bg-white border-dark-100 text-dark
+  flex gap-2 items-center 
 `;
 
   const getLabel = (val: string): string => {

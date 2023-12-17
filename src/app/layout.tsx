@@ -20,9 +20,7 @@ export default function RootLayout({
       <body>
         <ReduxProvider>
           <SideBar />
-          <div className="ml-[60px] md:ml-[230px] overflow-hidden">
-            {children}
-          </div>
+          <div className="ml-[60px] md:ml-[230px] ">{children}</div>
         </ReduxProvider>
       </body>
     </html>
