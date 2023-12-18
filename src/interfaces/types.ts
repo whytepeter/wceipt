@@ -76,3 +76,15 @@ export interface ReceiptType {
   description: String;
   createdAt: Date;
 }
+
+//Components Type
+export interface SelectOptionType {
+  label: string;
+  value: string;
+}
+
+export interface MenuItemsType {
+  href: string;
+  title: string;
+  icon: React.ReactNode | null;
+}

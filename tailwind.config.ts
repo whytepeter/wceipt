@@ -49,7 +49,14 @@ const config: Config = {
           light: "#EBF3FE",
         },
 
+        error: {
+          DEFAULT: "#EB3428",
+          dark: "#9D231B",
+          light: "#FDEBEA",
+        },
+
         dark: {
+          DEFAULT: "#383B66",
           100: "#B9B9B9",
           200: "#888888",
           300: "#474747",

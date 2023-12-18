@@ -1,7 +1,7 @@
 import { ReduxProvider } from "@/redux/provider";
 import type { Metadata } from "next";
-import { ThemeProvider } from "@mui/material";
-import theme from "@/app/theme";
+import SideBar from "@/components/sidebar/SideBar";
+
 import "./globals.css";
 import "primeicons/primeicons.css";
 
@@ -19,7 +19,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ReduxProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <SideBar />
+          <div className="ml-[60px] md:ml-[230px] ">{children}</div>
         </ReduxProvider>
       </body>
     </html>
