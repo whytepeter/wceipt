@@ -37,7 +37,7 @@ export default function Home() {
 
   return (
     <>
-      <div className=" text-2xl flex flex-col gap-4 p-4 ">
+      <div className=" text-2xl flex flex-col gap-4 p-4 max-w-xl">
         Home
         <Button onClick={handleClick} loading={loading}>
           Click Me
@@ -81,7 +81,7 @@ export default function Home() {
             <Button
               variant="text"
               block
-              className="flex items-center justify-center gap-2"
+              className="flex text-sm items-center justify-center gap-2"
             >
               Add More
               <FaPlus className="text-primary" />

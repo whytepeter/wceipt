@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Button from "@/components/global/Button";
 
 interface InputType {
   type?: "text" | "email" | "password" | "tel" | undefined;
@@ -64,9 +63,12 @@ export default function TextInput(props: InputType) {
   //Convert value to a formated currency
   const formatValue = (val: string): string => {
     const enteredValue = val;
+
+    //Remove all negative value and alphabets
     const parsedValue = parseFloat(enteredValue.replace(/[^\d.-]/g, ""));
     let stringValue = parsedValue.toLocaleString();
 
+    //Return the formatted string
     if (!isNaN(parsedValue)) {
       setFValue(`₦${stringValue}`);
     } else {
@@ -78,10 +80,12 @@ export default function TextInput(props: InputType) {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let enteredValue = event.target.value;
-
     if (format) {
+      //Get the formatted string and remove the commas
       let stringValue = formatValue(enteredValue);
       stringValue = stringValue.split(",").join("");
+
+      //handle the onchange
       onChange && onChange(stringValue);
     } else {
       onChange && onChange(enteredValue);
@@ -94,7 +98,7 @@ export default function TextInput(props: InputType) {
       <div className="flex flex-col ">
         <div className={inputStyles}>
           {leftIcon && (
-            <div className="text-base text-dark cursor-pointer">{leftIcon}</div>
+            <div className="text-sm text-dark cursor-pointer">{leftIcon}</div>
           )}
           <input
             id={id}
@@ -105,11 +109,11 @@ export default function TextInput(props: InputType) {
             onChange={handleInputChange}
             onFocus={onFocus}
             onBlur={onBlur}
-            className={`h-full  text-base  w-full font-light  caret-primary text-dark  leading-2 focus:outline-none block appearance-none`}
+            className={`h-full  text-sm  w-full font-light  caret-primary text-dark  leading-2 focus:outline-none block appearance-none`}
             placeholder={placeholder}
           />
           {righIcon && (
-            <div className="text-base text-dark cursor-pointer">{righIcon}</div>
+            <div className="text-sm text-dark cursor-pointer">{righIcon}</div>
           )}
         </div>
         <div className="text-xs font-light mt-1 ml-1">
