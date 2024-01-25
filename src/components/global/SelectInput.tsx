@@ -93,7 +93,11 @@ export default function TextInput(props: SelectType) {
           </span>
 
           <span className="text-xl  cursor-pointer">
-            {isSelect ? <FiChevronRight /> : <FiChevronDown />}
+            <FiChevronRight
+              className={`transiton-all duration-200 ${
+                isSelect ? "rotate-90" : "rotate-0"
+              }`}
+            />
           </span>
         </div>
 
