@@ -20,7 +20,8 @@ export default function RootLayout({
       <body>
         <ReduxProvider>
           <SideBar />
-          <div className="ml-[60px] md:ml-[230px] ">{children}</div>
+          {/* use the min here as well */}
+          <div className="ml-0 sm:ml-[60px] md:ml-[230px] ">{children}</div>
         </ReduxProvider>
       </body>
     </html>

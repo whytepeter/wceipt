@@ -21,7 +21,7 @@ export default function MenuItems({ menu, min }: MenuType) {
       <div
         className={`
       ${isActive(menu.href) ? "text-accent" : "text-white font-light"}
-      hover:text-accent flex justify-center md:justify-start items-center gap-2
+      hover:text-accent flex justify-center md:justify-start items-center gap-3
       `}
       >
         {menu.icon}

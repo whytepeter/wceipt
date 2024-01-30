@@ -58,43 +58,62 @@ export default function SideBar() {
     <>
       <div
         className={`${
-          min ? "w-[60px]" : "w-[60px] md:w-[230px]"
-        } fixed h-screen transition-all duration-75`}
+          min ? "sm:w-[60px]" : "sm:w-[60px] md:w-[230px]"
+        } w-full h-auto fixed left-0 bottom-0 sm:top-0 sm:h-screen transition-all duration-75 z-20`}
       >
         <div
-          className={`h-full w-full relative bg-primary  z-20 p-4 py-6 flex flex-col justify-between`}
+          className={`${
+            min ? "p-0" : "p-4"
+          } h-full w-full relative bg-primary   py-6 flex sm:flex-col justify-between`}
         >
           <div
             onClick={() => setMin((prev) => !prev)}
-            className=" absolute border-l-0 cursor-pointer top-0 -right-7 w-7 flex items-center justify-center border bg-white/30 backdrop-blur-sm border-dark-100 px-2 py-1 rounded-r-md"
+            className="hidden sm:flex absolute  cursor-pointer top-1/2 -translate-y-1/2 -right-3 w-7  items-center justify-center border bg-white/50 backdrop-blur-sm border-primary px-2 py-1 rounded-full"
           >
             <FaChevronRight
-              size={18}
-              className={`transition-all text-primary ${
+              size={16}
+              className={`transition-all duration-300 text-primary ${
                 min ? "rotate-0" : "rotate-180"
               }`}
             />
           </div>
 
-          <div className={`flex flex-col gap-5`}>
-            {!min && <ActiveOrganization />}
+          <div
+            className={`${
+              min ? "sm:items-center" : ""
+            } flex flex-col  w-full gap-5`}
+          >
+            {!min ? (
+              <ActiveOrganization />
+            ) : (
+              <div className="hidden sm:flex h-10 w-10  text-xl items-center justify-center  rounded-xl bg-accent text-primary font-light">
+                w
+              </div>
+            )}
 
-            <div className="flex flex-col gap-7 ">
+            <div
+              className={` ${
+                min ? "sm:items-center" : ""
+              } flex sm:flex-col justify-evenly  sm:justify-start gap-7 `}
+            >
               {menuItems.map((menu) => (
                 <MenuItems min={min} menu={menu} key={menu.title} />
               ))}
             </div>
           </div>
 
-          <div className={`${min ? "hidden" : "hidden md:flex"}`}>
+          <div className={`${min ? "hidden" : "hidden md:flex items-center"}`}>
             <Button block color="accent" className="text-primary gap-2 flex">
               <BiLogOutCircle size={22} />
               Logout
             </Button>
           </div>
-          <div className={`${min ? "" : "md:hidden"} `}>
-            <BiLogOutCircle className="text-accent" size={22} />
-          </div>
+
+          {min && (
+            <div className="hidden sm:flex justify-center">
+              <BiLogOutCircle className="text-accent" size={22} />
+            </div>
+          )}
         </div>
       </div>
     </>
