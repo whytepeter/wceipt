@@ -66,9 +66,10 @@ export default function SideBar() {
             min ? "p-0" : "p-4"
           } h-full w-full relative bg-primary   py-6 flex sm:flex-col justify-between`}
         >
+          {/* //Collapse button // */}
           <div
             onClick={() => setMin((prev) => !prev)}
-            className="hidden sm:flex absolute  cursor-pointer top-1/2 -translate-y-1/2 -right-3 w-7  items-center justify-center border bg-white/50 backdrop-blur-sm border-primary px-2 py-1 rounded-full"
+            className="hidden sm:flex absolute  cursor-pointer top-1/2 -translate-y-1/2 -right-3 w-7 h-7  items-center justify-center border bg-white/50 backdrop-blur-sm border-primary px-2 py-1 rounded-full"
           >
             <FaChevronRight
               size={16}
@@ -78,6 +79,7 @@ export default function SideBar() {
             />
           </div>
 
+          {/* //Change Organization  // */}
           <div
             className={`${
               min ? "sm:items-center" : ""
@@ -91,10 +93,11 @@ export default function SideBar() {
               </div>
             )}
 
+            {/* //Menu Links // */}
             <div
               className={` ${
                 min ? "sm:items-center" : ""
-              } flex sm:flex-col justify-evenly  sm:justify-start gap-7 `}
+              } flex sm:flex-col justify-evenly  sm:justify-start gap-7 sm:gap-8 `}
             >
               {menuItems.map((menu) => (
                 <MenuItems min={min} menu={menu} key={menu.title} />
@@ -102,6 +105,7 @@ export default function SideBar() {
             </div>
           </div>
 
+          {/* //Logout button // */}
           <div className={`${min ? "hidden" : "hidden md:flex items-center"}`}>
             <Button block color="accent" className="text-primary gap-2 flex">
               <BiLogOutCircle size={22} />
