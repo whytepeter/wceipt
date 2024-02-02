@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useAppSelector, useAppDispatch } from "@/hooks";
+import { toggleCollapes } from "@/redux/slices/controllerSlice";
+
 import MenuItems from "@/components/sidebar/MenuItems";
 import Button from "@/components/global/Button";
 import ActiveOrganization from "@/components/sidebar/ActiveOrganization";
@@ -51,30 +54,35 @@ const menuItems: MenuItemsType[] = [
 ];
 
 export default function SideBar() {
-  // Ovie, please make this a global property using the redux and add a toggle
-  const [min, setMin] = useState(false);
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state.controllerReducer);
+  const collapse = state.collapes;
+
+  const handleCollapseClick = (): void => {
+    dispatch(toggleCollapes(!collapse));
+  };
 
   return (
     <>
       <div
         className={`${
-          min ? "sm:w-[60px]" : "sm:w-[60px] md:w-[230px]"
+          collapse ? "sm:w-[60px]" : "sm:w-[60px] md:w-[230px]"
         } w-full h-auto fixed left-0 bottom-0 sm:top-0 sm:h-screen transition-all duration-75 z-20`}
       >
         <div
           className={`${
-            min ? "p-0" : "p-4"
+            collapse ? "p-0" : "p-4"
           } h-full w-full relative bg-primary   py-6 flex sm:flex-col justify-between`}
         >
           {/* //Collapse button // */}
           <div
-            onClick={() => setMin((prev) => !prev)}
+            onClick={handleCollapseClick}
             className="hidden sm:flex absolute  cursor-pointer top-1/2 -translate-y-1/2 -right-3 w-7 h-7  items-center justify-center border bg-white/50 backdrop-blur-sm border-primary px-2 py-1 rounded-full"
           >
             <FaChevronRight
               size={16}
               className={`transition-all duration-300 text-primary ${
-                min ? "rotate-0" : "rotate-180"
+                collapse ? "rotate-0" : "rotate-180"
               }`}
             />
           </div>
@@ -82,10 +90,10 @@ export default function SideBar() {
           {/* //Change Organization  // */}
           <div
             className={`${
-              min ? "sm:items-center" : ""
+              collapse ? "sm:items-center" : ""
             } flex flex-col  w-full gap-5`}
           >
-            {!min ? (
+            {!collapse ? (
               <ActiveOrganization />
             ) : (
               <div className="hidden sm:flex h-10 w-10  text-xl items-center justify-center  rounded-xl bg-accent text-primary font-light">
@@ -96,24 +104,26 @@ export default function SideBar() {
             {/* //Menu Links // */}
             <div
               className={` ${
-                min ? "sm:items-center" : ""
+                collapse ? "sm:items-center" : ""
               } flex sm:flex-col justify-evenly  sm:justify-start gap-7 sm:gap-8 `}
             >
               {menuItems.map((menu) => (
-                <MenuItems min={min} menu={menu} key={menu.title} />
+                <MenuItems min={collapse} menu={menu} key={menu.title} />
               ))}
             </div>
           </div>
 
           {/* //Logout button // */}
-          <div className={`${min ? "hidden" : "hidden md:flex items-center"}`}>
+          <div
+            className={`${collapse ? "hidden" : "hidden md:flex items-center"}`}
+          >
             <Button block color="accent" className="text-primary gap-2 flex">
               <BiLogOutCircle size={22} />
               Logout
             </Button>
           </div>
 
-          {min && (
+          {collapse && (
             <div className="hidden sm:flex justify-center">
               <BiLogOutCircle className="text-accent" size={22} />
             </div>
