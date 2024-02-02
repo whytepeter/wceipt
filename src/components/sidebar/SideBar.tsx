@@ -67,7 +67,7 @@ export default function SideBar() {
       <div
         className={`${
           collapse ? "sm:w-[60px]" : "sm:w-[60px] md:w-[230px]"
-        } w-full h-auto fixed left-0 bottom-0 sm:top-0 sm:h-screen transition-all duration-75 z-20`}
+        } w-full h-auto fixed left-0 bottom-0 sm:top-0 sm:h-screen transition-all duration-300 z-20`}
       >
         <div
           className={`${
