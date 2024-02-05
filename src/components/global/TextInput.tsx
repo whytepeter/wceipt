@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 interface InputType {
   type?: "text" | "email" | "password" | "tel" | undefined;
@@ -27,7 +27,8 @@ interface InputType {
   leftIcon?: React.ReactNode;
   leftIconClick?: () => void;
   rightIconClick?: () => void;
-  onChange?: (value: string) => void;
+  // onChange?: (value: string) => void;
+  onChange: (e: ChangeEvent<any>) => void;
   //   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -69,7 +70,7 @@ export default function TextInput(props: InputType) {
     const enteredValue = val;
 
     //Remove all negative value and alphabets
-    const parsedValue = parseFloat(enteredValue.replace(/[^\d.-]/g, ""));
+    const parsedValue = parseFloat(enteredValue.replace(/[^0-9.]/g, ""));
     let stringValue = parsedValue.toLocaleString();
 
     //Return the formatted string
@@ -77,6 +78,7 @@ export default function TextInput(props: InputType) {
       setFValue(`₦${stringValue}`);
     } else {
       setFValue("");
+      return "";
     }
 
     return stringValue;
@@ -88,11 +90,11 @@ export default function TextInput(props: InputType) {
       //Get the formatted string and remove the commas
       let stringValue = formatValue(enteredValue);
       stringValue = stringValue.split(",").join("");
-
+      event.target.value = stringValue;
       //handle the onchange
-      onChange && onChange(stringValue);
+      onChange && onChange(event);
     } else {
-      onChange && onChange(enteredValue);
+      onChange && onChange(event);
       setFValue(enteredValue);
     }
   };
@@ -115,6 +117,7 @@ export default function TextInput(props: InputType) {
             name={name}
             inputMode={inputMode}
             value={fValue}
+            // onChange={handleInputChange}
             onChange={handleInputChange}
             onFocus={onFocus}
             onBlur={onBlur}
