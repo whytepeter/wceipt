@@ -1,31 +1,26 @@
-'use client';
-import { useAppSelector } from '@/hooks';
-import { useRouter } from 'next/navigation';
+"use client";
+import SideBar from "@/components/sidebar/SideBar";
+import React from "react";
+import { useAppSelector } from "@/hooks";
 
-import React, { useEffect, useState } from 'react';
-
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const { authReducer } = useAppSelector((state) => state);
-  const { replace } = useRouter();
-  const [checkingStatus, setCheckingStatus] = useState(true);
-
-  useEffect(() => {
-    if (!authReducer.isLogin) replace('/');
-    else setCheckingStatus(false);
-  }, [authReducer.isLogin]);
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const state = useAppSelector((state) => state.controllerReducer);
+  const collapse = state.collapes;
 
   return (
-    <div>
-      {!checkingStatus && authReducer.isLogin && (
-        <div>
-          <p>Dashboard Layout</p>
-
-          <div>{children}</div>
-        </div>
-      )}{' '}
-      {checkingStatus && <div>Loading...</div>}
-    </div>
+    <main>
+      <SideBar />
+      <div
+        className={`${
+          collapse ? "sm:pl-[60px]" : "sm:pl-[60px] md:pl-[230px]"
+        } pl-0`}
+      >
+        {children}
+      </div>
+    </main>
   );
-};
-
-export default DashboardLayout;
+}

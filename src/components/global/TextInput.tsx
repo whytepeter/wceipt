@@ -25,6 +25,8 @@ interface InputType {
   className?: string;
   righIcon?: React.ReactNode;
   leftIcon?: React.ReactNode;
+  leftIconClick?: () => void;
+  rightIconClick?: () => void;
   onChange?: (value: string) => void;
   //   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
@@ -46,6 +48,8 @@ export default function TextInput(props: InputType) {
     className,
     leftIcon,
     righIcon,
+    leftIconClick,
+    rightIconClick,
     onChange,
     onFocus,
     onBlur,
@@ -98,7 +102,12 @@ export default function TextInput(props: InputType) {
       <div className="flex flex-col ">
         <div className={inputStyles}>
           {leftIcon && (
-            <div className="text-sm text-dark cursor-pointer">{leftIcon}</div>
+            <div
+              onClick={leftIconClick}
+              className="text-sm text-dark cursor-pointer"
+            >
+              {leftIcon}
+            </div>
           )}
           <input
             id={id}
@@ -113,7 +122,12 @@ export default function TextInput(props: InputType) {
             placeholder={placeholder}
           />
           {righIcon && (
-            <div className="text-sm text-dark cursor-pointer">{righIcon}</div>
+            <div
+              onClick={rightIconClick}
+              className="text-sm text-dark cursor-pointer"
+            >
+              {righIcon}
+            </div>
           )}
         </div>
         <div className="text-xs font-light mt-1 ml-1">

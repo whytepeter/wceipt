@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import { toggleCollapes } from "@/redux/slices/controllerSlice";
@@ -19,10 +18,11 @@ import {
   FaChevronRight,
 } from "react-icons/fa6";
 import { BiLogOutCircle } from "react-icons/bi";
+import { useRouter } from "next/navigation";
 
 const menuItems: MenuItemsType[] = [
   {
-    href: "/",
+    href: "/dashboard",
     title: "Dashboard",
     icon: <MdSpaceDashboard size={20} />,
   },
@@ -54,12 +54,18 @@ const menuItems: MenuItemsType[] = [
 ];
 
 export default function SideBar() {
+  const router = useRouter();
   const dispatch = useAppDispatch();
+
   const state = useAppSelector((state) => state.controllerReducer);
   const collapse = state.collapes;
 
   const handleCollapseClick = (): void => {
     dispatch(toggleCollapes(!collapse));
+  };
+
+  const handleLogout = (): void => {
+    router.push("/auth/login");
   };
 
   return (
@@ -115,6 +121,7 @@ export default function SideBar() {
 
           {/* //Logout button // */}
           <div
+            onClick={handleLogout}
             className={`${collapse ? "hidden" : "hidden md:flex items-center"}`}
           >
             <Button block color="accent" className="text-primary gap-2 flex">
@@ -124,7 +131,10 @@ export default function SideBar() {
           </div>
 
           {collapse && (
-            <div className="hidden sm:flex justify-center">
+            <div
+              onClick={handleLogout}
+              className="hidden sm:flex justify-center"
+            >
               <BiLogOutCircle className="text-accent" size={22} />
             </div>
           )}
