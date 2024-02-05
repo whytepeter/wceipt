@@ -28,9 +28,6 @@ export default function Register() {
       password: Yup.string().min(6).required().label("Password"),
     }),
     onSubmit: async (values) => {
-      console.log(values);
-
-      return;
       setLoading(true);
       setTimeout(() => {
         router.replace(`/auth/organization?userId=${123456}`);
@@ -41,36 +38,17 @@ export default function Register() {
     validateOnChange: true,
   });
 
-  const [args, setArgs] = useState({
-    fullname: "",
-    email: "",
-    phone_number: "",
-    password: "",
-  });
-
-  const [errors, setErrors] = useState({
-    fullname: false,
-    email: false,
-    phone_number: false,
-    password: false,
-  });
-
-  const handleChange = (val: string): void => {
-    console.log(val);
-  };
-
   return (
     <AuthContainer title="Sign Up">
       <form
         onSubmit={formik.handleSubmit}
-        className="grid grid-cols-1 gap-5 py-2 text-dark-300"
+        className="grid grid-cols-1 gap-4 py-2 text-dark-300"
       >
         <div className="flex flex-col gap-2">
           <label htmlFor="email" className="">
             Full Name
           </label>
           <TextInput
-            format
             id="full_name"
             name="full_name"
             error={formik.errors["full_name"]}
