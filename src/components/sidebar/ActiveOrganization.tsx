@@ -38,12 +38,16 @@ export default function ActiveOrganization() {
   };
 
   return (
-    <div className="hidden md:block">
+    <div className="hidden md:block w-full">
       <SelectInput
         onSelect={setActiveOrganizationHandler}
         value={activeOrgId}
         options={orgOptions}
-        className="bg-transparent border-accent border-2 text-accent "
+        styles={{
+          backgroundColor: "transparent",
+          borderColor: "#F4D690",
+          color: "#F4D690",
+        }}
       />
     </div>
   );

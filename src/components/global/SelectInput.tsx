@@ -16,6 +16,7 @@ interface SelectType {
   hint?: string;
   disabled?: boolean;
   className?: string;
+  styles?: Object;
   leftIcon?: React.ReactNode;
   action?: React.ReactNode;
   onSelect?: (value: string) => void;
@@ -41,6 +42,7 @@ export default function TextInput(props: SelectType) {
     onFocus,
     onBlur,
     className,
+    styles,
   } = props;
 
   const selectStyles = `
@@ -75,23 +77,27 @@ export default function TextInput(props: SelectType) {
       <div className="relative z-10">
         <div
           onClick={toggleIsSelect}
-          style={{ height: "48px" }}
-          className={`${selectStyles} flex items-center gap-2`}
+          style={styles}
+          className={`${selectStyles} h-[48px] flex items-center gap-2`}
           aria-readonly
         >
           {leftIcon && (
-            <div className="text-base  cursor-pointer">{leftIcon}</div>
+            <div className="text-sm  cursor-pointer">{leftIcon}</div>
           )}
           <span
             className={`${
               value ? "" : "text-dark-100"
-            } relative text-base w-full font-light leading-2  pointer-events-none`}
+            } relative text-sm w-full font-light leading-2  pointer-events-none`}
           >
             {value == "" ? placeholder : getLabel(value)}
           </span>
 
           <span className="text-xl  cursor-pointer">
-            {isSelect ? <FiChevronRight /> : <FiChevronDown />}
+            <FiChevronRight
+              className={`transiton-all duration-200 ${
+                isSelect ? "rotate-90" : "rotate-0"
+              }`}
+            />
           </span>
         </div>
 
@@ -100,7 +106,7 @@ export default function TextInput(props: SelectType) {
             ref={clickOutside}
             className={`
             ${autoHeight ? "h-auto" : "h-44 overflow-y-auto"}
-            absolute w-full mt-1 overflow-x-hidden rounded-b-xl shadow-xl bg-white`}
+            absolute w-full mt-1 overflow-x-hidden rounded-b-lg shadow-xl bg-white`}
           >
             {options &&
               options.map((option, index) => (
@@ -111,7 +117,7 @@ export default function TextInput(props: SelectType) {
                   }}
                   className={`${
                     value == option.value ? " text-primary" : "text-dark"
-                  } px-4 py-3 hover:bg-[#ebfaf6] text-base cursor-pointer flex justify-between items-center border-b last:border-none border-dark-100`}
+                  } px-4 py-3 text-sm  hover:bg-[#ebfaf6]  cursor-pointer flex justify-between items-center border-b last:border-none border-dark-100`}
                 >
                   <span> {option.label}</span>
                   <span className="text-xl">
@@ -120,7 +126,7 @@ export default function TextInput(props: SelectType) {
                 </li>
               ))}
 
-            {action && <div className="p-2">{action}</div>}
+            {action && <div className="p-1 text-sm">{action}</div>}
           </ul>
         )}
       </div>

@@ -4,8 +4,14 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { MenuItemsType } from "@/interfaces/types";
 
-export default function MenuItems({ menu }: { menu: MenuItemsType }) {
+interface MenuType {
+  menu: MenuItemsType;
+  min: boolean;
+}
+
+export default function MenuItems({ menu, min }: MenuType) {
   const pathname = usePathname();
+
   const isActive = (href: string): boolean => {
     return pathname == href;
   };
@@ -15,13 +21,15 @@ export default function MenuItems({ menu }: { menu: MenuItemsType }) {
       <div
         className={`
       ${isActive(menu.href) ? "text-accent" : "text-white font-light"}
-      hover:text-accent flex justify-center md:justify-start items-center gap-2
+      hover:text-accent flex justify-center md:justify-start items-center gap-3
       `}
       >
         {menu.icon}
-        <span className="text-sm hidden md:block  tracking-widest  ">
-          {menu.title}
-        </span>
+        {!min && (
+          <span className="text-sm hidden md:block  tracking-widest  ">
+            {menu.title}
+          </span>
+        )}
       </div>
     </Link>
   );
