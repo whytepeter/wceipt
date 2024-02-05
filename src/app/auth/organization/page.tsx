@@ -3,29 +3,29 @@ import React, { FormEvent, useState } from "react";
 import AuthContainer from "../shared/AuthContainer";
 import Button from "@/components/global/Button";
 import TextInput from "@/components/global/TextInput";
-import Link from "next/link";
-import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 
-export default function Login() {
+export default function Register() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [args, setArgs] = useState({
+    fullname: "",
     email: "",
-    password: "",
+    phone_number: "",
   });
 
   const [errors, setErrors] = useState({
+    fullname: false,
     email: false,
-    password: false,
+    phone_number: false,
   });
 
   const handleChange = (val: string): void => {
     console.log(val);
   };
 
-  const handleLogin = (e: FormEvent): void => {
+  const setupBusiness = (e: FormEvent): void => {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => {
@@ -35,11 +35,24 @@ export default function Login() {
   };
 
   return (
-    <AuthContainer color="bg-primary-200" title="Sign In">
+    <AuthContainer title="Setup Business">
       <form
-        onSubmit={handleLogin}
+        onSubmit={setupBusiness}
         className="grid grid-cols-1 gap-5 py-2 text-dark-300"
       >
+        <div className="flex flex-col gap-2">
+          <label htmlFor="email" className="">
+            Full Name
+          </label>
+          <TextInput
+            id="fullName"
+            error={errors.fullname}
+            onChange={(val) => {
+              handleChange(val);
+            }}
+            placeholder="eg: John Doe"
+          />
+        </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="email" className="">
             Email
@@ -56,41 +69,24 @@ export default function Login() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="password" className="">
-            Password
+          <label htmlFor="phone" className="">
+            Phone Number
           </label>
           <TextInput
-            type={showPassword ? "text" : "password"}
-            righIcon={showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
-            rightIconClick={() => {
-              setShowPassword((prev) => !prev);
-            }}
+            id="phone"
+            type="tel"
+            inputMode="numeric"
+            error={errors.phone_number}
             onChange={(val) => {
               handleChange(val);
             }}
-            placeholder="Enter Password"
+            placeholder="Enter Phone Number"
           />
         </div>
-        <div>
-          <Link
-            href="/auth/password"
-            className="text-primary-200 text-sm hover:underline underline-offset-2"
-          >
-            Forgot password
-          </Link>
-        </div>
+
         <Button loading={loading} type="submit" block>
-          Login
+          Continue
         </Button>
-        <div className="flex items-center gap-2 text-sm justify-center font-light text-primary">
-          New to <strong>Wceipt</strong>
-          <Link
-            href="/auth/register"
-            className="font-medium text-primary-200 hover:underline underline-offset-2"
-          >
-            Create Account
-          </Link>
-        </div>
       </form>
     </AuthContainer>
   );

@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const isPublicPath = path == "/" || path == "/auth/:path*";
-  const isLoggedIn = false; // get logged in user
+  const isLoggedIn = true; // get logged in user
 
   if (!isPublicPath && !isLoggedIn) {
     return NextResponse.redirect(new URL("/auth/login", request.nextUrl));
