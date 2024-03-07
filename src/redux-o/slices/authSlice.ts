@@ -1,5 +1,5 @@
-import { UserType } from "@/interfaces/types";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { UserType } from '@/interfaces/types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type InitialState = {
   isLogin: Boolean;
@@ -10,19 +10,19 @@ const initialState = {
   isLogin: false,
 
   user: {
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    userId: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    userId: '',
 
-    password: "",
+    password: '',
     createdAt: null,
 
     verified: false,
     blocked: false,
     deleted: false,
-    blockedMessage: "",
+    blockedMessage: '',
 
     organization: [],
     roles: [],
@@ -30,14 +30,14 @@ const initialState = {
 } as InitialState;
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     registerUser: (state, action: PayloadAction<UserType>) => {
-      console.log("");
+      console.log('');
     },
     loginUser: (state, action: PayloadAction) => {
-      console.log("");
+      console.log('');
     },
     logoutUser: () => {
       return initialState;

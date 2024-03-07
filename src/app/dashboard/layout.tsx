@@ -8,7 +8,7 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const state = useAppSelector((state) => state.controllerReducer);
+  const state = useAppSelector((state) => state.controller);
   const collapse = state.collapes;
 
   return (

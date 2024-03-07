@@ -57,7 +57,7 @@ export default function SideBar() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const state = useAppSelector((state) => state.controllerReducer);
+  const state = useAppSelector((state) => state.controller);
   const collapse = state.collapes;
 
   const handleCollapseClick = (): void => {

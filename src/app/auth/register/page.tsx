@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import AuthContainer from "../shared/AuthContainer";
 import Button from "@/components/global/Button";
 import TextInput from "@/components/global/TextInput";
@@ -21,12 +21,14 @@ export default function Register() {
       phone: "",
       password: "",
     },
+
     validationSchema: Yup.object({
       full_name: Yup.string().required().label("Full Name"),
       email: Yup.string().email().required().label("Email"),
       phone: Yup.string().min(11).required().label("Phone Number"),
       password: Yup.string().min(6).required().label("Password"),
     }),
+
     onSubmit: async (values) => {
       setLoading(true);
       setTimeout(() => {
@@ -51,9 +53,9 @@ export default function Register() {
           <TextInput
             id="full_name"
             name="full_name"
+            placeholder="eg: John Doe"
             error={formik.errors["full_name"]}
             onChange={formik.handleChange}
-            placeholder="eg: John Doe"
             value={formik.values.full_name}
           />
         </div>

@@ -2,37 +2,16 @@
 
 import { ChangeEvent, useState } from "react";
 
-interface InputType {
-  type?: "text" | "email" | "password" | "tel" | undefined;
-  name?: string;
-  value?: string | number;
+type InputType = React.InputHTMLAttributes<HTMLInputElement> & {
   id?: string;
-  inputMode?:
-    | "text"
-    | "email"
-    | "tel"
-    | "numeric"
-    | "search"
-    | "url"
-    | "none"
-    | "decimal"
-    | undefined;
-  placeholder?: string;
   error?: boolean | string;
   hint?: string;
-  disabled?: boolean;
   format?: boolean;
-  className?: string;
   righIcon?: React.ReactNode;
   leftIcon?: React.ReactNode;
   leftIconClick?: () => void;
   rightIconClick?: () => void;
-  // onChange?: (value: string) => void;
-  onChange: (e: ChangeEvent<any>) => void;
-  //   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  onFocus?: React.FocusEventHandler<HTMLInputElement>;
-  onBlur?: React.FocusEventHandler<HTMLInputElement>;
-}
+};
 
 export default function TextInput(props: InputType) {
   const {
@@ -63,7 +42,7 @@ export default function TextInput(props: InputType) {
         flex gap-2 items-center
     `;
 
-  const [fValue, setFValue] = useState<string | undefined>(undefined);
+  const [fValue, setFValue] = useState<string>("");
 
   //Convert value to a formated currency
   const formatValue = (val: string): string => {
@@ -95,6 +74,7 @@ export default function TextInput(props: InputType) {
       onChange && onChange(event);
     } else {
       onChange && onChange(event);
+
       setFValue(enteredValue);
     }
   };
