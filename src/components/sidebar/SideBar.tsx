@@ -122,9 +122,11 @@ export default function SideBar() {
           {/* //Logout button // */}
           <div
             onClick={handleLogout}
-            className={`${collapse ? "hidden" : "hidden md:flex items-center"}`}
+            className={`${
+              collapse ? "hidden" : "hidden md:flex  items-center"
+            }`}
           >
-            <Button block color="accent" className="text-primary gap-2 flex">
+            <Button block color="accent" className="text-primary  gap-2 flex">
               <BiLogOutCircle size={22} />
               Logout
             </Button>

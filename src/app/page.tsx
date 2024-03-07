@@ -15,6 +15,7 @@ export default function Default() {
         This is the Landing Page
         <Button
           onClick={() => {
+            console.log("clicked");
             handleClick("/dashboard");
           }}
         >
@@ -22,6 +23,7 @@ export default function Default() {
         </Button>
         <Button
           onClick={() => {
+            console.log("clicked");
             handleClick("/auth/login");
           }}
         >

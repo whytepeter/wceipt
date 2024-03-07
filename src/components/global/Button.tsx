@@ -22,19 +22,16 @@ const sizes = {
   large: "px-5 py-3.5 text-lg",
 };
 
-interface ButtonType {
+type ButtonType = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "fill" | "text" | "outlined";
-  type?: "button" | "submit" | "reset" | undefined;
-  className?: string;
   loading?: boolean;
   disabled?: boolean;
   block?: boolean;
   size?: "small" | "medium" | "large";
   color?: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   bold?: boolean;
   children: React.ReactNode;
-}
+};
 
 export default function CustomButton({
   variant = "fill",
@@ -45,9 +42,9 @@ export default function CustomButton({
   size = "medium",
   color = "primary",
   className = "",
-  onClick,
   bold = false,
   children,
+  onClick,
 }: ButtonType) {
   // Accessibility improvements
   const ariaDisabled = disabled ? "true" : undefined;
