@@ -29,7 +29,7 @@ export const createUser = async (
       deleted: false,
       blockedMessage: "",
       organization: null,
-      role: null,
+      role: null, //TOD : add role
     };
 
     await setDoc(doc(db, "users", userId), userDetails);
