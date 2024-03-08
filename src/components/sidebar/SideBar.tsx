@@ -7,7 +7,7 @@ import MenuItems from "@/components/sidebar/MenuItems";
 import Button from "@/components/global/Button";
 import ActiveOrganization from "@/components/sidebar/ActiveOrganization";
 
-import { MenuItemsType } from "@/interfaces/types";
+import { MenuItemsType } from "@/types/types";
 
 import { MdSpaceDashboard } from "react-icons/md";
 import { IoReceiptSharp, IoSettingsSharp } from "react-icons/io5";

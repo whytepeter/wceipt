@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type InitialState = {
-  collapes: Boolean;
+  collapes: boolean;
 };
 
 const initialState = {
@@ -12,7 +12,7 @@ export const controllerSlice = createSlice({
   name: "controller",
   initialState,
   reducers: {
-    toggleCollapes: (state, action: PayloadAction<Boolean>) => {
+    toggleCollapes: (state, action: PayloadAction<boolean>) => {
       state.collapes = action.payload;
     },
   },

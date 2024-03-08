@@ -8,6 +8,9 @@ import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { createUser } from "@/redux/api/authApi";
+import { SignUpUserType } from "@/types/types";
+import toast from "react-hot-toast";
 
 export default function Register() {
   const router = useRouter();
@@ -30,11 +33,21 @@ export default function Register() {
     }),
 
     onSubmit: async (values) => {
-      setLoading(true);
-      setTimeout(() => {
-        router.replace(`/auth/organization?userId=${123456}`);
+      const user: SignUpUserType = { ...values };
+
+      try {
+        setLoading(true);
+        const res = await createUser(user);
+        console.log("User Credential", res);
+
+        // Redirect to setup business page
+        const userId = res?.user?.uid;
+        router.replace(`/auth/organization?userId=${userId}`);
+      } catch (error: any) {
+        toast.error(error.message || "An error occurred.");
+      } finally {
         setLoading(false);
-      }, 3000);
+      }
     },
 
     validateOnChange: true,

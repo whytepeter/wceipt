@@ -4,7 +4,7 @@ import { useState } from "react";
 import useClickOutside from "@/hooks/useClickOutside";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
-import { SelectOptionType } from "@/interfaces/types";
+import { SelectOptionType } from "@/types/types";
 
 interface SelectType {
   value: string;

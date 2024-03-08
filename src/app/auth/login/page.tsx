@@ -8,6 +8,7 @@ import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { initRoles } from "@/redux/api/roleApi";
 
 export default function Login() {
   const router = useRouter();
@@ -26,6 +27,7 @@ export default function Login() {
     }),
 
     onSubmit: async (values) => {
+      await initRoles();
       setLoading(true);
       setTimeout(() => {
         router.replace("/dashboard");
