@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useClickOutside from "@/hooks/useClickOutside";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
 import { SelectOptionType } from "@/types/types";
+import { useField } from "formik";
 
 interface SelectType {
+  name?: string;
   value: string;
   options: SelectOptionType[] | null;
   id?: string;
@@ -19,6 +21,7 @@ interface SelectType {
   styles?: Object;
   leftIcon?: React.ReactNode;
   action?: React.ReactNode;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   onSelect?: (value: string) => void;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -26,10 +29,12 @@ interface SelectType {
 
 export default function TextInput(props: SelectType) {
   const [isSelect, setIsSelect] = useState(false);
+  const selectRef = useRef<HTMLSelectElement>(null);
 
   const {
     id,
     value,
+    name,
     options = [],
     disabled = false,
     autoHeight = true,
@@ -38,6 +43,7 @@ export default function TextInput(props: SelectType) {
     placeholder,
     leftIcon,
     action,
+    onChange,
     onSelect,
     onFocus,
     onBlur,
@@ -59,8 +65,16 @@ export default function TextInput(props: SelectType) {
   };
 
   const handleSelect = (option: SelectOptionType): void => {
-    if (!onSelect) return;
-    onSelect(option.value);
+    if (onChange) {
+      onChange({
+        target: { value: option.value, name },
+      } as React.ChangeEvent<HTMLSelectElement>);
+    }
+
+    if (onSelect) {
+      onSelect(option.value);
+    }
+
     setIsSelect(false);
   };
 
@@ -75,6 +89,14 @@ export default function TextInput(props: SelectType) {
   return (
     <div>
       <div className="relative z-10">
+        <select
+          ref={selectRef}
+          id={id}
+          name={name}
+          value={value}
+          onChange={onChange}
+          className="hidden"
+        />
         <div
           onClick={toggleIsSelect}
           style={styles}

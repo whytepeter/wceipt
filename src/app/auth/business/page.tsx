@@ -15,7 +15,6 @@ export default function Register() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
-  const [businessType, setBusinessType] = useState<string>("");
 
   const businessTypeOptions = [
     {
@@ -29,7 +28,7 @@ export default function Register() {
       name: "",
       email: "",
       phone: "",
-      type: "",
+      businessType: "",
       address: "",
     },
 
@@ -37,10 +36,14 @@ export default function Register() {
       name: Yup.string().required().label("Business name is required"),
       email: Yup.string().email().required().label("Email is required"),
       phone: Yup.string().min(11).required().label("Phone Number is required"),
+      businessType: Yup.string().min(11).required().label("Business type"),
       address: Yup.string().min(11).required().label("Address is required"),
     }),
 
     onSubmit: async (values) => {
+      console.log(values);
+
+      return;
       const userId = searchParams.get("userId");
       if (!userId) return;
 
@@ -48,7 +51,6 @@ export default function Register() {
         ...values,
         id: "",
         userId,
-        type: businessType,
         createdAt: new Date(),
       };
 
@@ -122,11 +124,12 @@ export default function Register() {
             Business Type
           </label>
           <SelectInput
-            value={businessType}
+            id="businessType"
+            name="businessType"
+            error={formik.errors["businessType"]}
+            value={formik.values.businessType}
+            onChange={formik.handleChange}
             options={businessTypeOptions}
-            onSelect={(val) => {
-              setBusinessType(val);
-            }}
             placeholder="Business Type"
           />
         </div>
