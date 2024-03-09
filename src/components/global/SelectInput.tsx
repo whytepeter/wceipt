@@ -1,11 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import useClickOutside from "@/hooks/useClickOutside";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
 import { SelectOptionType } from "@/types/types";
-import { useField } from "formik";
 
 interface SelectType {
   name?: string;
@@ -29,7 +28,6 @@ interface SelectType {
 
 export default function TextInput(props: SelectType) {
   const [isSelect, setIsSelect] = useState(false);
-  const selectRef = useRef<HTMLSelectElement>(null);
 
   const {
     id,
@@ -89,14 +87,6 @@ export default function TextInput(props: SelectType) {
   return (
     <div>
       <div className="relative z-10">
-        <select
-          ref={selectRef}
-          id={id}
-          name={name}
-          value={value}
-          onChange={onChange}
-          className="hidden"
-        />
         <div
           onClick={toggleIsSelect}
           style={styles}
