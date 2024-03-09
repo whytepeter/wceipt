@@ -8,12 +8,17 @@ import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { initRoles } from "@/redux/api/roleApi";
+import { getAllRoles } from "@/redux/api/roleApi";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { setAuthState } from "@/redux/slices/authSlice";
 
 export default function Login() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const state = useAppSelector((state) => state.auth);
+
+  const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -27,8 +32,14 @@ export default function Login() {
     }),
 
     onSubmit: async (values) => {
-      await initRoles();
-      setLoading(true);
+      const roles = await getAllRoles();
+
+      //Set all roles
+      dispatch(setAuthState({ field: "roles", value: roles }));
+
+      console.log("state roles", state.roles);
+
+      return;
       setTimeout(() => {
         router.replace("/dashboard");
         setLoading(false);

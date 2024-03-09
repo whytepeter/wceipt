@@ -1,47 +1,23 @@
-import { doc, collection, addDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  addDoc,
+  updateDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { auth, db } from "@/services/firebase";
-import { formatDate } from "@/utils";
-import { Role } from "@/types/types";
-import permissions from "@/utils/permissions";
 
+import { Role, Roles } from "@/types/types";
+import { defaultRoles } from "@/utils/db";
+
+// Add default roles to DB
 export const initRoles = async () => {
-  const roles = [
-    {
-      id: "",
-      name: "Admin",
-      permissions,
-      createdAt: formatDate(new Date()),
-    },
-    {
-      id: "",
-      name: "User",
-      permissions,
-      createdAt: formatDate(new Date()),
-    },
-    {
-      id: "",
-      name: "Staff",
-      permissions: [
-        "Add_Receipt",
-        "Add_Receipt",
-        "Add_Customer",
-        "Edit_Customer",
-        "Add_Product",
-        "Edit_Product",
-        "View_Wallet",
-      ],
-      createdAt: formatDate(new Date()),
-    },
-    {
-      id: "",
-      name: "Customer",
-      permissions: [],
-      createdAt: formatDate(new Date()),
-    },
-  ];
-
   // Create an array of promises for each role creation
-  const roleCreationPromises = roles.map(async (role) => createRole(role));
+  const roleCreationPromises = defaultRoles.map(async (role) =>
+    createRole(role)
+  );
 
   try {
     // Wait for all role creation promises to resolve or reject
@@ -80,6 +56,37 @@ export const updateRole = async (role: Role) => {
   }
 };
 
-export const getAllRole = async () => {};
+export const getAllRoles = async (): Promise<Roles> => {
+  try {
+    const q = query(collection(db, "roles"));
+    const querySnapshot = await getDocs(q);
 
-export const getRoleByID = async (roleId: string) => {};
+    const roles: Roles = [];
+    querySnapshot.forEach((doc) => {
+      const roleData = doc.data() as Role; // Cast the data to Role type
+      roles.push(roleData);
+    });
+
+    return roles;
+  } catch (error: any) {
+    console.log("Error fetching roles", error.message);
+    throw error;
+  }
+};
+
+export const getRoleByName = async (roleName: string): Promise<Role> => {
+  try {
+    const q = query(collection(db, "roles"), where("name", "==", roleName));
+    const querySnapshot = await getDocs(q);
+
+    const roles: Roles = [];
+    querySnapshot.forEach((doc) => {
+      const roleData = doc.data() as Role; // Cast the data to Role type
+      roles.push(roleData);
+    });
+
+    return roles[0];
+  } catch (error) {
+    throw error;
+  }
+};

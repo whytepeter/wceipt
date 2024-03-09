@@ -1,48 +1,64 @@
 "use client";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import AuthContainer from "../shared/AuthContainer";
 import Button from "@/components/global/Button";
 import TextInput from "@/components/global/TextInput";
-import Link from "next/link";
-import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { signUpUser } from "@/redux/api/authApi";
-import { SignUpUserType } from "@/types/types";
+import { BusinessType } from "@/types/types";
+import { createBusiness } from "@/redux/api/businessApi";
 import toast from "react-hot-toast";
+import SelectInput from "@/components/global/SelectInput";
 
 export default function Register() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [businessType, setBusinessType] = useState<string>("");
+
+  const businessTypeOptions = [
+    {
+      label: "Professional Service",
+      value: "Professional Service",
+    },
+  ];
 
   const formik = useFormik({
     initialValues: {
-      full_name: "",
+      name: "",
       email: "",
       phone: "",
-      password: "",
+      type: "",
+      address: "",
     },
 
     validationSchema: Yup.object({
-      full_name: Yup.string().required().label("Full Name"),
-      email: Yup.string().email().required().label("Email"),
-      phone: Yup.string().min(11).required().label("Phone Number"),
-      password: Yup.string().min(6).required().label("Password"),
+      name: Yup.string().required().label("Business name is required"),
+      email: Yup.string().email().required().label("Email is required"),
+      phone: Yup.string().min(11).required().label("Phone Number is required"),
+      address: Yup.string().min(11).required().label("Address is required"),
     }),
 
     onSubmit: async (values) => {
-      const user: SignUpUserType = { ...values };
+      const userId = searchParams.get("userId");
+      if (!userId) return;
+
+      const business: BusinessType = {
+        ...values,
+        id: "",
+        userId,
+        type: businessType,
+        createdAt: new Date(),
+      };
 
       try {
         setLoading(true);
-        const res = await signUpUser(user);
-        console.log("User Credential", res);
+        // Create business
+        await createBusiness(business);
 
-        // Redirect to setup business page
-        const userId = res?.userId;
-        router.replace(`/auth/business?userId=${userId}`);
+        //Log user in
+        router.replace(`/dashboard`);
       } catch (error: any) {
         toast.error(error.message || "An error occurred.");
       } finally {
@@ -54,27 +70,27 @@ export default function Register() {
   });
 
   return (
-    <AuthContainer title="Sign Up">
+    <AuthContainer title="Setup Business">
       <form
         onSubmit={formik.handleSubmit}
         className="grid grid-cols-1 gap-4 py-2 text-dark-300"
       >
         <div className="flex flex-col gap-2">
           <label htmlFor="email" className="">
-            Full Name
+            Business Name
           </label>
           <TextInput
-            id="full_name"
-            name="full_name"
+            id="name"
+            name="name"
             placeholder="eg: John Doe"
-            error={formik.errors["full_name"]}
+            error={formik.errors["name"]}
             onChange={formik.handleChange}
-            value={formik.values.full_name}
+            value={formik.values.name}
           />
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="email" className="">
-            Email
+            Business Email
           </label>
           <TextInput
             id="email"
@@ -88,7 +104,7 @@ export default function Register() {
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="phone" className="">
-            Phone Number
+            Business Phone Number
           </label>
           <TextInput
             id="phone"
@@ -102,36 +118,35 @@ export default function Register() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="password" className="">
-            Password
+          <label htmlFor="phone" className="">
+            Business Type
+          </label>
+          <SelectInput
+            value={businessType}
+            options={businessTypeOptions}
+            onSelect={(val) => {
+              setBusinessType(val);
+            }}
+            placeholder="Business Type"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="phone" className="">
+            Business Phone Number
           </label>
           <TextInput
-            type={showPassword ? "text" : "password"}
-            id="password"
-            name="password"
-            righIcon={showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
-            rightIconClick={() => {
-              setShowPassword((prev) => !prev);
-            }}
+            id="address"
+            name="address"
+            error={formik.errors["address"]}
             onChange={formik.handleChange}
-            placeholder="Enter Password"
-            error={formik.errors["password"]}
-            value={formik.values.password}
+            placeholder="Enter address"
+            value={formik.values.address}
           />
         </div>
 
         <Button loading={loading} type="submit" block>
-          Create Account
+          Continue
         </Button>
-        <div className="flex items-center gap-2 text-sm justify-center font-light text-primary">
-          Already have an account
-          <Link
-            href="/auth/login"
-            className="font-medium text-primary-200  hover:underline underline-offset-2"
-          >
-            Login
-          </Link>
-        </div>
       </form>
     </AuthContainer>
   );

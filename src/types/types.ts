@@ -19,8 +19,9 @@ export type UserType = {
   deleted: boolean;
   blockedMessage: string;
 
-  organization: OrganizationType[] | null;
-  role: Role | null;
+  business: BusinessType[] | null;
+  roleId: string;
+  roleDetails: Role | null;
 };
 
 export type Role = {
@@ -32,7 +33,7 @@ export type Role = {
 
 export type Roles = Role[];
 
-export type OrganizationType = {
+export type BusinessType = {
   id: string;
   userId: string;
   name: string;
@@ -40,7 +41,7 @@ export type OrganizationType = {
   phone: string;
   type: string;
   address: string;
-  createdAt: Date;
+  createdAt: Date | null | string;
 };
 
 export type CustomerType = {
@@ -63,7 +64,7 @@ export type ProductType = {
   price: number;
   quantity: number;
   description: string;
-  createdAt: Date;
+  createdAt: Date | null | string;
 };
 
 //Receip Types

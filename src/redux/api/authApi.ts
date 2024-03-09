@@ -3,13 +3,15 @@ import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "@/services/firebase";
 import { SignUpUserType, UserType } from "@/types/types";
 import { formatDate } from "@/utils";
+import { getRoleByName } from "./roleApi";
 
-export const createUser = async (
-  user: SignUpUserType
-): Promise<UserCredential> => {
+export const signUpUser = async (user: SignUpUserType): Promise<UserType> => {
   const { email, password } = user;
 
   try {
+    //Get user role
+    const role = await getRoleByName("User");
+
     //Sign up user
     const userCredential = await createUserWithEmailAndPassword(
       auth,
@@ -28,13 +30,14 @@ export const createUser = async (
       blocked: false,
       deleted: false,
       blockedMessage: "",
-      organization: null,
-      role: null, //TOD : add role
+      business: null,
+      roleId: role?.id,
+      roleDetails: null,
     };
 
     await setDoc(doc(db, "users", userId), userDetails);
 
-    return userCredential;
+    return userDetails;
   } catch (error: any) {
     console.error("Error creating user:", error.message);
     throw error;
