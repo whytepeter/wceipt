@@ -60,7 +60,7 @@ export default function Register() {
         className="grid grid-cols-1 gap-4 py-2 text-dark-300"
       >
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="">
+          <label htmlFor="email" className="text-sm">
             Full Name
           </label>
           <TextInput
@@ -73,7 +73,7 @@ export default function Register() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="">
+          <label htmlFor="email" className="text-sm">
             Email
           </label>
           <TextInput
@@ -87,7 +87,7 @@ export default function Register() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="phone" className="">
+          <label htmlFor="phone" className="text-sm">
             Phone Number
           </label>
           <TextInput
@@ -102,7 +102,7 @@ export default function Register() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="password" className="">
+          <label htmlFor="password" className="text-sm">
             Password
           </label>
           <TextInput

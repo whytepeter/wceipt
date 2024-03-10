@@ -26,7 +26,7 @@ export default function Login() {
     <AuthContainer color="bg-secondary" title="Forgot Password">
       <form className="grid grid-cols-1 gap-5 py-2 text-dark-300">
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="">
+          <label htmlFor="email" className="text-sm">
             Email
           </label>
           <TextInput

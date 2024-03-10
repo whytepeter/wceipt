@@ -36,8 +36,8 @@ export default function Register() {
       name: Yup.string().required().label("Business name is required"),
       email: Yup.string().email().required().label("Email is required"),
       phone: Yup.string().min(11).required().label("Phone Number is required"),
-      type: Yup.string().min(11).required().label("Business type"),
-      address: Yup.string().min(11).required().label("Address is required"),
+      type: Yup.string().required().label("Business type"),
+      address: Yup.string().required().label("Address is required"),
     }),
 
     onSubmit: async (values) => {
@@ -75,7 +75,7 @@ export default function Register() {
         className="grid grid-cols-1 gap-4 py-2 text-dark-300"
       >
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="">
+          <label className="text-sm" htmlFor="name">
             Business Name
           </label>
           <TextInput
@@ -88,7 +88,7 @@ export default function Register() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="">
+          <label className="text-sm" htmlFor="email">
             Business Email
           </label>
           <TextInput
@@ -102,7 +102,7 @@ export default function Register() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="phone" className="">
+          <label className="text-sm" htmlFor="phone">
             Business Phone Number
           </label>
           <TextInput
@@ -117,7 +117,7 @@ export default function Register() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="phone" className="">
+          <label className="text-sm" htmlFor="type">
             Business Type
           </label>
           <SelectInput
@@ -131,7 +131,7 @@ export default function Register() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="phone" className="">
+          <label className="text-sm" htmlFor="address">
             Business Phone Number
           </label>
           <TextInput

@@ -56,7 +56,7 @@ export default function Login() {
         className="grid grid-cols-1 gap-5 py-2 text-dark-300"
       >
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="">
+          <label htmlFor="email" className="text-sm">
             Email
           </label>
           <TextInput
@@ -70,7 +70,7 @@ export default function Login() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="password" className="">
+          <label htmlFor="password" className="text-sm">
             Password
           </label>
           <TextInput
