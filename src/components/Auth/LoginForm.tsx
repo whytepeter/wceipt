@@ -7,10 +7,10 @@ import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { signInUser } from "@/redux/api/authApi";
+import { signInUser } from "@/libs/api/authApi";
 import { setAuthState } from "@/redux/slices/authSlice";
 import { useAppDispatch } from "@/hooks";
-import useInitUser from "@/hooks/useInitUser";
+import useInitAccount from "@/hooks/useInitUser";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useAppDispatch();
-  const { initUser } = useInitUser();
+  const { initAccount } = useInitAccount();
 
   const formik = useFormik({
     initialValues: {
@@ -44,9 +44,9 @@ export default function LoginForm() {
 
         //Init the user
 
-        await initUser(userData);
+        await initAccount(userData);
 
-        // router.replace("/dashboard");
+        router.replace("/dashboard");
 
         console.log("Done");
       } catch (error) {

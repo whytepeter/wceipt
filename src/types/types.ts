@@ -52,7 +52,7 @@ export type BusinessType = {
 export type CustomerType = {
   id: string;
   userId: string;
-  organizationId: string;
+  businessId: string;
   name: string;
   email: string;
   phone: string;
@@ -63,7 +63,7 @@ export type CustomerType = {
 export type ProductType = {
   id: string;
   userId: string;
-  organizationId: string;
+  businessId: string;
   name: string;
   image: string;
   price: number;
@@ -83,7 +83,7 @@ export type ReceiptProductType = {
 export type ReceiptType = {
   id: string;
   userId: string;
-  organizationId: string;
+  businessId: string;
   customer: CustomerType;
   receiptNumber: number;
   products: ReceiptProductType[];

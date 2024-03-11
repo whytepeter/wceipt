@@ -7,7 +7,7 @@ import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { signUpUser } from "@/redux/api/authApi";
+import { signUpUser } from "@/libs/api/authApi";
 import { SignUpUserType, UserType } from "@/types/types";
 import toast from "react-hot-toast";
 import { useAppDispatch } from "@/hooks";

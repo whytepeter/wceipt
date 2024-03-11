@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { BusinessType } from "@/types/types";
-import { createBusiness } from "@/redux/api/businessApi";
+import { createBusiness } from "@/libs/api/businessApi";
 import toast from "react-hot-toast";
 import SelectInput from "@/components/global/SelectInput";
 import { setDataState } from "@/redux/slices/dataSlice";
