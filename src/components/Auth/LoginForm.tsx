@@ -42,8 +42,7 @@ export default function LoginForm() {
         dispatch(setAuthState({ field: "user", value: userData }));
         dispatch(setAuthState({ field: "isLogin", value: true }));
 
-        //Init the user
-
+        //Initial the user's account and redirect to dashboard
         await initAccount(userData);
 
         router.replace("/dashboard");

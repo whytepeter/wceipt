@@ -44,6 +44,7 @@ export default function Register() {
 
         //Set user state
         dispatch(setAuthState({ field: "user", value: userData }));
+        dispatch(setAuthState({ field: "isLogin", value: true }));
 
         toast.success("Account created successfully");
 
