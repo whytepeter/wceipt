@@ -1,14 +1,15 @@
-import { BusinessType, UserType } from "@/types/types";
-import { setDataState } from "@/redux/slices/dataSlice";
 import { getBusinessByID, getBusinessByUserID } from "@/redux/api/businessApi";
+import { setDataState } from "@/redux/slices/dataSlice";
+import { BusinessType, UserType } from "@/types/types";
+
 import toast from "react-hot-toast";
 import { useAppDispatch } from ".";
+import { useEffect } from "react";
 
-export default function useInitUser(user: UserType) {
+export default function useInitUser() {
   const dispatch = useAppDispatch();
 
-  console.log("initing...");
-  const init = async () => {
+  const initUser = async (user: UserType) => {
     try {
       let businesses: BusinessType[] = [];
       const roleName = user?.roleDetails?.name;
@@ -46,5 +47,5 @@ export default function useInitUser(user: UserType) {
     }
   };
 
-  return { init };
+  return { initUser };
 }

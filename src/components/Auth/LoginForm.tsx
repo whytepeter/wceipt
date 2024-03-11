@@ -18,6 +18,7 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useAppDispatch();
+  const { initUser } = useInitUser();
 
   const formik = useFormik({
     initialValues: {
@@ -43,9 +44,9 @@ export default function LoginForm() {
 
         //Init the user
 
-        const { init } = useInitUser(userData);
-        await init();
-        router.replace("/dashboard");
+        await initUser(userData);
+
+        // router.replace("/dashboard");
 
         console.log("Done");
       } catch (error) {
