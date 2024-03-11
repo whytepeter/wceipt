@@ -42,8 +42,9 @@ export default function LoginForm() {
         dispatch(setAuthState({ field: "isLogin", value: true }));
 
         //Init the user
-        console.log();
-        useInitUser(userData);
+
+        const { init } = useInitUser(userData);
+        await init();
         router.replace("/dashboard");
 
         console.log("Done");

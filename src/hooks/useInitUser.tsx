@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { useAppDispatch } from ".";
 import { BusinessType, UserType } from "@/types/types";
 import { setDataState } from "@/redux/slices/dataSlice";
 import { getBusinessByID, getBusinessByUserID } from "@/redux/api/businessApi";
 import toast from "react-hot-toast";
+import { useAppDispatch } from ".";
 
 export default function useInitUser(user: UserType) {
   const dispatch = useAppDispatch();
+
+  console.log("initing...");
   const init = async () => {
     try {
-      console.log("initing...");
       let businesses: BusinessType[] = [];
       const roleName = user?.roleDetails?.name;
       if (roleName === "Staff") {
@@ -46,5 +46,5 @@ export default function useInitUser(user: UserType) {
     }
   };
 
-  init();
+  return { init };
 }
