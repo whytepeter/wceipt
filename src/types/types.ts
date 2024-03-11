@@ -5,6 +5,11 @@ export type SignUpUserType = {
   password: string;
 };
 
+export type SignInUserType = {
+  email: string;
+  password: string;
+};
+
 export type UserType = {
   full_name: string;
   email: string;
@@ -19,7 +24,7 @@ export type UserType = {
   deleted: boolean;
   blockedMessage: string;
 
-  business: BusinessType[] | null;
+  business: string | null;
   roleId: string;
   roleDetails: Role | null;
 };

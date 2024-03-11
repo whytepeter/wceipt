@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Logo from "@/components/global/Logo";
 import { useRouter } from "next/navigation";

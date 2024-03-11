@@ -90,3 +90,20 @@ export const getRoleByName = async (roleName: string): Promise<Role> => {
     throw error;
   }
 };
+
+export const getRoleByID = async (roleId: string): Promise<Role> => {
+  try {
+    const q = query(collection(db, "roles"), where("id", "==", roleId));
+    const querySnapshot = await getDocs(q);
+
+    const roles: Roles = [];
+    querySnapshot.forEach((doc) => {
+      const roleData = doc.data() as Role; // Cast the data to Role type
+      roles.push(roleData);
+    });
+
+    return roles[0];
+  } catch (error) {
+    throw error;
+  }
+};

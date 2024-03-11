@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import AuthContainer from "../shared/AuthContainer";
+import AuthContainer from "../../../components/Auth/AuthContainer";
 import Button from "@/components/global/Button";
 import TextInput from "@/components/global/TextInput";
 import Link from "next/link";
