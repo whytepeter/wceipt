@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import SelectInput from "@/components/global/SelectInput";
 import { SelectOptionType } from "@/types/types";
 import { useAppSelector } from "@/hooks";
+import Button from "../global/Button";
+import { FaPlus } from "react-icons/fa6";
 
 export default function ActiveOrganization() {
   const [activeBusinessID, setActiveBusinessID] = useState("");
@@ -40,6 +42,16 @@ export default function ActiveOrganization() {
           borderColor: "#F4D690",
           color: "#F4D690",
         }}
+        action={
+          <Button
+            variant="text"
+            block
+            className="flex text-sm items-center justify-center gap-2"
+          >
+            New Business
+            <FaPlus className="text-primary" />
+          </Button>
+        }
       />
     </div>
   );

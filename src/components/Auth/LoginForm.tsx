@@ -10,7 +10,7 @@ import { useFormik } from "formik";
 import { signInUser } from "@/libs/api/authApi";
 import { setAuthState } from "@/redux/slices/authSlice";
 import { useAppDispatch } from "@/hooks";
-import useInitAccount from "@/hooks/useInitUser";
+import useInitAccount from "@/hooks/useInitAccount";
 
 export default function LoginForm() {
   const router = useRouter();

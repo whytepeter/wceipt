@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import Button from "@/components/global/Button";
 import TextInput from "@/components/global/TextInput";
-import { useRouter, useSearchParams } from "next/navigation";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { BusinessType } from "@/types/types";
@@ -10,12 +9,18 @@ import { createBusiness } from "@/libs/api/businessApi";
 import toast from "react-hot-toast";
 import SelectInput from "@/components/global/SelectInput";
 import { setDataState } from "@/redux/slices/dataSlice";
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 
-export default function Register() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+type BusinessPropsType = {
+  userId: string;
+  onDone?: () => void;
+};
+
+export default function Business({ onDone, userId }: BusinessPropsType) {
   const [loading, setLoading] = useState(false);
+
+  const state = useAppSelector((state) => state.data);
+  const businesses = state?.business || [];
 
   const dispatch = useAppDispatch();
 
@@ -44,7 +49,6 @@ export default function Register() {
     }),
 
     onSubmit: async (values) => {
-      const userId = searchParams.get("userId");
       if (!userId) return;
 
       try {
@@ -61,9 +65,13 @@ export default function Register() {
         const businessData = await createBusiness(business);
 
         //Update bussiness state with new business
-        dispatch(setDataState({ field: "business", value: businessData }));
-        //Log user in
-        router.replace(`/dashboard`);
+        const businessArray = [...businesses, businessData];
+        console.log("New Business", businessArray);
+        dispatch(setDataState({ field: "business", value: businessArray }));
+
+        if (onDone) {
+          onDone();
+        }
       } catch (error: any) {
         toast.error(error.message || "An error occurred.");
       } finally {

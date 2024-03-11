@@ -4,8 +4,10 @@ import { BusinessType, UserType } from "@/types/types";
 import toast from "react-hot-toast";
 import { useAppDispatch } from ".";
 import { setDataState } from "@/redux/slices/dataSlice";
+import { useRouter } from "next/navigation";
 
 export default function useInitAccount() {
+  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const initAccount = async (user: UserType) => {
@@ -32,6 +34,11 @@ export default function useInitAccount() {
       } else {
         //Get All business
         businesses = await getBusinessByUserID(userId);
+
+        //If the user has not business yet, redirected them to the business page
+        if (!businesses?.length) {
+          router.replace(`/auth/business?userId=${userId}`);
+        }
       }
 
       const activeBusiness = businesses[0];
