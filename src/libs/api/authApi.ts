@@ -1,6 +1,7 @@
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "@/services/firebase";
@@ -67,6 +68,19 @@ export const signInUser = async (user: SignInUserType): Promise<UserType> => {
     return { ...userData, roleDetails: role };
   } catch (error: any) {
     console.error("Error singing in:", error.message);
+    throw error;
+  }
+};
+
+export const checkAuthState = async (): Promise<boolean> => {
+  try {
+    let isUser;
+    onAuthStateChanged(auth, (user) => {
+      isUser = user;
+    });
+    return !!isUser;
+  } catch (error: any) {
+    console.log(error.message);
     throw error;
   }
 };

@@ -15,7 +15,7 @@ type setStateType = {
 
 const initialState = {
   isLogin: false,
-  user: {},
+  user: null,
   roles: null,
 } as InitialState;
 
@@ -27,8 +27,12 @@ export const authSlice = createSlice({
       const { field, value } = action.payload;
       state[field] = value;
     },
+    logUserOut: (state) => {
+      state.isLogin = false;
+      state.user = null;
+    },
   },
 });
 
-export const { setAuthState } = authSlice.actions;
+export const { setAuthState, logUserOut } = authSlice.actions;
 export default authSlice.reducer;

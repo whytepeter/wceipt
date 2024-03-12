@@ -4,6 +4,10 @@ import { Toaster } from "react-hot-toast";
 
 import "./globals.css";
 import "primeicons/primeicons.css";
+import { useEffect } from "react";
+import { checkAuthState } from "@/libs/api/authApi";
+import { useAppDispatch } from "@/hooks";
+import { logUserOut } from "@/redux/slices/authSlice";
 
 export const metadata: Metadata = {
   title: "Wceipt",
@@ -15,6 +19,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    (async function () {
+      const user = checkAuthState();
+      if (!user) {
+        dispatch(logUserOut());
+      }
+    })();
+  }, []);
+
   return (
     <html lang="en">
       <head>
