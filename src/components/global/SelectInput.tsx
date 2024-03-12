@@ -129,7 +129,7 @@ export default function TextInput(props: SelectType) {
                   }}
                   className={`${
                     value == option.value ? " text-primary" : "text-dark"
-                  } px-4 py-3 text-sm  hover:bg-[#ebfaf6]  cursor-pointer flex justify-between items-center border-b last:border-none border-dark-100`}
+                  } px-4 py-3 text-sm  hover:bg-[#ebfaf6]  cursor-pointer flex justify-between items-center border-b last:border-none border-outline`}
                 >
                   <span> {option.label}</span>
                   <span className="text-xl">

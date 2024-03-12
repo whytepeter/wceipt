@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import SelectInput from "@/components/global/SelectInput";
 import { setDataState } from "@/redux/slices/dataSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
+import { businessServices } from "@/utils/db";
 
 type BusinessPropsType = {
   userId: string;
@@ -24,12 +25,12 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
 
   const dispatch = useAppDispatch();
 
-  const businessTypeOptions = [
-    {
-      label: "Professional Service",
-      value: "Professional Service",
-    },
-  ];
+  const businessTypeOptions = businessServices.map((el) => {
+    return {
+      label: el,
+      value: el,
+    };
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -136,6 +137,7 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
         <SelectInput
           id="type"
           name="type"
+          autoHeight={false}
           error={formik.errors["type"]}
           value={formik.values.type}
           onChange={formik.handleChange}
