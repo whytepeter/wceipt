@@ -33,9 +33,7 @@ function AuthContainer({
             <Logo />
           </div>
           <div className="h-12  border-l border-accent"></div>
-          <h3 className="text-xl md:text-2xl text-primary font-bold">
-            {title}
-          </h3>
+          <h3 className="text-xl  text-primary font-bold">{title}</h3>
         </div>
         <div className="text-dark-300 text-sm sm:text-base">{children}</div>
       </div>
