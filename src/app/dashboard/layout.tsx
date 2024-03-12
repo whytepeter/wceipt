@@ -8,7 +8,7 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const state = useAppSelector((state) => state.controllerReducer);
+  const state = useAppSelector((state) => state.controller);
   const collapse = state.collapes;
 
   return (
@@ -17,7 +17,7 @@ export default function DashboardLayout({
       <div
         className={`${
           collapse ? "sm:pl-[60px]" : "sm:pl-[60px] md:pl-[230px]"
-        } pl-0`}
+        } pl-0  transition-all duration-300`}
       >
         {children}
       </div>

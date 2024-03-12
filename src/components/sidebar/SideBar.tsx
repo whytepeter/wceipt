@@ -7,7 +7,7 @@ import MenuItems from "@/components/sidebar/MenuItems";
 import Button from "@/components/global/Button";
 import ActiveOrganization from "@/components/sidebar/ActiveOrganization";
 
-import { MenuItemsType } from "@/interfaces/types";
+import { MenuItemsType } from "@/types/types";
 
 import { MdSpaceDashboard } from "react-icons/md";
 import { IoReceiptSharp, IoSettingsSharp } from "react-icons/io5";
@@ -57,7 +57,7 @@ export default function SideBar() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const state = useAppSelector((state) => state.controllerReducer);
+  const state = useAppSelector((state) => state.controller);
   const collapse = state.collapes;
 
   const handleCollapseClick = (): void => {
@@ -122,9 +122,11 @@ export default function SideBar() {
           {/* //Logout button // */}
           <div
             onClick={handleLogout}
-            className={`${collapse ? "hidden" : "hidden md:flex items-center"}`}
+            className={`${
+              collapse ? "hidden" : "hidden md:flex  items-center"
+            }`}
           >
-            <Button block color="accent" className="text-primary gap-2 flex">
+            <Button block color="accent" className="text-primary  gap-2 flex">
               <BiLogOutCircle size={22} />
               Logout
             </Button>

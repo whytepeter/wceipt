@@ -1,43 +1,25 @@
-import { UserType } from '@/interfaces/types';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserType } from "@/types/types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type InitialState = {
-  isLogin: Boolean;
+  isLogin: boolean;
   user: UserType | null;
 };
 
 const initialState = {
   isLogin: false,
-
-  user: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    userId: '',
-
-    password: '',
-    createdAt: null,
-
-    verified: false,
-    blocked: false,
-    deleted: false,
-    blockedMessage: '',
-
-    organization: [],
-    roles: [],
-  },
+  user: {},
 } as InitialState;
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     registerUser: (state, action: PayloadAction<UserType>) => {
-      console.log('');
+      console.log("");
     },
     loginUser: (state, action: PayloadAction) => {
-      console.log('');
+      console.log("");
     },
     logoutUser: () => {
       return initialState;

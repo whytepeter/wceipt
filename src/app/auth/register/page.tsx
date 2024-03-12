@@ -1,10 +1,13 @@
 'use client';
 import Button from '@/components/global/Button';
 import TextInput from '@/components/global/TextInput';
+import { createUser } from '@/redux/api/authApi';
+import { SignUpUserType } from '@/types/types';
 import { useFormik } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 import * as Yup from 'yup';
 import AuthContainer from '../shared/AuthContainer';
@@ -21,18 +24,30 @@ export default function Register() {
       phone: '',
       password: '',
     },
+
     validationSchema: Yup.object({
       full_name: Yup.string().required().label('Full Name'),
       email: Yup.string().email().required().label('Email'),
       phone: Yup.string().min(11).required().label('Phone Number'),
       password: Yup.string().min(6).required().label('Password'),
     }),
+
     onSubmit: async (values) => {
-      setLoading(true);
-      setTimeout(() => {
-        router.replace(`/auth/organization?userId=${123456}`);
+      const user: SignUpUserType = { ...values };
+
+      try {
+        setLoading(true);
+        const res = await createUser(user);
+        console.log('User Credential', res);
+
+        // Redirect to setup business page
+        const userId = res?.user?.uid;
+        router.replace(`/auth/organization?userId=${userId}`);
+      } catch (error: any) {
+        toast.error(error.message || 'An error occurred.');
+      } finally {
         setLoading(false);
-      }, 3000);
+      }
     },
 
     validateOnChange: true,
@@ -51,9 +66,9 @@ export default function Register() {
           <TextInput
             id='full_name'
             name='full_name'
+            placeholder='eg: John Doe'
             error={formik.errors['full_name']}
             onChange={formik.handleChange}
-            placeholder='eg: John Doe'
             value={formik.values.full_name}
           />
         </div>

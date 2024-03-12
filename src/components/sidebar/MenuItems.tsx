@@ -2,7 +2,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { MenuItemsType } from "@/interfaces/types";
+import { MenuItemsType } from "@/types/types";
 
 interface MenuType {
   menu: MenuItemsType;

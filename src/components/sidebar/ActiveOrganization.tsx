@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SelectInput from "@/components/global/SelectInput";
-import { SelectOptionType, OrganizationType } from "@/interfaces/types";
+import { SelectOptionType, OrganizationType } from "@/types/types";
 
 export default function ActiveOrganization() {
   const [activeOrgId, setActiveOrgId] = useState("");
