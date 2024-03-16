@@ -1,3 +1,50 @@
+//// Component Props Types ////
+
+import { ColumnBodyOptions } from "primereact/column";
+
+export type TableHeadersProps = {
+  title: string;
+  style?: string;
+  field: string;
+  sortable?: boolean;
+  frozen?: boolean;
+  body?:
+    | React.ReactNode
+    | ((data: any, options: ColumnBodyOptions) => React.ReactNode);
+  onRowClick?: () => void;
+};
+
+export type TableProps = {
+  data: any[];
+  headers: TableHeadersProps[];
+  selectable?: boolean;
+  stripedRows?: boolean;
+  showGridlines?: boolean;
+  sortMode?: "single" | "multiple";
+  scrollable?: boolean;
+  loading?: boolean;
+  dataKey?: string;
+  selectionMode?: "multiple" | "single";
+  scrollHeight?: string;
+  onRowSelect?: () => void;
+  onRowUnselect?: () => void;
+  selectedData?: any[] | null;
+  onSelectionChange?: (e: any) => void;
+};
+
+export type SelectOptionType = {
+  label: string;
+  value: string;
+};
+
+export type MenuItemsType = {
+  href: string;
+  title: string;
+  icon: React.ReactNode | null;
+};
+
+///// Auth Props /////
+
 export type SignUpUserType = {
   full_name: string;
   email: string;
@@ -89,16 +136,4 @@ export type ReceiptType = {
   products: ReceiptProductType[];
   description: string;
   createdAt: Date;
-};
-
-//Components Type
-export type SelectOptionType = {
-  label: string;
-  value: string;
-};
-
-export type MenuItemsType = {
-  href: string;
-  title: string;
-  icon: React.ReactNode | null;
 };
