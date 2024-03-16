@@ -34,9 +34,6 @@ export default function Login() {
             type="email"
             inputMode="email"
             error={errors.email}
-            onChange={(val) => {
-              handleChange(val);
-            }}
             placeholder="Enter Email"
           />
         </div>

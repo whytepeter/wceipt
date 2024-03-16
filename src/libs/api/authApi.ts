@@ -76,6 +76,7 @@ export const checkAuthState = async (): Promise<boolean> => {
   try {
     let isUser;
     onAuthStateChanged(auth, (user) => {
+      console.log(user);
       isUser = user;
     });
     return !!isUser;

@@ -47,27 +47,14 @@ export default function Dashboard() {
           inputMode="email"
           error="Email is required"
           leftIcon={<MdEmail />}
-          onChange={(val) => {
-            setAmount(val);
-          }}
           placeholder="Enter Email"
         />
         <TextInput
           type="password"
           righIcon={<FaRegEyeSlash />}
-          onChange={(val) => {
-            setAmount(val);
-          }}
           placeholder="Enter Password"
         />
-        <TextInput
-          format
-          hint="Enter the amount"
-          onChange={(val) => {
-            setAmount(val);
-          }}
-          placeholder="Enter Amount"
-        />
+        <TextInput format hint="Enter the amount" placeholder="Enter Amount" />
         <SelectInput
           value={selected}
           options={options}
