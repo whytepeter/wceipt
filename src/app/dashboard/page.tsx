@@ -27,7 +27,7 @@ export default function Dashboard() {
     {
       title: "First Name",
       field: "name",
-      body: (data: VData) => {
+      body: (data: any) => {
         return (
           <div className="flex items-center gap-2">
             <div className="w-9 h-9 rounded-full bg-primary-100"></div>
@@ -43,18 +43,11 @@ export default function Dashboard() {
     {
       title: "Date",
       field: "date",
-      body: (data: VData) => {
+      body: (data: any) => {
         return <div> {formatDate(data.date)}</div>;
       },
     },
   ];
-
-  const handleClick = (): void => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  };
 
   return (
     <>
