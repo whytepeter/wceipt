@@ -15,7 +15,6 @@ export default function Table(props: TableProps) {
     selectionMode = "multiple",
     scrollable = true,
     loading = false,
-
     ...rest
   } = props;
 
