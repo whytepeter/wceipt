@@ -1,74 +1,54 @@
 "use client";
-
-import { useEffect, useState } from "react";
-import Table from "@/components/Global/Table";
-import { formatDate } from "@/utils";
-import { TableHeadersProps } from "@/types/types";
-import ProductMobileTable from "@/components/Products/ProductMobileTable";
-
-type VData = {
-  name: string;
-  email: string;
-  date: Date;
-  _id: string;
-};
+import InfoCard from "@/components/Dashboard/InfoCard";
+import RecentSales from "@/components/Dashboard/RecentSales";
+import TopSellingProduct from "@/components/Dashboard/TopSellingProduct";
+import TotalSales from "@/components/Dashboard/TotalSales";
+import { formatAmount } from "@/utils";
 
 export default function Dashboard() {
-  const [loading, setLoading] = useState(false);
-
-  const [tableData, setTableData] = useState<VData[]>([
+  const stats = [
     {
-      name: "Jouh doe",
-      email: "johndoe@gmail.com",
-      date: new Date(),
-      _id: "1",
+      title: "Total Sales",
+      value: formatAmount(1120345),
     },
     {
-      name: "Williams doe",
-      email: "williams@gmail.com",
-      date: new Date(),
-      _id: "2",
-    },
-  ]);
-
-  const tableHeaders: TableHeadersProps[] = [
-    {
-      title: "First Name",
-      field: "name",
-      body: (data: VData) => {
-        return (
-          <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-full bg-primary-100"></div>
-            <div> {data.name}</div>
-          </div>
-        );
-      },
+      title: "Total Products",
+      value: (345).toLocaleString(),
     },
     {
-      title: "Email",
-      field: "email",
+      title: "Total Reciepts",
+      value: (1345).toLocaleString(),
     },
     {
-      title: "Date",
-      field: "date",
-      body: (data: VData) => {
-        return <div> {formatDate(data.date)}</div>;
-      },
+      title: "Low on stocks",
+      value: 10,
+      plain: true,
+      color: "text-error",
     },
   ];
 
   return (
-    <>
-      <div className="w-fullflex flex-col gap-4  ">
-        <Table
-          data={tableData}
-          headers={tableHeaders}
-          loading={loading}
-          desktopOnly
-        >
-          <ProductMobileTable />
-        </Table>
+    <main className="flex flex-col gap-6 pt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        {stats.map((el, index) => (
+          <InfoCard
+            key={index}
+            title={el.title}
+            value={el.value}
+            plain={el?.plain}
+            color={el?.color}
+          />
+        ))}
       </div>
-    </>
+
+      <div className="flex flex-col md:flex-row md:justify-between gap-5">
+        <div className="flex-grow">
+          <TotalSales />
+        </div>
+        <TopSellingProduct />
+      </div>
+
+      <RecentSales />
+    </main>
   );
 }

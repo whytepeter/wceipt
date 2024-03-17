@@ -96,7 +96,7 @@ export default function SideBar() {
         <div
           className={`${
             collapse ? "p-0" : "p-4"
-          } h-full w-full relative bg-primary py-4  md:py-6 flex md:flex-col justify-between`}
+          } h-full w-full relative bg-primary py-2.5  md:py-6 flex md:flex-col justify-between`}
         >
           {/* //Collapse button // */}
           <div

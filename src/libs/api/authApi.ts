@@ -2,6 +2,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  UserCredential,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "@/services/firebase";
@@ -18,13 +19,12 @@ export const signUpUser = async (user: SignUpUserType): Promise<UserType> => {
     const role = await getRoleByName("User");
 
     //Sign up user
-    const userCredential = await createUserWithEmailAndPassword(
+    const userCredential: UserCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
 
-    //Add user detials to database
     const userId = userCredential?.user?.uid;
     const userDetails: UserType = {
       ...user,
@@ -59,6 +59,7 @@ export const signInUser = async (user: SignInUserType): Promise<UserType> => {
     );
 
     //Get user detials from database
+    console.log("user credentials", userCredential);
     const userId = userCredential?.user?.uid;
     const userData = await getUserByID(userId);
 

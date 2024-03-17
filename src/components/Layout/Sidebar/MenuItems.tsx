@@ -35,7 +35,11 @@ export default function MenuItems({ menu, min }: MenuType) {
       >
         {menu.icon}
 
-        <span className={`${min ? "md:hidden" : ""} text-xs  tracking-widest`}>
+        <span
+          className={`${
+            min ? "md:hidden" : ""
+          } text-[0.65rem] sm:text-xs  tracking-widest`}
+        >
           {menu.title}
         </span>
       </div>

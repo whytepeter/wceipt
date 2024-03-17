@@ -20,9 +20,9 @@ export default function DashboardLayout({
       <div
         className={`${
           collapse ? "md:pl-[60px]" : "sm:pl-[60px] md:pl-[230px]"
-        }  pl-0 pt-20 transition-all duration-300 text-dark-300`}
+        }  pl-0 py-20 transition-all duration-300 text-dark-300 `}
       >
-        <div className="px-4">{children}</div>
+        <div className="px-4 md:px-8 ">{children}</div>
       </div>
     </main>
   );
