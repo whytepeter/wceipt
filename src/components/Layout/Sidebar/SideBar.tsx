@@ -2,13 +2,15 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import { togglecollapse } from "@/redux/slices/controllerSlice";
+import { logUserOut } from "@/redux/slices/authSlice";
 
-import MenuItems from "@/components/Sidebar/MenuItems";
+import MenuItems from "@/components/Layout/Sidebar/MenuItems";
 import Button from "@/components/Global/Button";
-import ActiveOrganization from "@/components/Sidebar/ActiveOrganization";
+import ActiveOrganization from "@/components/Layout/Sidebar/ActiveOrganization";
 
 import { MenuItemsType } from "@/types/types";
 
+import Logo from "@/components/Global/Logo";
 import { MdSpaceDashboard } from "react-icons/md";
 import { IoReceiptSharp, IoSettingsSharp } from "react-icons/io5";
 import {
@@ -19,7 +21,6 @@ import {
 } from "react-icons/fa6";
 import { BiLogOutCircle } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-import Logo from "../Global/Logo";
 
 const menuItems: MenuItemsType[] = [
   {
@@ -81,6 +82,7 @@ export default function SideBar() {
   };
 
   const handleLogout = (): void => {
+    dispatch(logUserOut());
     router.push("/auth/login");
   };
 

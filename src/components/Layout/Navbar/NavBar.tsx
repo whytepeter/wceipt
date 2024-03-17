@@ -1,8 +1,8 @@
 import React from "react";
 import { useAppSelector } from "@/hooks";
-import UserDropdown from "../Account/UserDropdown";
+import UserDropdown from "../../Account/UserDropdown";
 import Notification from "@/components/Notification/Notification";
-import ActiveOrganization from "@/components/Sidebar/ActiveOrganization";
+import ActiveOrganization from "@/components/Layout/Sidebar/ActiveOrganization";
 import ActionButton from "./ActionButton";
 
 export default function NavBar() {

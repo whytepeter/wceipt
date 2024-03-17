@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SelectInput from "@/components/Global/SelectInput";
 import { SelectOptionType } from "@/types/types";
 import { useAppSelector } from "@/hooks";
-import Button from "../Global/Button";
+import Button from "../../Global/Button";
 import { FaPlus } from "react-icons/fa6";
 
 type PropsType = {

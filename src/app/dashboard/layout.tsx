@@ -1,8 +1,8 @@
 "use client";
-import SideBar from "@/components/Sidebar/SideBar";
+import SideBar from "@/components/Layout/Sidebar/SideBar";
 import React from "react";
 import { useAppSelector } from "@/hooks";
-import NavBar from "@/components/Navbar/NavBar";
+import NavBar from "@/components/Layout/Navbar/NavBar";
 
 export default function DashboardLayout({
   children,
