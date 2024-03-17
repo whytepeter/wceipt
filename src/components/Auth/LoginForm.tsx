@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Button from "@/components/global/Button";
-import TextInput from "@/components/global/TextInput";
+import Button from "@/components/Global/Button";
+import TextInput from "@/components/Global/TextInput";
 import Link from "next/link";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { useRouter } from "next/navigation";

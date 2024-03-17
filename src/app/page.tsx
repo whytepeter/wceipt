@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/global/Button";
+import Button from "@/components/Global/Button";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { checkAuthState } from "@/libs/api/authApi";

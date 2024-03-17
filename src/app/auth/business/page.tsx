@@ -1,7 +1,7 @@
 "use client";
 import AuthContainer from "@/components/Auth/AuthContainer";
 import BusinessForm from "@/components/Auth/BusinessForm";
-import Button from "@/components/global/Button";
+import Button from "@/components/Global/Button";
 import { useAppSelector } from "@/hooks";
 import useInitAccount from "@/hooks/useInitAccount";
 import { useSearchParams } from "next/navigation";

@@ -1,8 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { MenuItemsType } from "@/types/types";
+import { setCurrentPage } from "@/redux/slices/controllerSlice";
+import { useAppDispatch } from "@/hooks";
 
 interface MenuType {
   menu: MenuItemsType;
@@ -10,11 +12,18 @@ interface MenuType {
 }
 
 export default function MenuItems({ menu, min }: MenuType) {
+  const dispatch = useAppDispatch();
   const pathname = usePathname();
 
   const isActive = (href: string): boolean => {
     return pathname == href;
   };
+
+  useEffect(() => {
+    if (pathname == menu.href) {
+      dispatch(setCurrentPage(menu.title));
+    }
+  }, [pathname]);
 
   return (
     <Link href={menu.href} key={menu.title}>
@@ -26,11 +35,7 @@ export default function MenuItems({ menu, min }: MenuType) {
       >
         {menu.icon}
 
-        <span
-          className={`${
-            min ? "md:hidden" : ""
-          } text-xs md:text-sm tracking-widest`}
-        >
+        <span className={`${min ? "md:hidden" : ""} text-xs  tracking-widest`}>
           {menu.title}
         </span>
       </div>

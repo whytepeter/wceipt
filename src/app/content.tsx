@@ -4,7 +4,7 @@ import { useAppSelector } from "@/hooks";
 
 export default function Content({ children }: { children: React.ReactNode }) {
   const state = useAppSelector((state) => state.controller);
-  const collapse = state.collapes;
+  const collapse = state.collapse;
 
   return (
     <div

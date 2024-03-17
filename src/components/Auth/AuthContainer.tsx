@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Logo from "@/components/global/Logo";
+import Logo from "@/components/Global/Logo";
 import { useRouter } from "next/navigation";
 
 interface ContainerTypes {

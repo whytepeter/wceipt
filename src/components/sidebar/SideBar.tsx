@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks";
-import { toggleCollapes } from "@/redux/slices/controllerSlice";
+import { togglecollapse } from "@/redux/slices/controllerSlice";
 
-import MenuItems from "@/components/sidebar/MenuItems";
-import Button from "@/components/global/Button";
-import ActiveOrganization from "@/components/sidebar/ActiveOrganization";
+import MenuItems from "@/components/Sidebar/MenuItems";
+import Button from "@/components/Global/Button";
+import ActiveOrganization from "@/components/Sidebar/ActiveOrganization";
 
 import { MenuItemsType } from "@/types/types";
 
@@ -19,7 +19,7 @@ import {
 } from "react-icons/fa6";
 import { BiLogOutCircle } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-import Logo from "../global/Logo";
+import Logo from "../Global/Logo";
 
 const menuItems: MenuItemsType[] = [
   {
@@ -74,10 +74,10 @@ export default function SideBar() {
   const dispatch = useAppDispatch();
 
   const state = useAppSelector((state) => state.controller);
-  const collapse = state.collapes;
+  const collapse = state.collapse;
 
   const handleCollapseClick = (): void => {
-    dispatch(toggleCollapes(!collapse));
+    dispatch(togglecollapse(!collapse));
   };
 
   const handleLogout = (): void => {
@@ -116,7 +116,9 @@ export default function SideBar() {
             } flex flex-col  w-full gap-5`}
           >
             {!collapse ? (
-              <ActiveOrganization />
+              <div className="hidden md:block">
+                <ActiveOrganization />
+              </div>
             ) : (
               <div className="hidden md:flex ">
                 <Logo />

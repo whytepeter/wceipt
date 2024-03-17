@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Table from "@/components/global/Table";
+import Table from "@/components/Global/Table";
 import { formatDate } from "@/utils";
 import { TableHeadersProps } from "@/types/types";
 import ProductMobileTable from "@/components/Products/ProductMobileTable";
@@ -59,8 +59,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="w-full text-2xl flex flex-col gap-4 p-4 md:px-6 ">
-        Home
+      <div className="w-fullflex flex-col gap-4  ">
         <Table
           data={tableData}
           headers={tableHeaders}

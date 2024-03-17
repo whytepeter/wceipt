@@ -1,7 +1,8 @@
 "use client";
-import SideBar from "@/components/sidebar/SideBar";
+import SideBar from "@/components/Sidebar/SideBar";
 import React from "react";
 import { useAppSelector } from "@/hooks";
+import NavBar from "@/components/Navbar/NavBar";
 
 export default function DashboardLayout({
   children,
@@ -9,17 +10,19 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const state = useAppSelector((state) => state.controller);
-  const collapse = state.collapes;
+  const collapse = state.collapse;
 
   return (
     <main>
+      <NavBar />
       <SideBar />
+
       <div
         className={`${
           collapse ? "md:pl-[60px]" : "sm:pl-[60px] md:pl-[230px]"
-        } pl-0  transition-all duration-300`}
+        }  pl-0 pt-20 transition-all duration-300 text-dark-300`}
       >
-        {children}
+        <div className="px-4">{children}</div>
       </div>
     </main>
   );
