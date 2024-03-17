@@ -16,7 +16,7 @@ export default function DashboardLayout({
       <SideBar />
       <div
         className={`${
-          collapse ? "sm:pl-[60px]" : "sm:pl-[60px] md:pl-[230px]"
+          collapse ? "md:pl-[60px]" : "sm:pl-[60px] md:pl-[230px]"
         } pl-0  transition-all duration-300`}
       >
         {children}

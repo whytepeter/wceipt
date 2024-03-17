@@ -23,7 +23,9 @@ export type TableProps = {
   sortMode?: "single" | "multiple";
   scrollable?: boolean;
   loading?: boolean;
+  desktopOnly?: boolean;
   dataKey?: string;
+  children?: React.ReactNode;
   selectionMode?: "multiple" | "single";
   scrollHeight?: string;
   onRowSelect?: () => void;
@@ -41,6 +43,8 @@ export type MenuItemsType = {
   href: string;
   title: string;
   icon: React.ReactNode | null;
+  mobile?: boolean;
+  desktop?: boolean;
 };
 
 ///// Auth Props /////

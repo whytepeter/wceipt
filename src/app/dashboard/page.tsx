@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Table from "@/components/global/Table";
 import { formatDate } from "@/utils";
 import { TableHeadersProps } from "@/types/types";
+import ProductMobileTable from "@/components/Products/ProductMobileTable";
 
 type VData = {
   name: string;
@@ -60,7 +61,14 @@ export default function Dashboard() {
     <>
       <div className="w-full text-2xl flex flex-col gap-4 p-4 md:px-6 ">
         Home
-        <Table data={tableData} headers={tableHeaders} loading={loading} />
+        <Table
+          data={tableData}
+          headers={tableHeaders}
+          loading={loading}
+          desktopOnly
+        >
+          <ProductMobileTable />
+        </Table>
       </div>
     </>
   );

@@ -21,15 +21,18 @@ export default function MenuItems({ menu, min }: MenuType) {
       <div
         className={`
       ${isActive(menu.href) ? "text-accent" : "text-white font-light"}
-      hover:text-accent flex justify-center md:justify-start items-center gap-3
+      hover:text-accent flex flex-col md:flex-row justify-center md:justify-start items-center gap-1.5 md:gap-3
       `}
       >
         {menu.icon}
-        {!min && (
-          <span className="text-sm hidden md:block  tracking-widest  ">
-            {menu.title}
-          </span>
-        )}
+
+        <span
+          className={`${
+            min ? "md:hidden" : ""
+          } text-xs md:text-sm tracking-widest`}
+        >
+          {menu.title}
+        </span>
       </div>
     </Link>
   );

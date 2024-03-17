@@ -7,10 +7,10 @@ import { FiChevronDown, FiChevronRight } from "react-icons/fi";
 import { SelectOptionType } from "@/types/types";
 
 interface SelectType {
+  id?: string;
   name?: string;
   value: string;
   options: SelectOptionType[] | null;
-  id?: string;
   autoHeight?: boolean;
   placeholder?: string;
   error?: boolean | string;
@@ -88,6 +88,7 @@ export default function TextInput(props: SelectType) {
     <div>
       <div className="relative z-10">
         <div
+          id={id}
           onClick={toggleIsSelect}
           style={styles}
           className={`${selectStyles} h-[48px] flex items-center gap-2`}
@@ -99,7 +100,7 @@ export default function TextInput(props: SelectType) {
           <span
             className={`${
               value ? "" : "text-dark-100"
-            } relative text-sm w-full font-light leading-2  pointer-events-none`}
+            } relative text-sm w-full font-light leading-2  pointer-events-none truncate`}
           >
             {value == "" ? placeholder : getLabel(value)}
           </span>

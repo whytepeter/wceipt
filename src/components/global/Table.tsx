@@ -15,6 +15,8 @@ export default function Table(props: TableProps) {
     selectionMode = "multiple",
     scrollable = true,
     loading = false,
+    desktopOnly = false,
+    children,
     ...rest
   } = props;
 
@@ -33,10 +35,9 @@ export default function Table(props: TableProps) {
         </div>
       )}
 
-      <div>
+      <div className={`${desktopOnly ? "hidden md:block" : ""}`}>
         <DataTable
           id="table-style"
-          className=""
           {...rest}
           stripedRows={stripedRows}
           scrollable={scrollable}
@@ -62,6 +63,8 @@ export default function Table(props: TableProps) {
           ))}
         </DataTable>
       </div>
+
+      {desktopOnly && <div className="block md:hidden">{children}</div>}
     </div>
   );
 }

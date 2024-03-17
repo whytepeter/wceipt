@@ -19,37 +19,53 @@ import {
 } from "react-icons/fa6";
 import { BiLogOutCircle } from "react-icons/bi";
 import { useRouter } from "next/navigation";
+import Logo from "../global/Logo";
 
 const menuItems: MenuItemsType[] = [
   {
     href: "/dashboard",
     title: "Dashboard",
     icon: <MdSpaceDashboard size={20} />,
+    desktop: true,
+    mobile: true,
   },
   {
     href: "/dashboard/products",
     title: "Products",
     icon: <FaBox size={20} />,
+    desktop: true,
+    mobile: true,
   },
   {
     href: "/dashboard/receipts",
     title: "Receipts",
     icon: <IoReceiptSharp size={20} />,
+    desktop: true,
+    mobile: true,
   },
   {
     href: "/dashboard/customers",
     title: "Customers",
     icon: <FaUserGroup size={20} />,
+    desktop: true,
   },
   {
     href: "/dashboard/reports",
     title: "Reports",
     icon: <FaChartBar size={20} />,
+    desktop: true,
   },
   {
     href: "/dashboard/settings",
     title: "Settings",
     icon: <IoSettingsSharp size={20} />,
+    desktop: true,
+  },
+  {
+    href: "",
+    title: "More",
+    icon: <IoSettingsSharp size={20} />,
+    mobile: true,
   },
 ];
 
@@ -72,18 +88,18 @@ export default function SideBar() {
     <>
       <div
         className={`${
-          collapse ? "sm:w-[60px]" : "sm:w-[60px] md:w-[230px]"
-        } w-full h-auto fixed left-0 bottom-0 sm:top-0 sm:h-screen transition-all duration-300 z-20`}
+          collapse ? "md:w-[60px]" : "sm:w-[60px] md:w-[230px]"
+        } w-full h-auto fixed left-0 bottom-0 md:top-0 md:h-screen transition-all duration-300 z-20`}
       >
         <div
           className={`${
             collapse ? "p-0" : "p-4"
-          } h-full w-full relative bg-primary   py-6 flex sm:flex-col justify-between`}
+          } h-full w-full relative bg-primary py-4  md:py-6 flex md:flex-col justify-between`}
         >
           {/* //Collapse button // */}
           <div
             onClick={handleCollapseClick}
-            className="hidden sm:flex absolute  cursor-pointer top-1/2 -translate-y-1/2 -right-3 w-7 h-7  items-center justify-center border bg-white/50 backdrop-blur-sm border-primary px-2 py-1 rounded-full"
+            className="hidden md:flex absolute  cursor-pointer top-1/2 -translate-y-1/2 -right-3 w-7 h-7  items-center justify-center border bg-white/50 backdrop-blur-sm border-primary px-2 py-1 rounded-full"
           >
             <FaChevronRight
               size={16}
@@ -96,26 +112,43 @@ export default function SideBar() {
           {/* //Change Organization  // */}
           <div
             className={`${
-              collapse ? "sm:items-center" : ""
+              collapse ? "md:items-center" : ""
             } flex flex-col  w-full gap-5`}
           >
             {!collapse ? (
               <ActiveOrganization />
             ) : (
-              <div className="hidden sm:flex h-10 w-10  text-xl items-center justify-center  rounded-xl bg-accent text-primary font-light">
-                w
+              <div className="hidden md:flex ">
+                <Logo />
               </div>
             )}
 
-            {/* //Menu Links // */}
+            {/* //Desktop Links // */}
+            <div
+              className={`${
+                collapse ? "items-center" : ""
+              } hidden md:flex flex-col justify-start gap-8 `}
+            >
+              {menuItems.map(
+                (menu) =>
+                  menu.desktop && (
+                    <MenuItems min={collapse} menu={menu} key={menu.title} />
+                  )
+              )}
+            </div>
+            {/* //// Mobile ///// */}
+
             <div
               className={` ${
-                collapse ? "sm:items-center" : ""
-              } flex sm:flex-col justify-evenly  sm:justify-start gap-7 sm:gap-8 `}
+                collapse ? "md:items-center" : ""
+              } flex md:hidden  justify-evenly  gap-7  `}
             >
-              {menuItems.map((menu) => (
-                <MenuItems min={collapse} menu={menu} key={menu.title} />
-              ))}
+              {menuItems.map(
+                (menu) =>
+                  menu.mobile && (
+                    <MenuItems min={collapse} menu={menu} key={menu.title} />
+                  )
+              )}
             </div>
           </div>
 
@@ -135,7 +168,7 @@ export default function SideBar() {
           {collapse && (
             <div
               onClick={handleLogout}
-              className="hidden sm:flex justify-center"
+              className="hidden cursor-pointer md:flex justify-center"
             >
               <BiLogOutCircle className="text-accent" size={22} />
             </div>
