@@ -78,7 +78,12 @@ export default function RecentSales() {
         return (
           <div className="flex items-center justify-between">
             <span> {formatDate(data.date)}</span>
-            <Button size="small" variant="outlined" color="primary-light">
+            <Button
+              className="rounded-full px-4"
+              size="small"
+              variant="outlined"
+              color="primary-light"
+            >
               View
             </Button>
           </div>

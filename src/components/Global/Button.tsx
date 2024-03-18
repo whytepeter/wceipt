@@ -1,6 +1,7 @@
 "use client";
-
+import clsx from "clsx";
 import { CgSpinner } from "react-icons/cg";
+import { twMerge } from "tailwind-merge";
 
 const colors = {
   primary: "#1B4946",
@@ -8,12 +9,7 @@ const colors = {
   secondary: "#76172F",
   "secondary-light": "#BC2747",
   accent: "#F4D690",
-};
-
-// Check if the type match the colors type
-function isValidColor(color: string): color is keyof typeof colors {
-  return Object.keys(colors).includes(color);
-}
+} as const;
 
 const sizes = {
   small: "px-3 py-2 text-xs",
@@ -27,7 +23,7 @@ type ButtonType = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   disabled?: boolean;
   block?: boolean;
   size?: "small" | "medium" | "large";
-  color?: string;
+  color?: keyof typeof colors;
   bold?: boolean;
   children: React.ReactNode;
 };
@@ -44,15 +40,12 @@ export default function CustomButton({
   bold = false,
   children,
   onClick,
+  ...rest
 }: ButtonType) {
   // Accessibility improvements
   const ariaDisabled = disabled ? "true" : undefined;
 
-  const mainColor = Object.keys(colors).includes(color)
-    ? isValidColor(color)
-      ? colors[color]
-      : undefined
-    : color;
+  const mainColor = colors[color];
 
   const loaderStyle = {
     color: variant == "fill" ? "white" : mainColor,
@@ -62,7 +55,7 @@ export default function CustomButton({
     outlined: {
       background: "transparent",
       color: mainColor,
-      border: `2px solid ${mainColor}`,
+      border: `1px solid ${mainColor}`,
     },
     text: {
       background: "transparent",
@@ -76,26 +69,29 @@ export default function CustomButton({
 
   const variantStyles = variants[variant];
 
-  const otherStyles = `
-          ${sizes[size]}
-          ${bold ? "font-medium" : ""}
-          ${block ? "max-w-full min-w-full w-full" : "w-fit"}
-          ${loading ? "pointer-events-none" : ""}
-          ${disabled ? "opacity-60" : "hover:opacity-95"}
-          active:opacity-90
-          text-center relative  
-          rounded-lg
-          ${className}
-          
-          `;
+  const buttonStyles = twMerge(
+    clsx(
+      sizes[size],
+      bold ? "font-medium" : "",
+      block ? "max-w-full min-w-full w-full" : "w-fit",
+      loading ? "pointer-events-none" : "",
+      disabled ? "opacity-60" : "hover:opacity-95",
+      "active:opacity-90",
+      "text-center",
+      "relative",
+      "rounded-lg",
+      className
+    )
+  );
 
   return (
     <>
       <button
+        {...rest}
         type={type}
         disabled={disabled}
         aria-disabled={ariaDisabled}
-        className={otherStyles}
+        className={buttonStyles}
         style={variantStyles}
         onClick={onClick}
       >

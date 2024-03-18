@@ -3,7 +3,7 @@ import React from "react";
 
 export default function ProductCard() {
   return (
-    <div className="cursor-pointer w-full flex  justify-between gap-2 text-sm text-dark-400">
+    <div className="cursor-pointer w-full flex items-center justify-between gap-2 text-sm text-dark-400">
       <div className="flex items-center gap-2">
         <div className="h-16 w-16 flex-shrink-0 bg-background rounded-xl"></div>
         <div className="flex flex-col  ">
