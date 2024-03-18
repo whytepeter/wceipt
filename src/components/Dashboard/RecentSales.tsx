@@ -79,7 +79,7 @@ export default function RecentSales() {
           <div className="flex items-center justify-between">
             <span> {formatDate(data.date)}</span>
             <Button
-              className="rounded-full px-4"
+              className="rounded-full px-4 "
               size="small"
               variant="outlined"
               color="primary-light"
@@ -92,8 +92,14 @@ export default function RecentSales() {
     },
   ];
 
+  const leftArea = (
+    <Button size="small" variant="text" color="primary-light">
+      See all
+    </Button>
+  );
+
   return (
-    <Card title="Recent Sales">
+    <Card title="Recent Sales" leftArea={leftArea}>
       <div className="w-fullflex flex-col gap-4  ">
         <Table
           data={tableData}

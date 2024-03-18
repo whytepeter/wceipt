@@ -75,7 +75,7 @@ export default function CustomButton({
       bold ? "font-medium" : "",
       block ? "max-w-full min-w-full w-full" : "w-fit",
       loading ? "pointer-events-none" : "",
-      disabled ? "opacity-60" : "hover:opacity-95",
+      disabled ? "opacity-60" : "hover:opacity-90",
       "active:opacity-90",
       "text-center",
       "relative",

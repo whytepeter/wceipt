@@ -28,7 +28,7 @@ export default function InfoCard({
           <span className="text-xs font-normal flex-grow whitespace-nowrap">
             {title}
           </span>
-          <Image src={wave} alt="" />
+          <Image src={wave} alt="" className="-mt-2" />
         </div>
       </div>
       {body ? body : <div className="font-semibold">{value}</div>}
