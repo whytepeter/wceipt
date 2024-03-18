@@ -19,7 +19,7 @@ export default function InfoCard({
         plain
           ? "bg-white border-outline text-dark-300"
           : "text-primary border-primary-200 bg-primary-100"
-      } p-4 rounded-xl border `}
+      } px-3 sm:px-4 p-4 rounded-xl border `}
     >
       <div>
         <span className="text-xs font-normal">{title}</span>
