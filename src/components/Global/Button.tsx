@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { CgSpinner } from "react-icons/cg";
 
 const colors = {
@@ -86,6 +85,7 @@ export default function CustomButton({
           active:opacity-90
           text-center relative  
           rounded-lg
+          ${className}
           
           `;
 
@@ -99,10 +99,7 @@ export default function CustomButton({
         style={variantStyles}
         onClick={onClick}
       >
-        <div
-          style={{ opacity: loading ? 0 : 1 }}
-          className={`text-center ${className}`}
-        >
+        <div style={{ opacity: loading ? 0 : 1 }} className={`text-center`}>
           {children}
         </div>
 

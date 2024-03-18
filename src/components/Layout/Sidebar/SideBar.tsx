@@ -164,9 +164,11 @@ export default function SideBar() {
               collapse ? "hidden" : "hidden md:flex  items-center"
             }`}
           >
-            <Button block color="accent" className="text-primary  gap-2 flex">
-              <BiLogOutCircle size={22} />
-              Logout
+            <Button block color="accent">
+              <div className="text-primary  gap-2 flex">
+                <BiLogOutCircle size={22} />
+                Logout
+              </div>
             </Button>
           </div>
 
