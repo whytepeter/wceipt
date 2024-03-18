@@ -4,14 +4,14 @@ type InfoCardProps = {
   title: string;
   value: string | number;
   plain?: boolean;
-  color?: string;
+  body?: React.ReactNode;
 };
 
 export default function InfoCard({
   title = "Title",
   value,
   plain,
-  color,
+  body,
 }: InfoCardProps) {
   return (
     <div
@@ -24,7 +24,7 @@ export default function InfoCard({
       <div>
         <span className="text-xs font-normal">{title}</span>
       </div>
-      <div className={`${color} font-semibold`}>{value}</div>
+      {body ? body : <div className="font-semibold">{value}</div>}
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default function Card({ children, title, leftArea }: CardProps) {
   const showHeading = !!title || !!leftArea;
   return (
     <div
-      className={`h-auto bg-white border border-outline rounded-2xl p-4 flex flex-col gap-2`}
+      className={`h-auto bg-white border border-outline rounded-2xl p-4 flex flex-col gap-3`}
     >
       {showHeading && (
         <div className="flex items-center justify-between gap-4 bg-white">
