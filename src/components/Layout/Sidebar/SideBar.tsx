@@ -19,53 +19,54 @@ import {
   FaBox,
   FaChevronRight,
 } from "react-icons/fa6";
+import { RiHomeFill } from "react-icons/ri";
 import { BiLogOutCircle } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 
 const menuItems: MenuItemsType[] = [
   {
     href: "/dashboard",
-    title: "Dashboard",
-    icon: <MdSpaceDashboard size={20} />,
+    title: "Home",
+    icon: <RiHomeFill size={18} />,
     desktop: true,
     mobile: true,
   },
   {
     href: "/dashboard/products",
     title: "Products",
-    icon: <FaBox size={20} />,
+    icon: <FaBox size={18} />,
     desktop: true,
     mobile: true,
   },
   {
     href: "/dashboard/receipts",
     title: "Receipts",
-    icon: <IoReceiptSharp size={20} />,
+    icon: <IoReceiptSharp size={18} />,
     desktop: true,
     mobile: true,
   },
   {
     href: "/dashboard/customers",
     title: "Customers",
-    icon: <FaUserGroup size={20} />,
+    icon: <FaUserGroup size={18} />,
     desktop: true,
   },
   {
     href: "/dashboard/reports",
     title: "Reports",
-    icon: <FaChartBar size={20} />,
+    icon: <FaChartBar size={18} />,
     desktop: true,
   },
   {
     href: "/dashboard/settings",
     title: "Settings",
-    icon: <IoSettingsSharp size={20} />,
+    icon: <IoSettingsSharp size={18} />,
     desktop: true,
   },
   {
     href: "",
     title: "More",
-    icon: <IoSettingsSharp size={20} />,
+    icon: <MdSpaceDashboard size={18} />,
     mobile: true,
   },
 ];

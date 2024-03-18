@@ -33,7 +33,7 @@ export default function RecentSales() {
 
   const tableHeaders: TableHeadersProps[] = [
     {
-      title: "First Name",
+      title: "Product",
       field: "name",
       body: (data: VData) => {
         return (
@@ -45,8 +45,12 @@ export default function RecentSales() {
       },
     },
     {
-      title: "Email",
-      field: "email",
+      title: "Quantity",
+      field: "quantity",
+    },
+    {
+      title: "Selling Price",
+      field: "sellingPrice",
     },
     {
       title: "Date",
