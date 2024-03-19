@@ -1,17 +1,19 @@
 "use client";
 import React, { useState } from "react";
 import { TableHeadersProps } from "@/types/types";
-import ProductMobileTable from "@/components/Products/ProductMobileTable";
 import { formatAmount, formatDate } from "@/utils";
 import Table from "../Global/Table";
 import Card from "../Global/Card";
 import Button from "../Global/Button";
+import SalesCard from "./SalesCard";
+import SalesMobileTable from "./SalesMobileTable";
 
 type VData = {
   name: string;
   description?: string;
   quantity: number;
   sellingPrice: number;
+  products: any[];
   date: Date;
   _id: string;
 };
@@ -25,6 +27,7 @@ export default function RecentSales() {
       description: "This is a mac book pro M2 2023",
       quantity: 3,
       sellingPrice: 200000,
+      products: [],
       date: new Date(),
       _id: "1",
     },
@@ -33,6 +36,7 @@ export default function RecentSales() {
       description: "Iphone 14, black, silver bla bla bla",
       quantity: 2,
       sellingPrice: 120000,
+      products: [],
       date: new Date(),
       _id: "2",
     },
@@ -43,17 +47,7 @@ export default function RecentSales() {
       title: "Product",
       field: "name",
       body: (data: VData) => {
-        return (
-          <div className="flex items-center gap-2">
-            <div className="w-14 h-14 flex-shrink-0 rounded-xl bg-background"></div>
-            <div className="flex flex-col text-dark-300">
-              <span className="text-sm">{data.name}</span>
-              <span className="text-xs text-dark-200 font-light">
-                {data.description}
-              </span>
-            </div>
-          </div>
-        );
+        return <SalesCard />;
       },
     },
     {
@@ -107,7 +101,7 @@ export default function RecentSales() {
           loading={loading}
           desktopOnly
         >
-          <ProductMobileTable />
+          <SalesMobileTable />
         </Table>
       </div>
     </Card>

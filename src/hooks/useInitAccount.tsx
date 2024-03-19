@@ -5,6 +5,9 @@ import toast from "react-hot-toast";
 import { useAppDispatch } from ".";
 import { setDataState } from "@/redux/slices/dataSlice";
 import { useRouter } from "next/navigation";
+import { getSalesByBusiness } from "@/libs/api/salesApi";
+import { getCustomersByBusiness } from "@/libs/api/customerApi";
+import { getStaffByBusiness } from "@/libs/api/userApi";
 
 export default function useInitAccount() {
   const router = useRouter();
@@ -14,6 +17,7 @@ export default function useInitAccount() {
     try {
       let businesses: BusinessType[] = [];
       const roleName = user?.roleDetails?.name;
+      const roleId = user?.roleDetails?.id!;
       const userId = user?.userId;
 
       //Check if the user is a Staff
@@ -50,15 +54,26 @@ export default function useInitAccount() {
       );
 
       console.log("Business", businesses);
+
       //Get all products By active business
       const products = await getProductsByBusiness(bussnessId);
       dispatch(setDataState({ field: "products", value: products }));
-
       console.log("Products", products);
+
       //Get all receipts by active business
+      const sales = await getSalesByBusiness(bussnessId);
+      dispatch(setDataState({ field: "sales", value: sales }));
+      console.log("Sales", sales);
+
       //Get all customers by active business
+      const customers = await getCustomersByBusiness(bussnessId);
+      dispatch(setDataState({ field: "customers", value: customers }));
+      console.log("customers", customers);
 
       //Get all staff by business
+      const staffs = await getStaffByBusiness(bussnessId, roleId);
+      dispatch(setDataState({ field: "staffs", value: staffs }));
+      console.log("staffs", staffs);
     } catch (error: any) {
       console.log("error initing user", error.message);
       throw error;

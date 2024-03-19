@@ -47,6 +47,13 @@ export type MenuItemsType = {
   desktop?: boolean;
 };
 
+export type InfoCardProps = {
+  title: string;
+  value: string | number;
+  plain?: boolean;
+  body?: React.ReactNode;
+};
+
 ///// Auth Props /////
 
 export type SignUpUserType = {
@@ -60,6 +67,8 @@ export type SignInUserType = {
   email: string;
   password: string;
 };
+
+////// User Types //////
 
 export type UserType = {
   full_name: string;
@@ -89,6 +98,19 @@ export type Role = {
 
 export type Roles = Role[];
 
+export type CustomerType = {
+  id: string;
+  userId: string;
+  businessId: string;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  createdAt: Date;
+};
+
+////// Business Types
+
 export type BusinessType = {
   id: string;
   userId: string;
@@ -100,16 +122,7 @@ export type BusinessType = {
   createdAt: Date | null | string;
 };
 
-export type CustomerType = {
-  id: string;
-  userId: string;
-  businessId: string;
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  createdAt: Date;
-};
+//// Product Types ////
 
 export type ProductType = {
   id: string;
@@ -123,12 +136,23 @@ export type ProductType = {
   createdAt: Date | null | string;
 };
 
-//Receip Types
+//Sales Types
 
-export type ReceiptProductType = {
+export type SalesProductType = {
   product: ProductType;
   quantity: number;
-  priceSold: number;
+  sellingPrice: number;
+};
+
+export type SalesType = {
+  id: string;
+  userId: string;
+  businessId: string;
+  receiptId: string;
+  totalPrice: number;
+  totalQuantity: number;
+  products: SalesProductType[];
+  customer: CustomerType;
 };
 
 export type ReceiptType = {
@@ -137,7 +161,7 @@ export type ReceiptType = {
   businessId: string;
   customer: CustomerType;
   receiptNumber: number;
-  products: ReceiptProductType[];
+  products: SalesProductType[];
   description: string;
-  createdAt: Date;
+  createdAt: Date | string;
 };
