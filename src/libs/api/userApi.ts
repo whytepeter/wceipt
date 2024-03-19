@@ -50,5 +50,30 @@ export const getUserByID = async (userId: string): Promise<UserType> => {
   }
 };
 
+export const getStaffByBusiness = async (
+  businessId: string,
+  roleId: string
+): Promise<UserType[]> => {
+  try {
+    const q = query(
+      collection(db, "sales"),
+      where("businessId", "==", businessId),
+      where("roleId", "==", roleId)
+    );
+    const querySnapshot = await getDocs(q);
+
+    const staffs: UserType[] = [];
+    querySnapshot.forEach((doc) => {
+      const staffData = doc.data() as UserType; // Cast the data to Role type
+      staffs.push(staffData);
+    });
+
+    return staffs;
+  } catch (error: any) {
+    console.log("error getting staffs", error.message);
+    throw error;
+  }
+};
+
 export const updateUser = async (userId: string, user: UserType) => {};
 export const deleteUser = async () => {};

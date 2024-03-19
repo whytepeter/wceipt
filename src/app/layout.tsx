@@ -25,6 +25,10 @@ export default function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@600;700&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body>
         <ReduxProvider>

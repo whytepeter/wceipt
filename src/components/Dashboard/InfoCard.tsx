@@ -1,13 +1,7 @@
 import React from "react";
 import wave from "@/assets/icons/wave.svg";
 import Image from "next/image";
-
-type InfoCardProps = {
-  title: string;
-  value: string | number;
-  plain?: boolean;
-  body?: React.ReactNode;
-};
+import { InfoCardProps } from "@/types/types";
 
 export default function InfoCard({
   title = "Title",
