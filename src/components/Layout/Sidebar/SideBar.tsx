@@ -22,6 +22,7 @@ import {
 import { RiHomeFill } from "react-icons/ri";
 import { BiLogOutCircle } from "react-icons/bi";
 import { useRouter } from "next/navigation";
+import { signOutUser } from "@/libs/api/authApi";
 
 const menuItems: MenuItemsType[] = [
   {
@@ -39,6 +40,12 @@ const menuItems: MenuItemsType[] = [
     mobile: true,
   },
   {
+    href: "/dashboard/sales",
+    title: "Sales",
+    icon: <FaChartBar size={18} />,
+    desktop: true,
+  },
+  {
     href: "/dashboard/receipts",
     title: "Receipts",
     icon: <IoReceiptSharp size={18} />,
@@ -51,12 +58,7 @@ const menuItems: MenuItemsType[] = [
     icon: <FaUserGroup size={18} />,
     desktop: true,
   },
-  {
-    href: "/dashboard/reports",
-    title: "Reports",
-    icon: <FaChartBar size={18} />,
-    desktop: true,
-  },
+
   {
     href: "/dashboard/settings",
     title: "Settings",
@@ -82,9 +84,14 @@ export default function SideBar() {
     dispatch(togglecollapse(!collapse));
   };
 
-  const handleLogout = (): void => {
-    dispatch(logUserOut());
-    router.push("/auth/login");
+  const handleLogout = async () => {
+    try {
+      await signOutUser();
+      dispatch(logUserOut());
+      router.push("/auth/login");
+    } catch (error: any) {
+      console.log(error?.message);
+    }
   };
 
   return (

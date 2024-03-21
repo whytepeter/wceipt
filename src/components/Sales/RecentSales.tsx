@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TableHeadersProps } from "@/types/types";
 import { formatAmount, formatDate } from "@/utils";
 import Table from "../Global/Table";
@@ -20,6 +20,11 @@ type VData = {
 
 export default function RecentSales() {
   const [loading, setLoading] = useState(false);
+  const [selectedData, setSelectedData] = useState([]);
+
+  useEffect(() => {
+    console.log(selectedData);
+  }, [selectedData]);
 
   const [tableData, setTableData] = useState<VData[]>([
     {
@@ -44,10 +49,10 @@ export default function RecentSales() {
 
   const tableHeaders: TableHeadersProps[] = [
     {
-      title: "Product",
+      title: "Sales",
       field: "name",
       body: (data: VData) => {
-        return <SalesCard />;
+        return <SalesCard infoOnly />;
       },
     },
     {

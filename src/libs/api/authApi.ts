@@ -3,9 +3,10 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   UserCredential,
+  signOut,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "@/services/firebase";
+import { auth, db } from "@/libs/firebase";
 import { SignInUserType, SignUpUserType, UserType } from "@/types/types";
 import { formatDate } from "@/utils";
 import { getRoleByID, getRoleByName } from "./roleApi";
@@ -69,6 +70,14 @@ export const signInUser = async (user: SignInUserType): Promise<UserType> => {
     return { ...userData, roleDetails: role };
   } catch (error: any) {
     console.error("Error singing in:", error.message);
+    throw error;
+  }
+};
+export const signOutUser = async () => {
+  try {
+    await signOut(auth);
+  } catch (error: any) {
+    console.error("Error signing out:", error.message);
     throw error;
   }
 };

@@ -7,7 +7,7 @@ import {
   getDocs,
   where,
 } from "firebase/firestore";
-import { db } from "@/services/firebase";
+import { db } from "@/libs/firebase";
 import { SalesType } from "@/types/types";
 
 export const createSale = async (payload: SalesType): Promise<SalesType> => {

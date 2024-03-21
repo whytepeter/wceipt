@@ -13,6 +13,8 @@ export default function Table(props: TableProps) {
     dataKey = "_id",
     scrollHeight = "30rem",
     selectionMode = "multiple",
+    selectedData,
+    onSelectionChange,
     scrollable = true,
     loading = false,
     desktopOnly = false,
@@ -22,6 +24,10 @@ export default function Table(props: TableProps) {
 
   const bodyTemplate = (data: any, options: ColumnBodyOptions) => {
     return <div>{data[options?.field]}</div>;
+  };
+
+  const handleSectionChange = (e: any) => {
+    onSelectionChange && onSelectionChange(e.value);
   };
 
   return (
@@ -39,6 +45,8 @@ export default function Table(props: TableProps) {
         <DataTable
           id="table-style"
           {...rest}
+          selection={selectedData}
+          onSelectionChange={handleSectionChange}
           stripedRows={stripedRows}
           scrollable={scrollable}
           columnResizeMode="fit"

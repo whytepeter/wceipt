@@ -1,17 +1,13 @@
-import { UserCredential, createUserWithEmailAndPassword } from "firebase/auth";
 import {
   doc,
   collection,
   setDoc,
-  addDoc,
-  updateDoc,
   getDocs,
   query,
   where,
 } from "firebase/firestore";
-import { auth, db } from "@/services/firebase";
-import { SignUpUserType, UserType } from "@/types/types";
-import { formatDate } from "@/utils";
+import { db } from "@/libs/firebase";
+import { UserType } from "@/types/types";
 import { getRoleByName } from "./roleApi";
 
 export const createUser = async (user: UserType, roleName: string) => {
@@ -51,14 +47,12 @@ export const getUserByID = async (userId: string): Promise<UserType> => {
 };
 
 export const getStaffByBusiness = async (
-  businessId: string,
-  roleId: string
+  businessId: string
 ): Promise<UserType[]> => {
   try {
     const q = query(
       collection(db, "sales"),
-      where("businessId", "==", businessId),
-      where("roleId", "==", roleId)
+      where("business", "==", businessId)
     );
     const querySnapshot = await getDocs(q);
 

@@ -1,9 +1,13 @@
 import { formatAmount, formatDate } from "@/utils";
 import React from "react";
 
-export default function SalesCard() {
+type SalesCardProps = {
+  infoOnly?: boolean;
+};
+
+export default function SalesCard({ infoOnly = false }: SalesCardProps) {
   return (
-    <div className="cursor-pointer w-full flex items-center justify-between gap-2 text-sm text-dark-400">
+    <div className="cursor-pointer flex items-center justify-between gap-2 text-sm text-dark-400">
       <div className="flex items-center gap-3">
         <div className="relative h-16 w-16">
           <div className="h-16 w-16 flex-shrink-0 bg-background border border-outline rounded-xl absolute left-0 "></div>
@@ -18,14 +22,16 @@ export default function SalesCard() {
           <span className="text-xs text-dark-100 font-light">3 item(s)</span>
         </div>
       </div>
-      <div className=" text-right  flex flex-col ">
-        <span className="font-semibold text-primary-200">
-          {formatAmount(20000)}
-        </span>
-        <span className="text-[0.65rem] text-dark-200 font-light">
-          {formatDate(new Date())}
-        </span>
-      </div>
+      {!infoOnly && (
+        <div className=" text-right  flex flex-col ">
+          <span className="font-semibold text-primary-200">
+            {formatAmount(20000)}
+          </span>
+          <span className="text-[0.65rem] text-dark-200 font-light">
+            {formatDate(new Date())}
+          </span>
+        </div>
+      )}
     </div>
   );
 }
