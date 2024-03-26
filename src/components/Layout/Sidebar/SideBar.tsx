@@ -98,8 +98,6 @@ export default function SideBar() {
   };
 
   const handleClick = (menu: MenuItemsType) => {
-    console.log("More");
-
     if (menu.title == "More") {
       setOpen(true);
     }
@@ -160,7 +158,6 @@ export default function SideBar() {
               )}
             </div>
             {/* //// Mobile ///// */}
-
             <div
               className={` ${
                 collapse ? "md:items-center" : ""

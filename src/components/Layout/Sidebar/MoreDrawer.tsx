@@ -10,31 +10,71 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import Button from "@/components/Global/Button";
+import UserDropdown from "@/components/Account/UserDropdown";
+import { BiLogOutCircle } from "react-icons/bi";
+import { IoReceiptSharp, IoSettingsSharp } from "react-icons/io5";
+import { FaUserGroup } from "react-icons/fa6";
+import { MenuItemsType } from "@/types/types";
+import MenuItems from "./MenuItems";
+import { useRouter } from "next/navigation";
 
 type MoreProps = {
   open: boolean;
   setOpen: (val: boolean) => void;
 };
 
+const menuItems: MenuItemsType[] = [
+  {
+    href: "/dashboard/receipts",
+    title: "Receipts",
+    icon: <IoReceiptSharp size={18} />,
+    mobile: true,
+  },
+  {
+    href: "/dashboard/customers",
+    title: "Customers",
+    icon: <FaUserGroup size={18} />,
+    mobile: true,
+  },
+
+  {
+    href: "/dashboard/settings",
+    title: "Settings",
+    icon: <IoSettingsSharp size={18} />,
+    mobile: true,
+  },
+];
+
 export default function MoreDrawer({ open, setOpen }: MoreProps) {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerContent className=" h-[80%]">
+      <DrawerContent className="">
         <DrawerHeader className="text-left">
-          <DrawerTitle>Edit profile</DrawerTitle>
-          <DrawerDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DrawerDescription>
+          <div className="pointer-events-none">
+            <UserDropdown />
+          </div>
         </DrawerHeader>
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button
+
+        <div className="flex flex-col justify-start  mb-6 ">
+          {menuItems.map((menu) => (
+            <MenuItems
+              list
               onClick={() => {
                 setOpen(false);
               }}
-              variant="outline"
-            >
-              Cancel
+              menu={menu}
+              key={menu.title}
+            />
+          ))}
+        </div>
+
+        <DrawerFooter className="pt-2 mb-4">
+          <DrawerClose asChild>
+            <Button block color="accent">
+              <div className="text-primary  gap-2 flex">
+                <BiLogOutCircle size={22} />
+                Logout
+              </div>
             </Button>
           </DrawerClose>
         </DrawerFooter>
