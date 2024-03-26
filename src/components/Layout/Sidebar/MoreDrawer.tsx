@@ -3,11 +3,8 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
 } from "@/components/ui/drawer";
 import Button from "@/components/Global/Button";
 import UserDropdown from "@/components/Account/UserDropdown";
@@ -16,7 +13,7 @@ import { IoReceiptSharp, IoSettingsSharp } from "react-icons/io5";
 import { FaUserGroup } from "react-icons/fa6";
 import { MenuItemsType } from "@/types/types";
 import MenuItems from "./MenuItems";
-import { useRouter } from "next/navigation";
+import useAuth from "@/hooks/useAuth";
 
 type MoreProps = {
   open: boolean;
@@ -46,6 +43,8 @@ const menuItems: MenuItemsType[] = [
 ];
 
 export default function MoreDrawer({ open, setOpen }: MoreProps) {
+  const { logout } = useAuth();
+
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent className="">
@@ -70,7 +69,7 @@ export default function MoreDrawer({ open, setOpen }: MoreProps) {
 
         <DrawerFooter className="pt-2 mb-4">
           <DrawerClose asChild>
-            <Button block color="accent">
+            <Button onClick={logout} block color="accent">
               <div className="text-primary  gap-2 flex">
                 <BiLogOutCircle size={22} />
                 Logout
