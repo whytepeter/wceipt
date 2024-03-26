@@ -22,7 +22,8 @@ import {
 import { RiHomeFill } from "react-icons/ri";
 import { BiLogOutCircle } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-import { signOutUser } from "@/libs/api/authApi";
+import { signOutUser } from "@/lib/api/authApi";
+import MoreDrawer from "./MoreDrawer";
 
 const menuItems: MenuItemsType[] = [
   {
@@ -77,6 +78,8 @@ export default function SideBar() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
+  const [open, setOpen] = useState(false);
+
   const state = useAppSelector((state) => state.controller);
   const collapse = state.collapse;
 
@@ -91,6 +94,14 @@ export default function SideBar() {
       router.push("/auth/login");
     } catch (error: any) {
       console.log(error?.message);
+    }
+  };
+
+  const handleClick = (menu: MenuItemsType) => {
+    console.log("More");
+
+    if (menu.title == "More") {
+      setOpen(true);
     }
   };
 
@@ -144,7 +155,7 @@ export default function SideBar() {
               {menuItems.map(
                 (menu) =>
                   menu.desktop && (
-                    <MenuItems min={collapse} menu={menu} key={menu.title} />
+                    <MenuItems key={menu.title} min={collapse} menu={menu} />
                   )
               )}
             </div>
@@ -158,7 +169,14 @@ export default function SideBar() {
               {menuItems.map(
                 (menu) =>
                   menu.mobile && (
-                    <MenuItems min={collapse} menu={menu} key={menu.title} />
+                    <MenuItems
+                      onClick={() => {
+                        handleClick(menu);
+                      }}
+                      min={collapse}
+                      menu={menu}
+                      key={menu.title}
+                    />
                   )
               )}
             </div>
@@ -189,6 +207,8 @@ export default function SideBar() {
           )}
         </div>
       </div>
+
+      <MoreDrawer open={open} setOpen={setOpen} />
     </>
   );
 }

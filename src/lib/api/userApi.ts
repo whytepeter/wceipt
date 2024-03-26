@@ -6,7 +6,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { db } from "@/libs/firebase";
+import { db } from "@/lib/firebase";
 import { UserType } from "@/types/types";
 import { getRoleByName } from "./roleApi";
 

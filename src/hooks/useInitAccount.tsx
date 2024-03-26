@@ -1,5 +1,5 @@
-import { getBusinessByID, getBusinessByUserID } from "@/libs/api/businessApi";
-import { getProductsByBusiness } from "@/libs/api/productApi";
+import { getBusinessByID, getBusinessByUserID } from "@/lib/api/businessApi";
+import { getProductsByBusiness } from "@/lib/api/productApi";
 import {
   BusinessType,
   CustomerType,
@@ -11,9 +11,9 @@ import toast from "react-hot-toast";
 import { useAppDispatch } from ".";
 import { setDataState } from "@/redux/slices/dataSlice";
 import { useRouter } from "next/navigation";
-import { getSalesByBusiness } from "@/libs/api/salesApi";
-import { getCustomersByBusiness } from "@/libs/api/customerApi";
-import { getStaffByBusiness } from "@/libs/api/userApi";
+import { getSalesByBusiness } from "@/lib/api/salesApi";
+import { getCustomersByBusiness } from "@/lib/api/customerApi";
+import { getStaffByBusiness } from "@/lib/api/userApi";
 
 export default function useInitAccount() {
   const router = useRouter();

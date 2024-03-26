@@ -3,7 +3,7 @@ import SideBar from "@/components/Layout/Sidebar/SideBar";
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "@/hooks";
 import NavBar from "@/components/Layout/Navbar/NavBar";
-import { auth } from "@/libs/firebase";
+import { auth } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import Loader from "@/components/Global/Loader";

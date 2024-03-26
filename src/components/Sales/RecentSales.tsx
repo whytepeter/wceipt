@@ -80,7 +80,7 @@ export default function RecentSales() {
             <Button
               className="rounded-full px-4 "
               size="small"
-              variant="outlined"
+              variant="outline"
               color="primary-light"
             >
               View

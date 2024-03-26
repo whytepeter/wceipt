@@ -43,6 +43,7 @@ export type MenuItemsType = {
   href: string;
   title: string;
   icon: React.ReactNode | null;
+  onClick?: () => void;
   mobile?: boolean;
   desktop?: boolean;
 };

@@ -1,7 +1,6 @@
 "use client";
-import clsx from "clsx";
 import { CgSpinner } from "react-icons/cg";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 const colors = {
   primary: "#1B4946",
@@ -18,7 +17,7 @@ const sizes = {
 };
 
 type ButtonType = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "fill" | "text" | "outlined";
+  variant?: "fill" | "text" | "outline";
   loading?: boolean;
   disabled?: boolean;
   block?: boolean;
@@ -52,7 +51,7 @@ export default function CustomButton({
   };
 
   const variants = {
-    outlined: {
+    outline: {
       background: "transparent",
       color: mainColor,
       border: `1px solid ${mainColor}`,
@@ -69,19 +68,17 @@ export default function CustomButton({
 
   const variantStyles = variants[variant];
 
-  const buttonStyles = twMerge(
-    clsx(
-      sizes[size],
-      bold ? "font-medium" : "",
-      block ? "max-w-full min-w-full w-full" : "w-fit",
-      loading ? "pointer-events-none" : "",
-      disabled ? "opacity-60" : "hover:opacity-90",
-      "active:opacity-90",
-      "text-center",
-      "relative",
-      "rounded-lg",
-      className
-    )
+  const buttonStyles = cn(
+    sizes[size],
+    bold ? "font-medium" : "",
+    block ? "max-w-full min-w-full w-full" : "w-fit",
+    loading ? "pointer-events-none" : "",
+    disabled ? "opacity-60" : "hover:opacity-90",
+    "active:opacity-90",
+    "text-center",
+    "relative",
+    "rounded-lg",
+    className
   );
 
   return (

@@ -11,7 +11,7 @@ import { SignUpUserType } from "@/types/types";
 import toast from "react-hot-toast";
 import { useAppDispatch } from "@/hooks";
 import { setAuthState } from "@/redux/slices/authSlice";
-import { signUpUser } from "@/libs/api/authApi";
+import { signUpUser } from "@/lib/api/authApi";
 
 export default function Register() {
   const router = useRouter();

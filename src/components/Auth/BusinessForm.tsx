@@ -5,7 +5,7 @@ import TextInput from "@/components/Global/TextInput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { BusinessType } from "@/types/types";
-import { createBusiness } from "@/libs/api/businessApi";
+import { createBusiness } from "@/lib/api/businessApi";
 import toast from "react-hot-toast";
 import SelectInput from "@/components/Global/SelectInput";
 import { setDataState } from "@/redux/slices/dataSlice";

@@ -9,9 +9,10 @@ import { useAppDispatch } from "@/hooks";
 interface MenuType {
   menu: MenuItemsType;
   min: boolean;
+  onClick?: () => void;
 }
 
-export default function MenuItems({ menu, min }: MenuType) {
+export default function MenuItems({ menu, min, onClick }: MenuType) {
   const dispatch = useAppDispatch();
   const pathname = usePathname();
 
@@ -28,6 +29,7 @@ export default function MenuItems({ menu, min }: MenuType) {
   return (
     <Link href={menu.href} key={menu.title}>
       <div
+        onClick={onClick}
         className={`
       ${isActive(menu.href) ? "text-accent" : "text-white font-light"}
       hover:text-accent flex flex-col md:flex-row justify-center md:justify-start items-center gap-1.5 md:gap-3

@@ -10,7 +10,7 @@ import {
   where,
   orderBy,
 } from "firebase/firestore";
-import { db } from "@/libs/firebase";
+import { db } from "@/lib/firebase";
 import { BusinessType } from "@/types/types";
 
 export const createBusiness = async (

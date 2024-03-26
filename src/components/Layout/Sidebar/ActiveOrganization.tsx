@@ -58,13 +58,11 @@ export default function ActiveOrganization({
           color,
         }}
         action={
-          <Button
-            variant="text"
-            block
-            className="flex text-sm items-center justify-center gap-2"
-          >
-            New Business
-            <FaPlus className="text-primary" />
+          <Button variant="text" block>
+            <div className="flex text-sm items-center justify-center gap-2">
+              New Business
+              <FaPlus className="text-primary" />
+            </div>
           </Button>
         }
       />
