@@ -35,7 +35,7 @@ export default function MenuItems({
   return (
     <Link onClick={onClick} href={menu.href} key={menu.title}>
       {list ? (
-        <div className="w-full  p-4 flex items-center justify-between gap-2 border-b border-outline last:borderb-none">
+        <div className="w-full  p-4 flex items-center justify-between gap-2 ">
           <div
             key={menu.title}
             className=" flex items-center gap-4 text-primary"

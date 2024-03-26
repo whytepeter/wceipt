@@ -54,7 +54,7 @@ export default function MoreDrawer({ open, setOpen }: MoreProps) {
           </div>
         </DrawerHeader>
 
-        <div className="flex flex-col justify-start  mb-6 ">
+        <div className="flex flex-col justify-start  mb-4 ">
           {menuItems.map((menu) => (
             <MenuItems
               list
