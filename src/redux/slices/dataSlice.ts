@@ -3,6 +3,7 @@ import {
   CustomerType,
   ProductType,
   ReceiptType,
+  SalesType,
   UserType,
 } from "@/types/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -15,6 +16,7 @@ type InitialState = {
   customers: CustomerType[];
   products: ProductType[];
   receipts: ReceiptType[];
+  sales: SalesType[];
   staffs: UserType[];
 };
 
@@ -30,6 +32,7 @@ const initialState = {
   customers: [],
   products: [],
   receipts: [],
+  sales: [],
   staffs: [],
 } as InitialState;
 

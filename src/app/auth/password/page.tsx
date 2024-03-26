@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import AuthContainer from "../../../components/Auth/AuthContainer";
-import Button from "@/components/global/Button";
-import TextInput from "@/components/global/TextInput";
+import Button from "@/components/Global/Button";
+import TextInput from "@/components/Global/TextInput";
 import Link from "next/link";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 
@@ -34,9 +34,6 @@ export default function Login() {
             type="email"
             inputMode="email"
             error={errors.email}
-            onChange={(val) => {
-              handleChange(val);
-            }}
             placeholder="Enter Email"
           />
         </div>

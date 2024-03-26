@@ -1,6 +1,8 @@
 import { Roles, UserType } from "@/types/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "../store";
+import { auth } from "@/libs/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 type InitialState = {
   isLogin: boolean;

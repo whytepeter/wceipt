@@ -1,1 +1,1 @@
-import { auth, db } from "@/services/firebase";
+import { auth, db } from "@/libs/firebase";

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Button from "@/components/global/Button";
-import TextInput from "@/components/global/TextInput";
+import Button from "@/components/Global/Button";
+import TextInput from "@/components/Global/TextInput";
 import Link from "next/link";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
@@ -11,6 +11,7 @@ import { signInUser } from "@/libs/api/authApi";
 import { setAuthState } from "@/redux/slices/authSlice";
 import { useAppDispatch } from "@/hooks";
 import useInitAccount from "@/hooks/useInitAccount";
+import toast from "react-hot-toast";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function LoginForm() {
       password: Yup.string().min(6).required().label("Password"),
     }),
 
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setErrors, setSubmitting }) => {
       try {
         setLoading(true);
         const payload = { ...values };
@@ -48,10 +49,16 @@ export default function LoginForm() {
         router.replace("/dashboard");
 
         console.log("Done");
-      } catch (error) {
+      } catch (error: any) {
+        const message = error.message;
+        if (message.includes("auth/invalid-credential")) {
+          toast.error("Invalide login details");
+        }
       } finally {
         setLoading(false);
       }
+
+      setSubmitting(false);
     },
 
     validateOnChange: true,

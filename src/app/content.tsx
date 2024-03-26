@@ -1,20 +1,34 @@
 "use client";
 import React from "react";
-import { useAppSelector } from "@/hooks";
+import Button from "@/components/Global/Button";
+import { useRouter } from "next/navigation";
 
-export default function Content({ children }: { children: React.ReactNode }) {
-  const state = useAppSelector((state) => state.controllerReducer);
-  const collapse = state.collapes;
+export default function Content() {
+  const router = useRouter();
 
-  console.log("Content");
+  const handleClick = (route: string): void => {
+    router.push(route);
+  };
 
   return (
-    <div
-      className={`${
-        collapse ? "sm:pl-[60px]" : "sm:pl-[60px] md:pl-[230px]"
-      } pl-0`}
-    >
-      {children}
+    <div className=" flex flex-wrap gap-4 p-4 ">
+      This is the Landing Page
+      <Button
+        onClick={() => {
+          console.log("clicked");
+          handleClick("/dashboard");
+        }}
+      >
+        Dashboard
+      </Button>
+      <Button
+        onClick={() => {
+          console.log("clicked");
+          handleClick("/auth/login");
+        }}
+      >
+        Login
+      </Button>
     </div>
   );
 }

@@ -1,22 +1,28 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type InitialState = {
-  collapes: boolean;
+  collapse: boolean;
+  currentPage: string;
 };
 
 const initialState = {
-  collapes: false,
+  collapse: false,
+  currentPage: "",
 } as InitialState;
 
 export const controllerSlice = createSlice({
   name: "controller",
   initialState,
   reducers: {
-    toggleCollapes: (state, action: PayloadAction<boolean>) => {
-      state.collapes = action.payload;
+    togglecollapse: (state, action: PayloadAction<boolean>) => {
+      state.collapse = action.payload;
+    },
+
+    setCurrentPage: (state, action: PayloadAction<string>) => {
+      state.currentPage = action.payload;
     },
   },
 });
 
-export const { toggleCollapes } = controllerSlice.actions;
+export const { togglecollapse, setCurrentPage } = controllerSlice.actions;
 export default controllerSlice.reducer;

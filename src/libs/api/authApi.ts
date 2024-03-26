@@ -2,9 +2,11 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  UserCredential,
+  signOut,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "@/services/firebase";
+import { auth, db } from "@/libs/firebase";
 import { SignInUserType, SignUpUserType, UserType } from "@/types/types";
 import { formatDate } from "@/utils";
 import { getRoleByID, getRoleByName } from "./roleApi";
@@ -18,13 +20,12 @@ export const signUpUser = async (user: SignUpUserType): Promise<UserType> => {
     const role = await getRoleByName("User");
 
     //Sign up user
-    const userCredential = await createUserWithEmailAndPassword(
+    const userCredential: UserCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
 
-    //Add user detials to database
     const userId = userCredential?.user?.uid;
     const userDetails: UserType = {
       ...user,
@@ -59,6 +60,7 @@ export const signInUser = async (user: SignInUserType): Promise<UserType> => {
     );
 
     //Get user detials from database
+    console.log("user credentials", userCredential);
     const userId = userCredential?.user?.uid;
     const userData = await getUserByID(userId);
 
@@ -71,11 +73,20 @@ export const signInUser = async (user: SignInUserType): Promise<UserType> => {
     throw error;
   }
 };
+export const signOutUser = async () => {
+  try {
+    await signOut(auth);
+  } catch (error: any) {
+    console.error("Error signing out:", error.message);
+    throw error;
+  }
+};
 
 export const checkAuthState = async (): Promise<boolean> => {
   try {
     let isUser;
     onAuthStateChanged(auth, (user) => {
+      console.log(user);
       isUser = user;
     });
     return !!isUser;

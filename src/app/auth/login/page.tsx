@@ -1,4 +1,4 @@
-import AuthContainer from "../../../components/Auth/AuthContainer";
+import AuthContainer from "@/components/Auth/AuthContainer";
 import LoginForm from "@/components/Auth/LoginForm";
 
 export default function Login() {

@@ -56,7 +56,7 @@ export const validatePhone = (phone: string) => {
 };
 
 export const formatDate = (
-  date: Date,
+  date: Date | string,
   pastTime = false,
   style = "Do MMM YYYY"
 ): string => {
