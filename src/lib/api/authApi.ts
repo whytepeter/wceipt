@@ -6,7 +6,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "@/libs/firebase";
+import { auth, db } from "@/lib/firebase";
 import { SignInUserType, SignUpUserType, UserType } from "@/types/types";
 import { formatDate } from "@/utils";
 import { getRoleByID, getRoleByName } from "./roleApi";

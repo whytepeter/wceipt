@@ -1,4 +1,5 @@
 import moment from "moment";
+import { NextRequest } from "next/server";
 
 export const formatAmount = (amount: number) => {
   if (isNaN(amount) || amount === 0) {
@@ -63,3 +64,5 @@ export const formatDate = (
 
   return moment(date).fromNow();
 };
+
+export const verifyToken = (token: string, request: NextRequest) => {};

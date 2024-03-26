@@ -7,7 +7,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { auth, db } from "@/libs/firebase";
+import { auth, db } from "@/lib/firebase";
 
 import { Role, Roles } from "@/types/types";
 import { defaultRoles } from "@/utils/db";

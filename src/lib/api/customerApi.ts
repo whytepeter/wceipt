@@ -7,7 +7,7 @@ import {
   getDocs,
   where,
 } from "firebase/firestore";
-import { db } from "@/libs/firebase";
+import { db } from "@/lib/firebase";
 import { CustomerType } from "@/types/types";
 
 export const createCustomer = async (

@@ -7,7 +7,7 @@ import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { signInUser } from "@/libs/api/authApi";
+import { signInUser } from "@/lib/api/authApi";
 import { setAuthState } from "@/redux/slices/authSlice";
 import { useAppDispatch } from "@/hooks";
 import useInitAccount from "@/hooks/useInitAccount";
