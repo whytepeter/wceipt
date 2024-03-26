@@ -134,7 +134,7 @@ export default function TextInput(props: SelectType) {
                 >
                   <span> {option.label}</span>
                   <span className="text-xl">
-                    {value == option.value && <AiFillCheckCircle />}
+                    {value == option.value && <AiFillCheckCircle size={16} />}
                   </span>
                 </li>
               ))}
