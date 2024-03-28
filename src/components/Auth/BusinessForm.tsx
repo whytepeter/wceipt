@@ -67,8 +67,6 @@ export default function Business({
     onSubmit: async (values) => {
       if (!userId) return;
 
-      console.log(values);
-      return;
       try {
         setLoading(true);
 

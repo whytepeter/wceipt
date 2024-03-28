@@ -43,14 +43,14 @@ export default function ActiveOrganization({ className }: PropsType) {
   const switchBusiness = async (businessId: string): Promise<void> => {
     //if id is already active do nothing
     if (businessId === activeBusiness) return;
-
-    setLoading(true);
     try {
+      setLoading(true);
       //swtich businesss
       await initProducts(businessId);
       await initSales(businessId);
       await initSales(businessId);
-      if (!isStaff) await initStaffs(businessId);
+      await initStaffs(businessId);
+      await initCustomer(businessId);
 
       dispatch(setDataState({ field: "activeBusiness", value: businessId }));
       toast.success("Business successfully switched");
