@@ -40,7 +40,6 @@ export default function TextInput(props: TextInputType) {
     const parsedValue = parseFloat(strValue.replace(/[^0-9.]/g, ""));
     strValue = parsedValue.toLocaleString();
 
-    console.log(parsedValue);
     return !isNaN(parsedValue) ? `₦${strValue}` : "";
   }, [value]);
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@/components/Global/Button";
 import TextInput from "@/components/Global/TextInput";
 import * as Yup from "yup";
@@ -14,10 +14,23 @@ import { businessServices } from "@/utils/db";
 
 type BusinessPropsType = {
   userId: string;
+  business?: BusinessType | null;
   onDone?: () => void;
 };
 
-export default function Business({ onDone, userId }: BusinessPropsType) {
+type InitialValueType = {
+  name: string;
+  email: string;
+  phone: string;
+  type: string;
+  address: string;
+};
+
+export default function Business({
+  onDone,
+  userId,
+  business,
+}: BusinessPropsType) {
   const [loading, setLoading] = useState(false);
 
   const state = useAppSelector((state) => state.data);
@@ -31,7 +44,8 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
       value: el,
     };
   });
-  const initialValues = {
+
+  let initialValues: InitialValueType = {
     name: "",
     email: "",
     phone: "",
@@ -88,6 +102,16 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
 
     validateOnChange: true,
   });
+
+  useEffect(() => {
+    if (business) {
+      //Assign values
+      console.log("The Business", business);
+      Object.keys(initialValues).forEach((key: string) => {
+        (initialValues as any)[key] = (business as any)[key]; // Type assertion
+      });
+    }
+  }, [business]);
 
   return (
     <form
@@ -168,7 +192,7 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
       </div>
 
       <Button loading={loading} type="submit" block>
-        Add Business
+        {business ? "Update" : "Add"} Business
       </Button>
     </form>
   );

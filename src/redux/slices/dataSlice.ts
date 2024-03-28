@@ -11,7 +11,7 @@ import { AppDispatch } from "../store";
 
 type InitialState = {
   business: BusinessType[];
-  activeBusiness: BusinessType | null;
+  activeBusiness: string;
 
   customers: CustomerType[];
   products: ProductType[];
@@ -27,7 +27,7 @@ type setStateType = {
 
 const initialState = {
   business: [],
-  activeBusiness: null,
+  activeBusiness: "",
 
   customers: [],
   products: [],

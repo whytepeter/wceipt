@@ -1,3 +1,4 @@
+"use client";
 import AddEditBusiness from "@/components/Business/AddEditBusiness";
 import React from "react";
 
@@ -7,7 +8,10 @@ type PropTypes = {
 };
 
 export default function Business({ params, searchParams }: PropTypes) {
-  if (params.slug === "new") return <AddEditBusiness />;
+  const editMode = searchParams?.edit;
 
-  return <div>{params?.slug} Business Page </div>;
+  if (params.slug === "new") return <AddEditBusiness />;
+  if (editMode) return <AddEditBusiness edit businessId={params.slug} />;
+
+  return <div>View Business By ID </div>;
 }

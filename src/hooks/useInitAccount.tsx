@@ -50,7 +50,7 @@ export default function useInitAccount() {
         }
       }
 
-      const activeBusiness = businesses[0];
+      const activeBusiness = businesses[0].id;
 
       dispatch(setDataState({ field: "business", value: businesses }));
       dispatch(
@@ -112,8 +112,7 @@ export default function useInitAccount() {
     try {
       const businesses = await initBussiness(user);
 
-      const activeBusiness = businesses[0];
-      const businessId = activeBusiness?.id;
+      const businessId = businesses[0]?.id;
 
       //Get all products By active business
       initProducts(businessId);
