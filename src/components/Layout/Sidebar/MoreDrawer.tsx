@@ -14,6 +14,7 @@ import { FaUserGroup } from "react-icons/fa6";
 import { MenuItemsType } from "@/types/types";
 import MenuItems from "./MenuItems";
 import useAuth from "@/hooks/useAuth";
+import ListItem from "@/components/Global/ListItem";
 
 type MoreProps = {
   open: boolean;
@@ -25,20 +26,17 @@ const menuItems: MenuItemsType[] = [
     href: "/dashboard/receipts",
     title: "Receipts",
     icon: <IoReceiptSharp size={18} />,
-    mobile: true,
   },
   {
     href: "/dashboard/customers",
     title: "Customers",
     icon: <FaUserGroup size={18} />,
-    mobile: true,
   },
 
   {
     href: "/dashboard/settings",
     title: "Settings",
     icon: <IoSettingsSharp size={18} />,
-    mobile: true,
   },
 ];
 
@@ -56,12 +54,11 @@ export default function MoreDrawer({ open, setOpen }: MoreProps) {
 
         <div className="flex flex-col justify-start  mb-4 ">
           {menuItems.map((menu) => (
-            <MenuItems
-              list
+            <ListItem
+              item={menu}
               onClick={() => {
                 setOpen(false);
               }}
-              menu={menu}
               key={menu.title}
             />
           ))}

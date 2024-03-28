@@ -137,6 +137,7 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
         <SelectInput
           id="type"
           name="type"
+          search
           autoHeight={false}
           error={formik.errors["type"]}
           value={formik.values.type}
@@ -160,7 +161,7 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
       </div>
 
       <Button loading={loading} type="submit" block>
-        Continue
+        Add Business
       </Button>
     </form>
   );

@@ -2,6 +2,17 @@
 
 import { ColumnBodyOptions } from "primereact/column";
 
+export type TextInputType = React.InputHTMLAttributes<HTMLInputElement> & {
+  id?: string;
+  error?: boolean | string;
+  hint?: string;
+  format?: boolean;
+  righIcon?: React.ReactNode;
+  leftIcon?: React.ReactNode;
+  leftIconClick?: () => void;
+  rightIconClick?: () => void;
+};
+
 export type TableHeadersProps = {
   title: string;
   style?: string;
@@ -37,6 +48,18 @@ export type TableProps = {
 export type SelectOptionType = {
   label: string;
   value: string;
+};
+
+export type ListItemType = {
+  href?: string;
+  title: string;
+  description?: string;
+  icon: React.ReactNode | null;
+};
+
+export type ListType = {
+  item: ListItemType;
+  onClick?: () => void;
 };
 
 export type MenuItemsType = {

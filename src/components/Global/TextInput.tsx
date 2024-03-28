@@ -1,19 +1,10 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
+import { cn } from "@/lib/utils";
+import { TextInputType } from "@/types/types";
 
-type InputType = React.InputHTMLAttributes<HTMLInputElement> & {
-  id?: string;
-  error?: boolean | string;
-  hint?: string;
-  format?: boolean;
-  righIcon?: React.ReactNode;
-  leftIcon?: React.ReactNode;
-  leftIconClick?: () => void;
-  rightIconClick?: () => void;
-};
-
-export default function TextInput(props: InputType) {
+export default function TextInput(props: TextInputType) {
   const {
     type = "text",
     inputMode = "text",
@@ -35,12 +26,11 @@ export default function TextInput(props: InputType) {
     onBlur,
   } = props;
 
-  const inputStyles = `
-        ${disabled && "pointer-events-none opacity-60"}
-        ${className}
-        h-[48px] bg-white px-3 py-2 rounded-lg border border-dark-100
-        flex gap-2 items-center
-    `;
+  const inputStyles = cn(
+    disabled ? "pointer-events-none opacity-60" : "",
+    "h-[48px] bg-white px-3 py-2 rounded-lg border border-dark-100 flex gap-2 items-center",
+    className
+  );
 
   const [fValue, setFValue] = useState<string>("");
 

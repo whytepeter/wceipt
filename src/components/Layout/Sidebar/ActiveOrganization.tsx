@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import SelectInput from "@/components/Global/SelectInput";
 import { SelectOptionType } from "@/types/types";
 import { useAppSelector } from "@/hooks";
 import Button from "../../Global/Button";
 import { FaPlus } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 
 type PropsType = {
   borderColor?: string;
@@ -16,33 +17,37 @@ export default function ActiveOrganization({
   backgroundColor = "transparent",
   color = "#F4D690",
 }: PropsType) {
+  const router = useRouter();
   const [activeBusinessID, setActiveBusinessID] = useState("");
-  const [businessOptions, setbusinessOptions] = useState<
-    SelectOptionType[] | null
-  >(null);
 
   const { user } = useAppSelector((state) => state.auth);
-  const isAdmin =
-    user?.roleDetails?.name === "Admin" || user?.roleDetails?.name === "User";
+  const isStaff = user?.roleDetails?.name === "Staff";
 
-  const state = useAppSelector((state) => state.data);
-  const business = state.business;
-  const activeBusiness = state.activeBusiness || business[0];
+  const { business, activeBusiness } = useAppSelector((state) => state.data);
+
+  const businessOptions: SelectOptionType[] = useMemo(
+    () =>
+      business.map((el) => {
+        return {
+          label: el.name,
+          value: el.id,
+        };
+      }),
+    [business]
+  );
 
   useEffect(() => {
-    const options = business.map((el) => {
-      return {
-        label: el.name,
-        value: el.id,
-      };
-    });
-    setbusinessOptions(options);
-    setActiveBusinessID(activeBusiness?.id);
-  }, [business]);
+    // console.log(activeBusiness);
+    setActiveBusinessID(activeBusiness?.id || business[0]?.id);
+  }, [activeBusiness]);
 
   const switchBusiness = (val: string): void => {
     //Do some actions here
     setActiveBusinessID(val);
+  };
+
+  const handleAddBusiness = () => {
+    router.push("/dashboard/business/new");
   };
 
   return (
@@ -51,15 +56,15 @@ export default function ActiveOrganization({
         onSelect={switchBusiness}
         value={activeBusinessID}
         options={businessOptions}
-        disabled={!isAdmin}
+        disabled={isStaff}
         styles={{
           backgroundColor,
           borderColor,
           color,
         }}
         action={
-          <Button variant="text" block>
-            <div className="flex text-xs items-center justify-center gap-2">
+          <Button onClick={handleAddBusiness} variant="text" block>
+            <div className="flex text-xs md:text-sm items-center justify-center gap-2">
               New Business
               <FaPlus className="text-primary" />
             </div>

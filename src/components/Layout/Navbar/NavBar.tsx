@@ -4,9 +4,12 @@ import UserDropdown from "../../Account/UserDropdown";
 import Notification from "@/components/Notification/Notification";
 import ActiveOrganization from "@/components/Layout/Sidebar/ActiveOrganization";
 import ActionButton from "./ActionButton";
+import { usePathname } from "next/navigation";
 
 export default function NavBar() {
-  const { collapse, currentPage } = useAppSelector((state) => state.controller);
+  const pathname = usePathname();
+  const { collapse } = useAppSelector((state) => state.controller);
+  const currentPage = pathname.split("/")[2] || "Dashboard";
 
   return (
     <div

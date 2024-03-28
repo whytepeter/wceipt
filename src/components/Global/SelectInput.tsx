@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import useClickOutside from "@/hooks/useClickOutside";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
 import { SelectOptionType } from "@/types/types";
+import TextInput from "./TextInput";
+import { cn } from "@/lib/utils";
+import SearchInput from "./SearchInput";
 
 interface SelectType {
   id?: string;
@@ -18,6 +21,7 @@ interface SelectType {
   disabled?: boolean;
   className?: string;
   styles?: Object;
+  search?: boolean;
   leftIcon?: React.ReactNode;
   action?: React.ReactNode;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -26,8 +30,9 @@ interface SelectType {
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
 
-export default function TextInput(props: SelectType) {
+export default function SelectType(props: SelectType) {
   const [isSelect, setIsSelect] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
   const {
     id,
@@ -37,6 +42,7 @@ export default function TextInput(props: SelectType) {
     disabled = false,
     autoHeight = true,
     error = false,
+    search = false,
     hint,
     placeholder,
     leftIcon,
@@ -49,13 +55,17 @@ export default function TextInput(props: SelectType) {
     styles,
   } = props;
 
-  const selectStyles = `
-  ${disabled && "pointer-events-none opacity-60"}
-  ${className}
-  h-[48px]  px-3 py-2 rounded-lg 
-  border bg-white border-dark-100 text-dark
-  flex gap-2 items-center 
-`;
+  const visibleOptions = useMemo(() => {
+    if (!search) return options;
+    const text = searchInput.toLowerCase();
+    return options?.filter((el) => el.label.toLowerCase().includes(text));
+  }, [searchInput]);
+
+  const selectStyles = cn(
+    disabled ? "pointer-events-none opacity-60" : "",
+    "h-[48px]  px-3 py-2 rounded-lg border bg-white border-dark-100 text-dark flex gap-2 items-center",
+    className
+  );
 
   const getLabel = (val: string): string => {
     const option = options && options.find((el) => el.value == val);
@@ -83,6 +93,11 @@ export default function TextInput(props: SelectType) {
   const clickOutside = useClickOutside(() => {
     setIsSelect(false);
   });
+
+  const optionStyle = cn(
+    autoHeight ? "h-auto" : "h-auto max-h-48 overflow-y-auto",
+    "absolute w-full mt-1 overflow-x-hidden rounded-b-lg shadow-xl bg-white"
+  );
 
   return (
     <div>
@@ -115,31 +130,36 @@ export default function TextInput(props: SelectType) {
         </div>
 
         {isSelect && (
-          <ul
-            ref={clickOutside}
-            className={`
-            ${autoHeight ? "h-auto" : "h-44 overflow-y-auto"}
-            absolute w-full mt-1 overflow-x-hidden rounded-b-lg shadow-xl bg-white`}
-          >
-            {options &&
-              options.map((option, index) => (
-                <li
-                  key={index}
-                  onClick={() => {
-                    handleSelect(option);
-                  }}
-                  className={`${
-                    value == option.value ? " text-primary" : "text-dark"
-                  } px-4 py-3 text-sm  hover:bg-[#ebfaf6]  cursor-pointer flex justify-between items-center border-b last:border-none border-outline`}
-                >
-                  <span> {option.label}</span>
-                  <span className="text-xl">
-                    {value == option.value && <AiFillCheckCircle size={16} />}
-                  </span>
-                </li>
-              ))}
+          <ul ref={clickOutside} className="shadow-xl">
+            {search && (
+              <div className="  left-0 top-0  w-full bg-white -mb-1 mt-2 border-b border-primary-200">
+                <SearchInput
+                  onSearch={setSearchInput}
+                  className="border-none h-[40px]"
+                />
+              </div>
+            )}
+            <ul className={optionStyle}>
+              {visibleOptions &&
+                visibleOptions.map((option, index) => (
+                  <li
+                    key={index}
+                    onClick={() => {
+                      handleSelect(option);
+                    }}
+                    className={`${
+                      value == option.value ? " text-primary" : "text-dark"
+                    } px-4 py-3 text-sm  hover:bg-[#ebfaf6]  cursor-pointer flex justify-between items-center border-b last:border-none border-outline`}
+                  >
+                    <span> {option.label}</span>
+                    <span className="text-xl">
+                      {value == option.value && <AiFillCheckCircle size={16} />}
+                    </span>
+                  </li>
+                ))}
 
-            {action && <div className="p-1 text-sm">{action}</div>}
+              {action && <div className="p-1 text-sm">{action}</div>}
+            </ul>
           </ul>
         )}
       </div>

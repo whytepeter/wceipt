@@ -1,44 +1,23 @@
 "use client";
 import SideBar from "@/components/Layout/Sidebar/SideBar";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAppSelector } from "@/hooks";
 import NavBar from "@/components/Layout/Navbar/NavBar";
-import { auth } from "@/lib/firebase";
-import { useRouter } from "next/navigation";
-import { onAuthStateChanged } from "firebase/auth";
+
 import Loader from "@/components/Global/Loader";
+import useAuth from "@/hooks/useAuth";
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const router = useRouter();
   const state = useAppSelector((state) => state.controller);
   const collapse = state.collapse;
 
-  const [loading, setLoading] = useState(true);
-  const [isUserValid, setIsUserValid] = useState(false);
+  const { checkAuth, isUserValid, loading } = useAuth();
 
   useEffect(() => {
-    const checkAuth = () => {
-      onAuthStateChanged(auth, (user) => {
-        try {
-          if (user) {
-            setIsUserValid(true);
-            console.log("This is the logged in user", user);
-          } else {
-            console.log("no user found");
-            router.push("/auth/login");
-          }
-        } catch (error: any) {
-          console.log(error.message);
-        } finally {
-          setLoading(false);
-        }
-      });
-    };
-
     checkAuth();
   }, []);
 
