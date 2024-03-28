@@ -18,7 +18,7 @@ export default function AddEditBusiness({ type = "add" }: PropType) {
   const userId = user?.userId;
 
   const onDone = async () => {
-    await initBussiness(user!);
+    // await initBussiness(user!);
     router.push("/dashboard/business");
   };
 
@@ -27,15 +27,15 @@ export default function AddEditBusiness({ type = "add" }: PropType) {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto flex flex-col gap-2  md:p-6 my-6 md:my-0">
-      <div className="bg-primary-100 px-4 py-3 text-primary rounded-t-xl flex items-center justify-between">
+    <div className="w-full shadow-xl max-w-2xl mx-auto flex flex-col gap-2 my-6 pb-6 md:my-0 rounded-xl overflow-hidden">
+      <div className="bg-primary-100 px-4 py-4 text-primary  flex items-center justify-between">
         <h4 className="font-medium text-lg">New Business</h4>
         <i
           onClick={handleBack}
           className="pi pi-times-circle text-primary text-lg cursor-pointer"
         />
       </div>
-      <div className="px-4">
+      <div className="px-4 md:px-6">
         <BusinessForm onDone={onDone} userId={userId!} />
       </div>
     </div>

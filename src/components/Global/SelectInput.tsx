@@ -4,33 +4,12 @@ import { useMemo, useState } from "react";
 import useClickOutside from "@/hooks/useClickOutside";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
-import { SelectOptionType } from "@/types/types";
+import { SelectInputType, SelectOptionType } from "@/types/types";
 import TextInput from "./TextInput";
 import { cn } from "@/lib/utils";
 import SearchInput from "./SearchInput";
 
-interface SelectType {
-  id?: string;
-  name?: string;
-  value: string;
-  options: SelectOptionType[] | null;
-  autoHeight?: boolean;
-  placeholder?: string;
-  error?: boolean | string;
-  hint?: string;
-  disabled?: boolean;
-  className?: string;
-  styles?: Object;
-  search?: boolean;
-  leftIcon?: React.ReactNode;
-  action?: React.ReactNode;
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  onSelect?: (value: string) => void;
-  onFocus?: React.FocusEventHandler<HTMLInputElement>;
-  onBlur?: React.FocusEventHandler<HTMLInputElement>;
-}
-
-export default function SelectType(props: SelectType) {
+export default function SelectType(props: SelectInputType) {
   const [isSelect, setIsSelect] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
@@ -55,17 +34,25 @@ export default function SelectType(props: SelectType) {
     styles,
   } = props;
 
-  const visibleOptions = useMemo(() => {
-    if (!search) return options;
-    const text = searchInput.toLowerCase();
-    return options?.filter((el) => el.label.toLowerCase().includes(text));
-  }, [searchInput]);
-
+  /// Styles ////
   const selectStyles = cn(
     disabled ? "pointer-events-none opacity-60" : "",
     "h-[48px]  px-3 py-2 rounded-lg border bg-white border-dark-100 text-dark flex gap-2 items-center",
     className
   );
+
+  const optionStyle = cn(
+    autoHeight ? "h-auto" : "h-auto max-h-48 overflow-y-auto",
+    "absolute w-full mt-1 overflow-x-hidden rounded-b-lg shadow-xl bg-white"
+  );
+
+  /// Methods ////
+
+  let visibleOptions = useMemo(() => {
+    if (!search || !searchInput.trim()) return options;
+    const text = searchInput.toLowerCase();
+    return options?.filter((el) => el.label.toLowerCase().includes(text));
+  }, [searchInput, isSelect]);
 
   const getLabel = (val: string): string => {
     const option = options && options.find((el) => el.value == val);
@@ -84,6 +71,7 @@ export default function SelectType(props: SelectType) {
     }
 
     setIsSelect(false);
+    setSearchInput("");
   };
 
   const toggleIsSelect = (): void => {
@@ -93,11 +81,6 @@ export default function SelectType(props: SelectType) {
   const clickOutside = useClickOutside(() => {
     setIsSelect(false);
   });
-
-  const optionStyle = cn(
-    autoHeight ? "h-auto" : "h-auto max-h-48 overflow-y-auto",
-    "absolute w-full mt-1 overflow-x-hidden rounded-b-lg shadow-xl bg-white"
-  );
 
   return (
     <div>

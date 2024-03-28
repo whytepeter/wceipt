@@ -13,6 +13,27 @@ export type TextInputType = React.InputHTMLAttributes<HTMLInputElement> & {
   rightIconClick?: () => void;
 };
 
+export interface SelectInputType {
+  id?: string;
+  name?: string;
+  value: string;
+  options: SelectOptionType[] | null;
+  autoHeight?: boolean;
+  placeholder?: string;
+  error?: boolean | string;
+  hint?: string;
+  disabled?: boolean;
+  className?: string;
+  styles?: Object;
+  search?: boolean;
+  leftIcon?: React.ReactNode;
+  action?: React.ReactNode;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onSelect?: (value: string) => void;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+}
+
 export type TableHeadersProps = {
   title: string;
   style?: string;
@@ -143,6 +164,7 @@ export type BusinessType = {
   phone: string;
   type: string;
   address: string;
+  logo?: string | null;
   createdAt: Date | null | string;
 };
 

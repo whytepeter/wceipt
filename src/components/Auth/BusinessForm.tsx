@@ -21,7 +21,7 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
   const [loading, setLoading] = useState(false);
 
   const state = useAppSelector((state) => state.data);
-  const businesses = state?.business || [];
+  const allBusiness = state?.business || [];
 
   const dispatch = useAppDispatch();
 
@@ -59,6 +59,7 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
           ...values,
           id: "",
           userId,
+          logo: null,
           createdAt: new Date(),
         };
 
@@ -66,13 +67,15 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
         const businessData = await createBusiness(business);
 
         //Update bussiness state with new business
-        const businessArray = [...businesses, businessData];
+        const businessArray = [...allBusiness, businessData];
         console.log("New Business", businessArray);
         dispatch(setDataState({ field: "business", value: businessArray }));
 
         if (onDone) {
           onDone();
         }
+
+        toast.success("Business added successfully");
       } catch (error: any) {
         toast.error(error.message || "An error occurred.");
       } finally {
@@ -148,7 +151,7 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
       </div>
       <div className="flex flex-col gap-2">
         <label className="text-sm" htmlFor="address">
-          Business Phone Number
+          Business Address
         </label>
         <TextInput
           id="address"

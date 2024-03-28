@@ -23,7 +23,7 @@ export default function NavBar() {
         </div>
 
         <div className=" md:hidden">
-          <ActiveOrganization color="#1B4946" borderColor="#48B3AB" />
+          <ActiveOrganization className="border-primary-200 text-primary" />
         </div>
 
         <div className="flex items-center divider-x-dark-100 gap-5">

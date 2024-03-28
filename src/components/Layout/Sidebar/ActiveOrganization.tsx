@@ -6,17 +6,13 @@ import Button from "../../Global/Button";
 import { FaPlus } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 
+import { cn } from "@/lib/utils";
+
 type PropsType = {
-  borderColor?: string;
-  backgroundColor?: string;
-  color?: string;
+  className?: string;
 };
 
-export default function ActiveOrganization({
-  borderColor = "#F4D690",
-  backgroundColor = "transparent",
-  color = "#F4D690",
-}: PropsType) {
+export default function ActiveOrganization({ className }: PropsType) {
   const router = useRouter();
   const [activeBusinessID, setActiveBusinessID] = useState("");
 
@@ -50,6 +46,8 @@ export default function ActiveOrganization({
     router.push("/dashboard/business/new");
   };
 
+  const classStyle = cn("bg-transparent text-accent border-accent", className);
+
   return (
     <div className="">
       <SelectInput
@@ -57,11 +55,7 @@ export default function ActiveOrganization({
         value={activeBusinessID}
         options={businessOptions}
         disabled={isStaff}
-        styles={{
-          backgroundColor,
-          borderColor,
-          color,
-        }}
+        className={classStyle}
         action={
           <Button onClick={handleAddBusiness} variant="text" block>
             <div className="flex text-xs md:text-sm items-center justify-center gap-2">
