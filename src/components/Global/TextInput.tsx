@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { TextInputType } from "@/types/types";
 
@@ -32,42 +32,17 @@ export default function TextInput(props: TextInputType) {
     className
   );
 
-  const [fValue, setFValue] = useState<string>("");
-
-  //Convert value to a formated currency
-  const formatValue = (val: string): string => {
-    const enteredValue = val;
+  const computeValue = useMemo(() => {
+    if (!format) return value;
 
     //Remove all negative value and alphabets
-    const parsedValue = parseFloat(enteredValue.replace(/[^0-9.]/g, ""));
-    let stringValue = parsedValue.toLocaleString();
+    let strValue = value + "";
+    const parsedValue = parseFloat(strValue.replace(/[^0-9.]/g, ""));
+    strValue = parsedValue.toLocaleString();
 
-    //Return the formatted string
-    if (!isNaN(parsedValue)) {
-      setFValue(`₦${stringValue}`);
-    } else {
-      setFValue("");
-      return "";
-    }
-
-    return stringValue;
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let enteredValue = event.target.value;
-    if (format) {
-      //Get the formatted string and remove the commas
-      let stringValue = formatValue(enteredValue);
-      stringValue = stringValue.split(",").join("");
-      event.target.value = stringValue;
-      //handle the onchange
-      onChange && onChange(event);
-    } else {
-      onChange && onChange(event);
-
-      setFValue(enteredValue);
-    }
-  };
+    console.log(parsedValue);
+    return !isNaN(parsedValue) ? `₦${strValue}` : "";
+  }, [value]);
 
   return (
     <>
@@ -86,9 +61,8 @@ export default function TextInput(props: TextInputType) {
             type={type}
             name={name}
             inputMode={inputMode}
-            value={fValue}
-            // onChange={handleInputChange}
-            onChange={handleInputChange}
+            value={computeValue}
+            onChange={onChange}
             onFocus={onFocus}
             onBlur={onBlur}
             className={`h-full  text-sm  w-full font-light  caret-primary text-dark  leading-2 focus:outline-none block appearance-none`}

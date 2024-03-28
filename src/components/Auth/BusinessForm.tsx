@@ -31,15 +31,16 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
       value: el,
     };
   });
+  const initialValues = {
+    name: "",
+    email: "",
+    phone: "",
+    type: "",
+    address: "",
+  };
 
   const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      phone: "",
-      type: "",
-      address: "",
-    },
+    initialValues,
 
     validationSchema: Yup.object({
       name: Yup.string().required().label("Business name is required"),
@@ -52,6 +53,8 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
     onSubmit: async (values) => {
       if (!userId) return;
 
+      console.log(values);
+      return;
       try {
         setLoading(true);
 
@@ -95,6 +98,7 @@ export default function Business({ onDone, userId }: BusinessPropsType) {
         <label className="text-sm" htmlFor="name">
           Business Name
         </label>
+
         <TextInput
           id="name"
           name="name"
